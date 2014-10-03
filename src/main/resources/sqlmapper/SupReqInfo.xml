@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uuola.txcms.sqlmapper.SupReqInfoMapper">
+
+    <select id="findInfosByRowRange"  resultType="SupReqInfo" parameterType="SupReqInfoQuery">
+        select * from sup_req_info where id>=(
+			select id from sup_req_info order By id limit #{crow}, 1
+		)
+		limit 0, #{listsize}
+    </select>
+    
+</mapper>
