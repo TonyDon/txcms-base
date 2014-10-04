@@ -117,19 +117,19 @@ public class UploaderAction {
     @ResponseBody
     public boolean deleteImage(@RequestParam(value = "imageUrl") String imageUrl) throws FileNotFoundException{
         if(StringUtil.isEmpty(imageUrl)){
-            return true;
+            return false;
         }
         String imageExtName = FileUtil.getFileExt(imageUrl);
         if (!imageUrl.startsWith(UPLOAD_ROOT_DIR) || imageUrl.indexOf("..") >= 0 
                 || imageUrl.contains("WEB-INF") 
                 || imageUrl.contains("META-INF") 
                 || !fileExtNameValidator.checkImageExt(imageExtName)) {
-            return true;
+            return false;
         }
         String imagePath = ContextUtil.getRealPath("/").concat(imageUrl.trim());
         File imageFile = new File(imagePath);
         if(imageFile.isDirectory()){
-            return true;
+            return false;
         }
         
         
