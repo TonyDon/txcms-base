@@ -37,7 +37,7 @@ public class SupReqInfoDAO extends TsBaseDAO<SupReqInfo> {
         return this.executeQuery(sql, SupReqInfo.class, startIndex, rowSize);*/
         SupReqInfoQuery query = new SupReqInfoQuery();
         query.setCrow(startIndex);
-        query.setListsize(rowSize);
+        query.setListSize(rowSize);
         return this.selectList("com.uuola.txcms.sqlmapper.SupReqInfoMapper.findInfosByRowRange", query);
     }
 }

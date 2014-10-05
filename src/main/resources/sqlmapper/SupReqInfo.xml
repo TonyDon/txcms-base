@@ -6,7 +6,7 @@
         select * from sup_req_info where id>=(
 			select id from sup_req_info order By id limit #{crow}, 1
 		)
-		limit 0, #{listsize}
+		limit 0, #{listSize}
     </select>
     
 </mapper>

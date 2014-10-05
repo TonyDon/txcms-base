@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.UserInfo;
 import com.uuola.txweb.framework.dao.support.TsBaseDAO;
+import com.uuola.txweb.framework.query.BaseQuery;
 
 
 /**
@@ -35,5 +36,9 @@ public class UserInfoDAO extends TsBaseDAO<UserInfo> {
     public boolean isNotExistTel(String tel) {
         List<Map<String, Object>> list = this.executeQuery("select id from user_info where tel=? limit 0,1", tel);
         return CollectionUtils.isEmpty(list);
+    }
+    
+    public List<UserInfo> findByRange(BaseQuery query){
+        return this.selectList("com.uuola.txcms.sqlmapper.UserInfoMapper.findByRange", query);
     }
 }
