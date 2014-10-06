@@ -6,24 +6,19 @@
 
 package com.uuola.txcms.action;
 
-import java.util.ArrayList;
-
-import org.apache.commons.lang.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.ServletWebRequest;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.uuola.commons.constant.HTTP_STATUS_CODE;
-import com.uuola.commons.exception.BusinessException;
-import com.uuola.commons.exception.BusinessExceptionMessageProvider;
 import com.uuola.txcms.base.query.UserInfoQuery;
 import com.uuola.txcms.base.service.UserInfoService;
 import com.uuola.txweb.framework.action.BaseQueryAction;
 import com.uuola.txweb.framework.dto.PageDTO;
+import com.uuola.txweb.framework.query.BaseQuery;
+import com.uuola.txweb.framework.query.QueryCallbackHandler;
 
 
 /**
@@ -41,31 +36,19 @@ public class UserInfoAction extends BaseQueryAction {
     private UserInfoService userInfoService;
     
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public void query(UserInfoQuery query, 
-            @ModelAttribute(ERRORS_ATTR)ArrayList<String> errors, 
-            ServletWebRequest webRequest,
-            Model model) {
+    public ModelAndView search(UserInfoQuery query, ServletWebRequest webRequest) {
         
-        if (!preValidQuery(query, errors)) {
-            webRequest.getResponse().setStatus(HTTP_STATUS_CODE.SC_BAD_REQUEST);
-            return ;
-        }
+        ModelAndView model = executeQuery(query, new QueryCallbackHandler() {
+
+            @Override
+            public PageDTO doQuery(BaseQuery query) {
+                return userInfoService.fetchByRange(query);
+            }
+
+        }, webRequest);
+        model.setViewName(this.getViewName("search"));
+        return model;
         
-        query.filter();
-        query.calcCurrRowIndex();
-        
-        try {
-            PageDTO   pageDTO = userInfoService.fetchByRange(query);
-            model.addAttribute("page", pageDTO);
-        } catch (BusinessException be) {
-            errors.add(BusinessExceptionMessageProvider.getMessage(be));
-        } catch (Exception e) {
-            errors.add(ExceptionUtils.getFullStackTrace(e));
-        }
-        
-        if (!errors.isEmpty()) {
-            webRequest.getResponse().setStatus(HTTP_STATUS_CODE.SC_BZ_ERROR);
-        }
     }
 
 }

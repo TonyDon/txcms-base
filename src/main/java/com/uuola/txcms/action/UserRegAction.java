@@ -46,7 +46,7 @@ public class UserRegAction extends BaseAction{
         // 基础校验没有通过 或者 验证码不匹配，返回异常信息
         if (CaptchaValidator.notMatch(userInfoDTO.getCaptcha())) {
             errors.add(CST_ERROR_MSG.CAPTCHA_ERROR);
-        } else if (userInfoDTO.notValidPass()) {
+        } else if (!userInfoDTO.isValidPass()) {
             errors.addAll(getErrors(userInfoDTO));
         } else {
             // 保存用户基本信息

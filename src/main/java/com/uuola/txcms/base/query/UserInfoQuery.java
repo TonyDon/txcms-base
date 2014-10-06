@@ -11,7 +11,7 @@ import com.uuola.txweb.framework.query.BaseQuery;
 
 /**
  * <pre>
- *
+ * 用户信息查询对象
  * @author tangxiaodong
  * 创建日期: 2014-10-5
  * </pre>
@@ -19,11 +19,14 @@ import com.uuola.txweb.framework.query.BaseQuery;
 public class UserInfoQuery extends BaseQuery {
 
     private static final long serialVersionUID = 7551270157936798721L;
+    
+    //TODO other search conditions 
 
     @Override
     public void filter() {
-        // TODO Auto-generated method stub
-
+        if (this.listSize > 100) {
+            this.listSize = 20;
+        }
     }
 
 }
