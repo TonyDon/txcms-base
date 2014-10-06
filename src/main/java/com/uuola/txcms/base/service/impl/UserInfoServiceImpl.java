@@ -32,11 +32,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     
     @Override
     public PageDTO fetchByRange(BaseQuery query) {
-        PageDTO pageDTO = new PageDTO();
-        pageDTO.setData(userInfoDAO.findByRange(query));
-        // TODO
-        pageDTO.setTotalCount(33);
-        return pageDTO;
+        return new PageDTO(userInfoDAO.findByRange(query), 16);
     }
 
 }
