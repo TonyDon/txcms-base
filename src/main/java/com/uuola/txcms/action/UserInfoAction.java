@@ -37,18 +37,18 @@ public class UserInfoAction extends BaseQueryAction {
     
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ModelAndView search(UserInfoQuery query, ServletWebRequest webRequest) {
-        
-        ModelAndView model = executeQuery(query, new QueryCallbackHandler() {
+
+        ModelAndView model = executeQuery(webRequest, query, new QueryCallbackHandler() {
 
             @Override
             public PageDTO doQuery(BaseQuery query) {
                 return userInfoService.fetchByRange(query);
             }
 
-        }, webRequest);
+        });
         model.setViewName(this.getViewName("search"));
         return model;
-        
+
     }
 
 }
