@@ -93,11 +93,11 @@ public class UploaderAction {
             
             // 缩图
             if(distImage.exists() && distImage.canRead()){
-                File w200Image = new File(distImageDir, distImageName.concat(".w200.thumb"));
-                ImageUtil.resize(distImage, w200Image, 200, 0, false);
+                File w1Image = new File(distImageDir, distImageName.concat(".w1.thumb"));
+                ImageUtil.resize(distImage, w1Image, 150, 0, false);
                 
-                File w500Image = new File(distImageDir, distImageName.concat(".w450.thumb"));
-                ImageUtil.resize(distImage, w500Image, 450, 0, false);
+                File w2Image = new File(distImageDir, distImageName.concat(".w2.thumb"));
+                ImageUtil.resize(distImage, w2Image, 350, 0, false);
             }
             
             result = UPLOAD_ROOT_DIR.concat(imgDir).concat("/").concat(distImageName);
@@ -119,10 +119,11 @@ public class UploaderAction {
         if(StringUtil.isEmpty(imageUrl)){
             return false;
         }
-        String imageExtName = FileUtil.getFileExt(imageUrl);
-        if (!imageUrl.startsWith(UPLOAD_ROOT_DIR) || imageUrl.indexOf("..") >= 0 
-                || imageUrl.contains("WEB-INF") 
-                || imageUrl.contains("META-INF") 
+        String lowerImageUrl = imageUrl.toLowerCase();
+        String imageExtName = FileUtil.getFileExt(lowerImageUrl);
+        if (!lowerImageUrl.startsWith(UPLOAD_ROOT_DIR) || lowerImageUrl.contains("..")
+                || lowerImageUrl.contains("web-inf") 
+                || lowerImageUrl.contains("meta-inf") 
                 || !fileExtNameValidator.checkImageExt(imageExtName)) {
             return false;
         }
@@ -132,12 +133,11 @@ public class UploaderAction {
             return false;
         }
         
+        File w1Thumb = new File(imagePath.concat(".w1.thumb"));
+        FileUtils.deleteQuietly(w1Thumb);
         
-        File w200Thumb = new File(imagePath.concat(".w200.thumb"));
-        FileUtils.deleteQuietly(w200Thumb);
-        
-        File w500Thumb = new File(imagePath.concat(".w450.thumb"));
-        FileUtils.deleteQuietly(w500Thumb);
+        File w2Thumb = new File(imagePath.concat(".w2.thumb"));
+        FileUtils.deleteQuietly(w2Thumb);
         
         return FileUtils.deleteQuietly(imageFile);
     }
