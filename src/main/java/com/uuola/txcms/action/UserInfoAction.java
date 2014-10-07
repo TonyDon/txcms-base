@@ -87,8 +87,10 @@ public class UserInfoAction extends BaseQueryAction {
                 userRegService.saveNewUserInfo(userInfoDTO);
             }catch(BusinessException be){
                 errors.add(BusinessExceptionMessageProvider.getMessage(be));
+                log.error("UserInfoAction.add()", be);
             }catch(Exception e){
-                errors.add(ExceptionUtils.getFullStackTrace(e));
+                errors.add(ExceptionUtils.getRootCauseMessage(e));
+                log.error("UserInfoAction.add()", e);
             }
         }
         // 重置属性为null
