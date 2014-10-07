@@ -21,6 +21,8 @@ import com.uuola.txweb.framework.dto.ValidateDTO;
 public class UserInfoDTO extends ValidateDTO {
 
     private static final long serialVersionUID = 4524010793324910268L;
+    
+    private String name;
 
     @NotNull
     private String tel;
@@ -28,12 +30,26 @@ public class UserInfoDTO extends ValidateDTO {
     @NotNull
     private String passKey;
     
+    private String email;
+    
     private Long createTime;
     
     @NotNull
     private String captcha;
 
     
+    
+    public String getName() {
+        return name;
+    }
+
+
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
     public String getTel() {
         return tel;
     }
@@ -49,6 +65,20 @@ public class UserInfoDTO extends ValidateDTO {
     }
 
     
+    
+    public String getEmail() {
+        return email;
+    }
+
+
+
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+
     public void setPassKey(String passKey) {
         this.passKey = passKey;
     }
