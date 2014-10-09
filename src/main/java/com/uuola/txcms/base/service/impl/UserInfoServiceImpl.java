@@ -35,4 +35,9 @@ public class UserInfoServiceImpl implements UserInfoService {
         return new PageDTO(userInfoDAO.findByRange(query), 16);
     }
 
+    @Override
+    public int delete(Long id) {
+        return userInfoDAO.deleteById(id);
+    }
+
 }

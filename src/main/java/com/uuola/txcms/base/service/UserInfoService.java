@@ -24,4 +24,11 @@ public interface UserInfoService {
      * @return
      */
     PageDTO fetchByRange(BaseQuery query);
+    
+    /**
+     * 删除用户信息
+     * @param id
+     * @return
+     */
+    int delete(Long id);
 }
