@@ -17,7 +17,7 @@ import com.uuola.txcms.base.dto.UserInfoDTO;
 import com.uuola.txcms.base.query.UserInfoQuery;
 import com.uuola.txcms.base.service.UserInfoService;
 import com.uuola.txcms.base.service.UserRegService;
-import com.uuola.txweb.framework.action.BaseQueryAction;
+import com.uuola.txweb.framework.action.BaseAction;
 import com.uuola.txweb.framework.action.methods.QueryCallbackHandler;
 import com.uuola.txweb.framework.action.methods.UpdateCallbackHandler;
 import com.uuola.txweb.framework.dto.PageDTO;
@@ -34,7 +34,7 @@ import com.uuola.txweb.framework.query.BaseQuery;
  */
 @Controller
 @RequestMapping("/user/info")
-public class UserInfoAction extends BaseQueryAction {
+public class UserInfoAction extends BaseAction {
 
     @Autowired
     private UserInfoService userInfoService;
