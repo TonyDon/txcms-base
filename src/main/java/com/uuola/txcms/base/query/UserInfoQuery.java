@@ -6,6 +6,7 @@
 
 package com.uuola.txcms.base.query;
 
+import com.uuola.txcms.base.exception.DemoException;
 import com.uuola.txweb.framework.query.BaseQuery;
 
 
@@ -25,7 +26,7 @@ public class UserInfoQuery extends BaseQuery {
     @Override
     public void filter() {
         if (this.listSize > 100) {
-            this.listSize = 20;
+            throw new DemoException(DemoException.TEST_ERROR, this.listSize).setErrorCode(123);
         }
     }
 
