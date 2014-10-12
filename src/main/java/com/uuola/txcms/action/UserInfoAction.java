@@ -52,7 +52,7 @@ public class UserInfoAction extends BaseAction {
      */
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ModelAndView search(UserInfoQuery query, ServletWebRequest webRequest) {
-        ModelAndView model = queryAction(webRequest, query, new QueryCallbackHandler() {
+        ModelAndView model = queryAction(query, new QueryCallbackHandler() {
             @Override
             public PageDTO doQuery(BaseQuery query) {
                 return userInfoService.fetchByRange(query);
@@ -70,7 +70,7 @@ public class UserInfoAction extends BaseAction {
      */
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public ModelAndView add(UserInfoDTO userInfoDTO, ServletWebRequest webRequest) {
-        ModelAndView model = updateAction(webRequest, userInfoDTO, new UpdateCallbackHandler<Object>() {
+        ModelAndView model = updateAction(userInfoDTO, new UpdateCallbackHandler<Object>() {
             @Override
             public Object doUpdate(ValidateDTO userInfoDTO) {
                 userRegService.saveNewUserInfo((UserInfoDTO)userInfoDTO);
