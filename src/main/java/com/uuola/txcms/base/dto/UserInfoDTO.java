@@ -8,6 +8,8 @@ package com.uuola.txcms.base.dto;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.uuola.txweb.framework.dto.ValidateDTO;
 
 
@@ -34,7 +36,7 @@ public class UserInfoDTO extends ValidateDTO {
     
     private Long createTime;
     
-    @NotNull
+    @NotEmpty
     private String captcha;
 
     
