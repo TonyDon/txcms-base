@@ -25,7 +25,7 @@ public class CaptchaValidator {
      */
     public static boolean isMatch(String input){
         String serverCode = SessionUtil.getValidCode();
-        if(StringUtil.isEmpty(serverCode)){
+        if(StringUtil.isEmpty(serverCode) || StringUtil.isEmpty(input)){
             return false;
         }
         return serverCode.equalsIgnoreCase(input);
