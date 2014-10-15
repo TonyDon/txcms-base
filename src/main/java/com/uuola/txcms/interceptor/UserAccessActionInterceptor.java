@@ -40,8 +40,8 @@ public class UserAccessActionInterceptor extends HandlerInterceptorAdapter {
         }
         System.out.println(handler.getClass().getCanonicalName());
         
-        response.setStatus(HTTP_STATUS_CODE.SC_FORBIDDEN);
-        response.getWriter().print("deny access.");
-        return false;
+//        response.setStatus(HTTP_STATUS_CODE.SC_FORBIDDEN);
+//        response.getWriter().print("deny access.");
+        return true;
     }
 }
