@@ -58,8 +58,7 @@ public class UserInfoAction extends BaseAction {
                 return userInfoService.fetchByRange(query);
             }
         });
-        model.setViewName(this.getViewName("search"));
-        return model;
+        return assignViewName(model, "search");
     }
     
     /**
@@ -80,8 +79,7 @@ public class UserInfoAction extends BaseAction {
         
         // 重置关键属性为null
         userInfoDTO.reset();
-        model.setViewName(getViewName("add"));
-        return model;
+        return assignViewName(model, "add");
     }
 
     
@@ -89,7 +87,7 @@ public class UserInfoAction extends BaseAction {
      * 删除记录
      */
     @Override
-    protected Integer delete(Serializable id) {
+    protected Integer delete(Serializable id, ServletWebRequest webRequest) {
         return userInfoService.delete(parseId(id));
     }
     

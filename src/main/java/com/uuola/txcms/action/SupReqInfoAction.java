@@ -58,9 +58,11 @@ public class SupReqInfoAction extends BaseAction {
         }
     }
 
-    @Override
-    protected SupReqInfo show(Serializable id, Model model) {
-        return  supReqInfoService.getInfoById(parseId(id));
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String show(Serializable id, Model model) {
+        SupReqInfo info =  supReqInfoService.getInfoById(parseId(id));
+        model.addAttribute("supReqInfo", info);
+        return this.getViewName("show");
     }
     
     /**
@@ -75,7 +77,6 @@ public class SupReqInfoAction extends BaseAction {
         int rowSize = 5;
         int startIndex = (pageNo-1) * rowSize ;
         model.addAttribute("list", supReqInfoService.getBatchInfos(startIndex, rowSize));
-        
         return this.getViewName("list");
     }
 }
