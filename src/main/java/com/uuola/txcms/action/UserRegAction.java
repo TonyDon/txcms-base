@@ -42,7 +42,7 @@ public class UserRegAction extends BaseAction{
      * @return
      */
     @RequestMapping(method=RequestMethod.POST)
-    public void regist(UserInfoDTO userInfoDTO, @ModelAttribute(IConstant.ERRORS_ATTR)
+    public void regist(UserInfoDTO userInfoDTO, @ModelAttribute(IConstant.VALID_ERRORS_ATTR)
     ArrayList<String> errors) {
         // 基础校验没有通过 或者 验证码不匹配，返回异常信息
         if (CaptchaValidator.notMatch(userInfoDTO.getCaptcha())) {

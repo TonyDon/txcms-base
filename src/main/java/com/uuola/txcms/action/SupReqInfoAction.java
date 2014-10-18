@@ -46,7 +46,7 @@ public class SupReqInfoAction extends BaseAction {
      * @param errors
      */
     @RequestMapping(method=RequestMethod.POST)
-    public void post(SupReqInfoDTO supReqInfoDTO, @ModelAttribute(IConstant.ERRORS_ATTR) 
+    public void post(SupReqInfoDTO supReqInfoDTO, @ModelAttribute(IConstant.VALID_ERRORS_ATTR) 
     ArrayList<String> errors){
         if (!CaptchaValidator.isMatch(supReqInfoDTO.getCaptcha())) {
             errors.add(CST_ERROR_MSG.CAPTCHA_ERROR);
