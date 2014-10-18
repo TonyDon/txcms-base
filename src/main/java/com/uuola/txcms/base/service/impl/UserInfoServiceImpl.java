@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uuola.txcms.base.dao.UserInfoDAO;
+import com.uuola.txcms.base.entity.UserInfo;
+import com.uuola.txcms.base.query.UserInfoQuery;
 import com.uuola.txcms.base.service.UserInfoService;
 import com.uuola.txweb.framework.dao.support.TsBaseTx;
 import com.uuola.txweb.framework.dto.PageDTO;
@@ -38,6 +40,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public int delete(Long id) {
         return userInfoDAO.deleteById(id);
+    }
+
+    @Override
+    public UserInfo fetchSingle(UserInfoQuery query) {
+        return userInfoDAO.findSingle(query);
     }
 
 }

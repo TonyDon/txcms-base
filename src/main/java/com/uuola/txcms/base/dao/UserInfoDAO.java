@@ -41,4 +41,8 @@ public class UserInfoDAO extends TsBaseDAO<UserInfo> {
     public List<UserInfo> findByRange(BaseQuery query){
         return this.selectList("com.uuola.txcms.sqlmapper.UserInfoMapper.findByRange", query);
     }
+    
+    public UserInfo findSingle(BaseQuery query){
+        return this.selectOne("com.uuola.txcms.sqlmapper.UserInfoMapper.findSingle", query);
+    }
 }

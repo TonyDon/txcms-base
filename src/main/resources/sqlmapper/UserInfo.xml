@@ -9,4 +9,8 @@
 		order by id asc limit 0, #{listSize}
     </select>
     
+    <select id="findSingle"  resultType="UserInfo" parameterType="UserInfoQuery">
+        select * from user_info where name=#{name} limit 0, 1
+    </select>
+    
 </mapper>

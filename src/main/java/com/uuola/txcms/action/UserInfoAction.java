@@ -15,6 +15,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.txcms.base.dto.UserInfoDTO;
+import com.uuola.txcms.base.entity.UserInfo;
 import com.uuola.txcms.base.query.UserInfoQuery;
 import com.uuola.txcms.base.service.UserInfoService;
 import com.uuola.txcms.base.service.UserRegService;
@@ -51,13 +52,13 @@ public class UserInfoAction extends BaseAction {
      */
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ModelAndView search(UserInfoQuery query, ServletWebRequest webRequest) {
-        ModelAndView model = queryAction(query, new QueryCallbackHandler() {
+        ModelAndView mv = queryAction(query, new QueryCallbackHandler<PageDTO>() {
             @Override
             public PageDTO doQuery(BaseQuery query) {
                 return userInfoService.fetchByRange(query);
             }
         });
-        return assignViewName(model, "search");
+        return assignViewName(mv, "search");
     }
     
     /**
@@ -68,7 +69,7 @@ public class UserInfoAction extends BaseAction {
      */
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public ModelAndView add(UserInfoDTO userInfoDTO, ServletWebRequest webRequest) {
-        ModelAndView model = updateAction(userInfoDTO, new UpdateCallbackHandler<Object>() {
+        ModelAndView mv = updateAction(userInfoDTO, new UpdateCallbackHandler<Object>() {
             @Override
             public Object doUpdate(ValidateDTO userInfoDTO) {
                 userRegService.saveNewUserInfo((UserInfoDTO)userInfoDTO);
@@ -78,7 +79,7 @@ public class UserInfoAction extends BaseAction {
         
         // 重置关键属性为null
         userInfoDTO.reset();
-        return assignViewName(model, "add");
+        return assignViewName(mv, "add");
     }
 
     
@@ -91,7 +92,25 @@ public class UserInfoAction extends BaseAction {
         return makeModelView("delete").addObject("num", num);
     }
     
-    
+    /**
+     * 展示用户信息
+     * @param id
+     * @param query
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ModelAndView show(@PathVariable("id") String id, UserInfoQuery query){
+        query.setName(id);
+        ModelAndView mv = queryAction(query, new QueryCallbackHandler<UserInfo>() {
+
+            @Override
+            public UserInfo doQuery(BaseQuery query) {
+                return userInfoService.fetchSingle((UserInfoQuery)query);
+            }
+            
+        });
+        return assignViewName(mv, "show");
+    }
     
 
 }

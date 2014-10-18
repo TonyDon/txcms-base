@@ -6,6 +6,8 @@
 
 package com.uuola.txcms.base.service;
 
+import com.uuola.txcms.base.entity.UserInfo;
+import com.uuola.txcms.base.query.UserInfoQuery;
 import com.uuola.txweb.framework.dto.PageDTO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
@@ -31,4 +33,11 @@ public interface UserInfoService {
      * @return
      */
     int delete(Long id);
+    
+    /**
+     * 获取单个用户信息  
+     * @param name
+     * @return
+     */
+    UserInfo fetchSingle(UserInfoQuery query);
 }
