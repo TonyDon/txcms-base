@@ -6,10 +6,9 @@
 
 package com.uuola.txcms.action;
 
-import java.io.Serializable;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -86,9 +85,10 @@ public class UserInfoAction extends BaseAction {
     /**
      * 删除记录
      */
-    @Override
-    protected Integer delete(Serializable id, ServletWebRequest webRequest) {
-        return userInfoService.delete(parseId(id));
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ModelAndView delete(@PathVariable("id") Long id) {
+        Integer num = userInfoService.delete(id);
+        return makeModelView("delete").addObject("num", num);
     }
     
     
