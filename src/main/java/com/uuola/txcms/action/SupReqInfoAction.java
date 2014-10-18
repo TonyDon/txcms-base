@@ -23,6 +23,7 @@ import com.uuola.txcms.base.service.SupReqInfoService;
 import com.uuola.txcms.component.CaptchaValidator;
 import com.uuola.txcms.constants.CST_ERROR_MSG;
 import com.uuola.txweb.framework.action.BaseAction;
+import com.uuola.txweb.framework.action.IConstant;
 
 
 /**
@@ -45,7 +46,8 @@ public class SupReqInfoAction extends BaseAction {
      * @param errors
      */
     @RequestMapping(method=RequestMethod.POST)
-    public void post(SupReqInfoDTO supReqInfoDTO, @ModelAttribute(ERRORS_ATTR) ArrayList<String> errors){
+    public void post(SupReqInfoDTO supReqInfoDTO, @ModelAttribute(IConstant.ERRORS_ATTR) 
+    ArrayList<String> errors){
         if (!CaptchaValidator.isMatch(supReqInfoDTO.getCaptcha())) {
             errors.add(CST_ERROR_MSG.CAPTCHA_ERROR);
         } else  if (!supReqInfoDTO.validatePass()) {

@@ -19,6 +19,7 @@ import com.uuola.txcms.base.service.UserRegService;
 import com.uuola.txcms.component.CaptchaValidator;
 import com.uuola.txcms.constants.CST_ERROR_MSG;
 import com.uuola.txweb.framework.action.BaseAction;
+import com.uuola.txweb.framework.action.IConstant;
 
 
 /**
@@ -41,7 +42,7 @@ public class UserRegAction extends BaseAction{
      * @return
      */
     @RequestMapping(method=RequestMethod.POST)
-    public void regist(UserInfoDTO userInfoDTO, @ModelAttribute(ERRORS_ATTR)
+    public void regist(UserInfoDTO userInfoDTO, @ModelAttribute(IConstant.ERRORS_ATTR)
     ArrayList<String> errors) {
         // 基础校验没有通过 或者 验证码不匹配，返回异常信息
         if (CaptchaValidator.notMatch(userInfoDTO.getCaptcha())) {
