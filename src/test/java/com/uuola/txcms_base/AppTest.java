@@ -36,7 +36,12 @@ public class AppTest
         System.out.println(((Class<?>)type.getActualTypeArguments()[0]).getName());
         
         MyHandler my = new MyHandler();
+        System.out.println(my.getClass().getGenericInterfaces().length);
         System.out.println(((ParameterizedType)(my.getClass().getGenericInterfaces()[0])).getRawType());
+        
+        System.out.println(AppTest.class.getGenericInterfaces().length);
+        
+        System.out.println(new AppTest() instanceof QueryCallbackHandler);
     }
 }
 
