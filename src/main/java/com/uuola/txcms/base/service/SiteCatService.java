@@ -32,4 +32,11 @@ public interface SiteCatService {
      * @return
      */
     PageDTO fetchByRange(SiteCatQuery query);
+    
+    /**
+     * 删除一个类目
+     * @param id
+     * @return
+     */
+    Integer delete(Long id);
 }

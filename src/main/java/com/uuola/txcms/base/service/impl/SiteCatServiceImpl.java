@@ -14,6 +14,7 @@ import com.uuola.commons.constant.CST_CHAR;
 import com.uuola.txcms.base.dao.SiteCatDAO;
 import com.uuola.txcms.base.dto.SiteCatDTO;
 import com.uuola.txcms.base.entity.SiteCat;
+import com.uuola.txcms.base.exception.SiteCatException;
 import com.uuola.txcms.base.query.SiteCatQuery;
 import com.uuola.txcms.base.service.SiteCatService;
 import com.uuola.txweb.framework.dao.support.TsBaseTx;
@@ -60,11 +61,33 @@ public class SiteCatServiceImpl implements SiteCatService {
 
     @Override
     public PageDTO fetchByRange(SiteCatQuery query) {
-        // TODO Auto-generated method stub
         PageDTO pageDTO = new PageDTO();
         pageDTO.setTotal(20);// TODO
         pageDTO.setDatas(siteCatDAO.findByRange(query));
         return pageDTO;
+    }
+
+
+    @Override
+    public Integer delete(Long id) {
+        SiteCat cat = siteCatDAO.get(id);
+        if(null == cat){
+            return 0;
+        }
+        if(cat.getNodeNum()>0){
+            throw new SiteCatException(SiteCatException.EXIST_NODE_CAT_THEN_DEL);
+        }
+        Integer effectNum = 0;
+        effectNum += siteCatDAO.delete(cat);
+        SiteCat parentCat = siteCatDAO.get(cat.getRid());
+        if(null != parentCat){
+            Integer nodeNum = parentCat.getNodeNum();
+            if(nodeNum>0){
+                parentCat.setNodeNum(--nodeNum);
+                siteCatDAO.update(parentCat);
+            }
+        }
+        return effectNum;
     }
     
 

@@ -42,6 +42,9 @@ public class AppTest
         System.out.println(AppTest.class.getGenericInterfaces().length);
         
         System.out.println(new AppTest() instanceof QueryCallbackHandler);
+        
+        StringBuilder sb = new StringBuilder("aaa bbb ccc AND ");
+        System.out.println(sb.delete(sb.length()-4, sb.length()));
     }
 }
 
