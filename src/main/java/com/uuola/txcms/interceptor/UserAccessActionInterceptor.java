@@ -28,6 +28,7 @@ public class UserAccessActionInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
      // TODO Auto-generated method stub
+        System.out.println("--- ActionInterceptor ---");
         if(handler instanceof HandlerMethod){
             //TODO
             HandlerMethod method = (HandlerMethod)handler;
@@ -35,7 +36,7 @@ public class UserAccessActionInterceptor extends HandlerInterceptorAdapter {
             System.out.println(method.getMethod().getName());
             MethodParameter[] params = method.getMethodParameters();
             for (MethodParameter mp : params) {
-                System.out.println(mp.getParameterName() + " "+mp.getParameterType().getCanonicalName());
+                System.out.println(" MethodParameter: " + mp.getParameterName() + " "+mp.getParameterType().getCanonicalName());
             }
         }
         System.out.println(handler.getClass().getCanonicalName());
