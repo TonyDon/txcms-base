@@ -2,15 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.uuola.txcms.sqlmapper.UserInfoMapper">
 
+    <sql id="userInfoCols"> 
+    	id,
+    	name,
+    	pass_key as passKey,
+    	tel,
+    	qq,
+    	email,
+    	gender,
+    	create_time as createTime,
+    	update_time as updateTime,
+    	city_code as cityCode,
+    	status,
+    	admin_flag as adminFlag
+    </sql>
+
     <select id="findByRange"  resultType="UserInfo" parameterType="UserInfoQuery">
-        select * from user_info where id>=(
+        select 
+        <include refid="userInfoCols"/> 
+        from user_info where id>=(
 			select id from user_info order by id asc limit #{crow}, 1
 		)
 		order by id asc limit 0, #{listSize}
     </select>
     
     <select id="findSingle"  resultType="UserInfo" parameterType="UserInfoQuery">
-        select * from user_info where name=#{name} limit 0, 1
+        select <include refid="userInfoCols"/> 
+        from user_info where name=#{name} limit 0, 1
     </select>
     
 </mapper>
