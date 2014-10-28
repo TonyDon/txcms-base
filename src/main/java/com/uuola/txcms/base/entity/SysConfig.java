@@ -39,7 +39,7 @@ public class SysConfig extends BaseEntity {
     @Column(name ="CONFIG_TYPE")
     private String configType;
     
-    @Column(name ="general_class")
+    @Column(name ="GENERAL_CLASS")
     private String generalClass;
     
     @Column(name ="UPDATE_TIME")
