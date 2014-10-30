@@ -16,6 +16,7 @@ import com.uuola.txcms.base.dto.UserInfoDTO;
 import com.uuola.txcms.base.entity.UserInfo;
 import com.uuola.txcms.base.service.UserRegService;
 import com.uuola.txcms.component.PassKeyManager;
+import com.uuola.txcms.component.SequenceManager;
 import com.uuola.txweb.framework.dao.support.TsBaseTx;
 
 
@@ -29,6 +30,9 @@ import com.uuola.txweb.framework.dao.support.TsBaseTx;
 @Service
 @TsBaseTx
 public class UserRegServiceImpl implements UserRegService {
+    
+    @Autowired
+    private SequenceManager sequenceManager;
 
     @Autowired
     private UserInfoDAO userInfoDAO;
@@ -45,6 +49,7 @@ public class UserRegServiceImpl implements UserRegService {
         String passkey= userInfo.getPassKey();
         userInfo.setPassKey(PassKeyManager.encrypt(passkey));
         userInfo.setCreateTime(DateUtil.getCurrMsTime());
+        userInfo.setId(sequenceManager.getUserId());
         userInfoDAO.save(userInfo);
         if(null!=userInfo.getId()){
             return true;
