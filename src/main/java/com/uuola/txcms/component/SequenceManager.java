@@ -31,16 +31,16 @@ public class SequenceManager {
         this.sequenceBuilders = sequenceBuilders;
         this.sequenceBuilderCount = sequenceBuilders.size();
         if(this.sequenceBuilderCount > 9){
-            throw new RuntimeException("Sequence Builders count at 1 ~ 9 !");
+            throw new IllegalArgumentException("Sequence Builders count at 1 ~ 9 !");
         }
     }
     
-    public long getInfoId() {
+    public long makeInfoId() {
         int index = NumberUtil.genRndInt(0, this.sequenceBuilderCount);
         return (this.sequenceBuilders.get(index).getSid() * multiples) + index + 1;
     }
     
-    public long getUserId(){
+    public long makeUserId(){
         int index = sequenceBuilderCount - NumberUtil.genRndInt(0, this.sequenceBuilderCount) - 1;
         return (this.sequenceBuilders.get(index).getSid() * multiples) + index + 1;
     }
