@@ -30,7 +30,7 @@ public class SequenceManager {
     private int multiples = 10 ;
     
     public SequenceManager(List<SequenceBuilder> sequenceBuilders) {
-        Assert.isNull(sequenceBuilders, "At least one SequenceBuilder !");
+        Assert.notNull(sequenceBuilders, "At least one SequenceBuilder !");
         this.sequenceBuilders = sequenceBuilders;
         this.sequenceBuilderCount = sequenceBuilders.size();
         if (this.sequenceBuilderCount > 9 || this.sequenceBuilderCount == 0) {
