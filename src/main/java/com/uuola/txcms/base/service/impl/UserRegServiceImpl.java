@@ -49,7 +49,6 @@ public class UserRegServiceImpl implements UserRegService {
         String passkey= userInfo.getPassKey();
         userInfo.setPassKey(PassKeyManager.encrypt(passkey));
         userInfo.setCreateTime(DateUtil.getCurrMsTime());
-        userInfo.setId(sequenceManager.makeUserId());
         userInfoDAO.save(userInfo);
         if(null!=userInfo.getId()){
             return true;

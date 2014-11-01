@@ -31,7 +31,7 @@ public class TestAction {
     @RequestMapping("/show")
     public void show(Model model){
         model.addAttribute("show", this.getClass().getCanonicalName());
-        model.addAttribute("seqId", sequenceManager.makeUserId());
+        model.addAttribute("seqId", sequenceManager.makeId());
     }
 
 }

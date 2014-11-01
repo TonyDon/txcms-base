@@ -38,7 +38,7 @@ public class SequenceManager {
         }
     }
     
-    public long makeUserId() {
+    public long makeId() {
         int index = NumberUtil.genRndInt(0, this.sequenceBuilderCount);
         return (this.sequenceBuilders.get(index).getSid() * multiples) + index + 1;
     }
