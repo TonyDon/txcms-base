@@ -31,18 +31,12 @@
 		<constructor-arg name="maxExtDigit" value="9" />
 	</bean>
 	
-	<bean id="seq-3" class="com.uuola.commons.coder.SequenceBuilder">
-		<constructor-arg name="fixedValue" value="1414675898040" />
-		<constructor-arg name="maxExtDigit" value="9" />
-	</bean>
-	
 	<bean id="sequenceManager" class="com.uuola.txcms.component.SequenceManager">
 		<constructor-arg>
 			<list>
 				<ref local="seq-0"/>
 				<ref local="seq-1"/>
 				<ref local="seq-2"/>
-				<ref local="seq-3"/>
 			</list>
 		</constructor-arg>
 	</bean>
