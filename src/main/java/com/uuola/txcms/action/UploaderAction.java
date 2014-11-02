@@ -63,6 +63,9 @@ public class UploaderAction {
     @ResponseBody
     public String saveImage(@RequestParam(value = "imageFile")
     MultipartFile imageFile) {
+        if(null == imageFile || imageFile.getSize() == 0){
+            return CST_ERROR_MSG.UPLOAD_FILE_SIZE_EMPTY;
+        }
         String result = CST_CHAR.STR_EMPTY;
         String extName = FileUtil.getFileExt(imageFile.getOriginalFilename());
         if (!fileExtNameValidator.checkImageExt(extName)) {

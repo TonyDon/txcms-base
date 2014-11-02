@@ -16,13 +16,9 @@ package com.uuola.txcms.constants;
  */
 public class CST_ERROR_MSG {
 
-    /**
-     * 验证码填写错误
-     */
     public static final String CAPTCHA_ERROR = "验证码填写错误,请重试.";
     
-    /**
-     * 图片文件名校验失败
-     */
     public static final String IMAGE_EXT_NAME_INVALID = "图片文件不合法,请检查.";
+
+    public static final String UPLOAD_FILE_SIZE_EMPTY = "上传了空文件." ;
 }
