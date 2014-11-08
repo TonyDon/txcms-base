@@ -1,12 +1,12 @@
 /*
- * @(#)SysConfigService.java 2014-11-8
+ * @(#)DictConfigService.java 2014-11-8
  * 
  * Copy Right@ uuola
  */ 
 
 package com.uuola.txcms.base.service;
 
-import com.uuola.txcms.base.dto.SysConfigDTO;
+import com.uuola.txcms.base.dto.DictConfigDTO;
 import com.uuola.txweb.framework.dto.PageDTO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
@@ -18,7 +18,7 @@ import com.uuola.txweb.framework.query.BaseQuery;
  * 创建日期: 2014-11-8
  * </pre>
  */
-public interface SysConfigService {
+public interface DictConfigService {
 
     /**
      * 分页查询信息
@@ -26,5 +26,5 @@ public interface SysConfigService {
      */
     PageDTO fetchByRange(BaseQuery query);
 
-    void  save(SysConfigDTO dto);
+    void  save(DictConfigDTO dto);
 }

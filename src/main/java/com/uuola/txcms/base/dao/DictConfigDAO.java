@@ -6,10 +6,13 @@
 
 package com.uuola.txcms.base.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.DictConfig;
 import com.uuola.txweb.framework.dao.support.TsBaseDAO;
+import com.uuola.txweb.framework.query.BaseQuery;
 
 
 /**
@@ -22,4 +25,7 @@ import com.uuola.txweb.framework.dao.support.TsBaseDAO;
 @Repository
 public class DictConfigDAO extends TsBaseDAO<DictConfig> {
 
+    public List<DictConfig> findByRange(BaseQuery query){
+        return this.selectList("com.uuola.txcms.sqlmapper.DictConfigMapper.findByRange", query);
+    }
 }

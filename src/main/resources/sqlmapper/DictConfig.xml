@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uuola.txcms.sqlmapper.DictConfigMapper">
+
+    <sql id="dictConfigCols"> 
+    	id,
+    	name,
+    	dict_code as dictCode,
+    	dict_value as dictValue,
+    	remark,
+    	update_time as updateTime
+    </sql>
+
+    <select id="findByRange"  resultType="DictConfig" parameterType="DictConfigQuery">
+        select 
+        <include refid="dictConfigCols"/> 
+        from dict_config where id>=(
+			select id from dict_config order by id asc limit #{crow}, 1
+		)
+		order by id asc limit 0, #{listSize}
+    </select>
+    
+</mapper>
