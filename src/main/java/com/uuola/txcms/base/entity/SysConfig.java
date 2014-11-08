@@ -33,11 +33,11 @@ public class SysConfig extends BaseEntity {
     @Column(name ="NAME")
     private String name;
     
-    @Column(name ="CONFIG_VALUE")
-    private String configValue;
+    @Column(name ="SYS_VALUE")
+    private String sysValue;
     
-    @Column(name ="CONFIG_TYPE")
-    private String configType;
+    @Column(name ="SYS_TYPE")
+    private String sysType;
     
     @Column(name ="GENERAL_CLASS")
     private String generalClass;
@@ -66,23 +66,23 @@ public class SysConfig extends BaseEntity {
     }
 
     
-    public String getConfigValue() {
-        return configValue;
+    public String getSysValue() {
+        return sysValue;
     }
 
     
-    public void setConfigValue(String configValue) {
-        this.configValue = configValue;
+    public void setSysValue(String sysValue) {
+        this.sysValue = sysValue;
     }
 
     
-    public String getConfigType() {
-        return configType;
+    public String getSysType() {
+        return sysType;
     }
 
     
-    public void setConfigType(String configType) {
-        this.configType = configType;
+    public void setSysType(String sysValue) {
+        this.sysType = sysValue;
     }
 
     
