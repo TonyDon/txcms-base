@@ -4,7 +4,7 @@
  * Copy Right@ uuola
  */ 
 
-package com.uuola.txcms.action;
+package com.uuola.txcms.demo.action;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

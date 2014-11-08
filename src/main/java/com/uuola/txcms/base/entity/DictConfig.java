@@ -1,5 +1,5 @@
 /*
- * @(#)SysConfig.java 2014-10-28
+ * @(#)DictConfig.java 2014-11-8
  * 
  * Copy Right@ uuola
  */ 
@@ -16,33 +16,33 @@ import com.uuola.txweb.framework.dao.support.BaseEntity;
 
 /**
  * <pre>
- * 系统配置实体
+ *
  * @author tangxiaodong
- * 创建日期: 2014-10-28
+ * 创建日期: 2014-11-8
  * </pre>
  */
 @Entity
-@Table(name="SYS_CONFIG")
-public class SysConfig extends BaseEntity {
+@Table(name="DICT_CONFIG")
+public class DictConfig extends BaseEntity {
 
-    private static final long serialVersionUID = -4092219936498753594L;
-    
+    private static final long serialVersionUID = -2352725934013477953L;
+
     @Id
     private Integer id;
     
-    @Column(name ="NAME")
+    @Column(name = "NAME")
     private String name;
     
-    @Column(name ="SYS_VALUE")
-    private String sysValue;
+    @Column(name = "DICT_CODE")
+    private String dictCode;
     
-    @Column(name ="SYS_TYPE")
-    private String sysType;
+    @Column(name = "DICT_VALUE")
+    private String dictValue;
     
-    @Column(name ="GENERAL_CLASS")
-    private String generalClass;
+    @Column(name = "REMARK")
+    private String remark;
     
-    @Column(name ="UPDATE_TIME")
+    @Column(name = "UPDATE_TIME")
     private Long updateTime;
 
     
@@ -66,33 +66,33 @@ public class SysConfig extends BaseEntity {
     }
 
     
-    public String getSysValue() {
-        return sysValue;
+    public String getDictCode() {
+        return dictCode;
     }
 
     
-    public void setSysValue(String sysValue) {
-        this.sysValue = sysValue;
+    public void setDictCode(String dictCode) {
+        this.dictCode = dictCode;
     }
 
     
-    public String getSysType() {
-        return sysType;
+    public String getDictValue() {
+        return dictValue;
     }
 
     
-    public void setSysType(String sysValue) {
-        this.sysType = sysValue;
+    public void setDictValue(String dictValue) {
+        this.dictValue = dictValue;
     }
 
     
-    public String getGeneralClass() {
-        return generalClass;
+    public String getRemark() {
+        return remark;
     }
 
     
-    public void setGeneralClass(String generalClass) {
-        this.generalClass = generalClass;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     
@@ -105,5 +105,4 @@ public class SysConfig extends BaseEntity {
         this.updateTime = updateTime;
     }
     
-
 }
