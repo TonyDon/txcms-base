@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.DictConfig;
+import com.uuola.txweb.framework.dao.support.SqlPropertyValue;
 import com.uuola.txweb.framework.dao.support.TsBaseDAO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
@@ -27,5 +28,16 @@ public class DictConfigDAO extends TsBaseDAO<DictConfig> {
 
     public List<DictConfig> findByRange(BaseQuery query){
         return this.selectList("com.uuola.txcms.sqlmapper.DictConfigMapper.findByRange", query);
+    }
+    
+    /**
+     * 通过字典编码查询字典参数列表
+     * @param dictCode
+     * @return
+     */
+    public List<DictConfig> findByCode(String dictCode) {
+        return this.findByProperty(
+                new String[] { "id", "name", "dictCode", "dictValue" }, 
+                new SqlPropertyValue("dictCode", dictCode));
     }
 }

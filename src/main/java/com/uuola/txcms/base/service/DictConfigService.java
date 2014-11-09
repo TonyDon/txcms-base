@@ -6,7 +6,10 @@
 
 package com.uuola.txcms.base.service;
 
+import java.util.List;
+
 import com.uuola.txcms.base.dto.DictConfigDTO;
+import com.uuola.txcms.base.entity.DictConfig;
 import com.uuola.txweb.framework.dto.PageDTO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
@@ -27,4 +30,11 @@ public interface DictConfigService {
     PageDTO fetchByRange(BaseQuery query);
 
     void  save(DictConfigDTO dto);
+    
+    /**
+     * 通过字典代码获取字典配置
+     * @param dictCode
+     * @return
+     */
+    List<DictConfig> getDict(String dictCode);
 }

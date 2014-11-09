@@ -6,17 +6,31 @@
 
 package com.uuola.txcms.config.action;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.uuola.commons.JsonUtil;
 import com.uuola.txcms.base.dto.DictConfigDTO;
+import com.uuola.txcms.base.entity.DictConfig;
 import com.uuola.txcms.base.query.DictConfigQuery;
 import com.uuola.txcms.base.service.DictConfigService;
 import com.uuola.txweb.framework.action.BaseAction;
+import com.uuola.txweb.framework.action.IConstant;
 import com.uuola.txweb.framework.action.methods.QueryCallbackHandler;
 import com.uuola.txweb.framework.action.methods.UpdateCallbackHandler;
 import com.uuola.txweb.framework.dto.PageDTO;
@@ -60,5 +74,20 @@ public class DictConfigAction extends BaseAction {
             }
         });
         return assignViewName(mv, "add");
+    }
+    
+    @RequestMapping(value = "/jsonp", method = RequestMethod.GET)
+    public ResponseEntity<String> jsonp(
+           @RequestParam(value = "dictCode")String dictCode, 
+           @RequestParam(value = IConstant.CALL_BACK_NAME)String callbackName){
+        List<DictConfig> dicts = dictConfigService.getDict(dictCode);
+        StringBuilder sb = new StringBuilder(callbackName + "(");
+        sb.append(JsonUtil.toJSONString(dicts));
+        sb.append(")");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(new MediaType("application", "javascript", Charset.forName("UTF-8")));
+        ResponseEntity<String> re = new ResponseEntity<String>(sb.toString(), headers, HttpStatus.OK);
+        return re;
     }
 }

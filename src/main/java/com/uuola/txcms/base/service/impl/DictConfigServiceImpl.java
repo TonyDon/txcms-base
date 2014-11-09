@@ -6,11 +6,15 @@
 
 package com.uuola.txcms.base.service.impl;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uuola.commons.DateUtil;
+import com.uuola.commons.StringUtil;
 import com.uuola.txcms.base.dao.DictConfigDAO;
 import com.uuola.txcms.base.dto.DictConfigDTO;
 import com.uuola.txcms.base.entity.DictConfig;
@@ -48,6 +52,15 @@ public class DictConfigServiceImpl implements DictConfigService {
         BeanUtils.copyProperties(dictConfigDTO, entity);
         entity.setUpdateTime(DateUtil.getCurrTime());
         dictConfigDAO.save(entity);
+    }
+
+
+    @Override
+    public List<DictConfig> getDict(String dictCode) {
+        if(StringUtil.isEmpty(dictCode)){
+            return Collections.emptyList();
+        }
+        return dictConfigDAO.findByCode(dictCode);
     }
 
 }
