@@ -6,11 +6,8 @@
 
 package com.uuola.txcms.config.action;
 
-import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
