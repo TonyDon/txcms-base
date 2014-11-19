@@ -11,6 +11,11 @@
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
 	<context:annotation-config />
+	
+	<bean id="baseEntityClassLoader" class="com.uuola.txweb.framework.dao.support.EntityClassLoader">
+		<property name="entityPackagePaths" value="com.uuola.txcms.base.entity" />
+	</bean>
+	
 	<context:component-scan base-package="
     	com.uuola.txcms.base.dao,
     	com.uuola.txcms.base.service
