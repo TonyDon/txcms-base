@@ -11,7 +11,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.DictConfig;
-import com.uuola.txweb.framework.dao.support.SqlPropertyValue;
+import com.uuola.txweb.framework.dao.support.SqlPropValue;
 import com.uuola.txweb.framework.dao.support.TsBaseDAO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
@@ -38,6 +38,6 @@ public class DictConfigDAO extends TsBaseDAO<DictConfig> {
     public List<DictConfig> findByCode(String dictCode) {
         return this.findByProperty(
                 new String[] { "id", "name", "dictCode", "dictValue" }, 
-                new SqlPropertyValue("dictCode", dictCode));
+                new SqlPropValue("dictCode", dictCode));
     }
 }
