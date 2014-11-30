@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uuola.commons.DateUtil;
+import com.uuola.commons.StringUtil;
 import com.uuola.txcms.base.dao.InfoBaseDAO;
 import com.uuola.txcms.base.dao.InfoContentDAO;
 import com.uuola.txcms.base.dto.InfoPostDTO;
@@ -44,10 +45,12 @@ public class InfoPostServiceImpl implements InfoPostService {
         BeanUtils.copyProperties(infoPostDTO, base);
         base.setAuthorId(-1L);
         base.setCreateTime(DateUtil.getCurrTime());
-        content.setContent(infoPostDTO.getContent());
         infoBaseDAO.save(base);
-        content.setInfoId(base.getId());
-        infoContentDAO.save(content);
+        if (StringUtil.isNotEmpty(infoPostDTO.getContent())) {
+            content.setContent(infoPostDTO.getContent());
+            content.setInfoId(base.getId());
+            infoContentDAO.save(content);
+        }
     }
 
 }
