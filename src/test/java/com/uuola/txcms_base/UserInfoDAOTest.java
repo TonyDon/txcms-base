@@ -59,7 +59,7 @@ public class UserInfoDAOTest {
         ids.add(10000L);
         ids.add(10001l);
         ids.add(10002L);
-        List<UserInfo> list = userInfoDAO.getByKeys(ids);
+        List<UserInfo> list = userInfoDAO.getByKeys(10000L, 10001l, 10002L);
         System.out.println(JsonUtil.toJSONString(list));
     }
     
