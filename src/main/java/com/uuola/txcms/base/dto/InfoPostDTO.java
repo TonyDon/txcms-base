@@ -49,6 +49,8 @@ public class InfoPostDTO extends ValidateDTO {
     private Byte isDelete;
     
     private String content;
+    
+    private Long[] tagIds;
 
     
     public Long getId() {
@@ -198,6 +200,18 @@ public class InfoPostDTO extends ValidateDTO {
     
     public void setContent(String content) {
         this.content = content;
+    }
+
+
+    
+    public Long[] getTagIds() {
+        return tagIds;
+    }
+
+
+    
+    public void setTagIds(Long[] tagIds) {
+        this.tagIds = tagIds;
     }
     
 }
