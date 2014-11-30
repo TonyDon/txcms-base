@@ -53,7 +53,7 @@ public class UserInfoDAOTest {
     @Autowired
     private UserInfoDAO userInfoDAO;
     
-    //@Test
+    @Test
     public void test_getByKeys(){
         List<Long> ids = new ArrayList<Long>();
         ids.add(10000L);
@@ -63,11 +63,12 @@ public class UserInfoDAOTest {
         System.out.println(JsonUtil.toJSONString(list));
     }
     
-    //@Test
+    @Test
     public void test_deleteByPropValue(){
         UserInfo ui = new UserInfo();
         ui.setName("dsaf");
         ui.setTel("af");
+        ui.setId(10002l);
         userInfoDAO.delete(ui);
         UserInfo u = userInfoDAO.get(10002);
         System.out.println(u);
@@ -79,7 +80,7 @@ public class UserInfoDAOTest {
                 new SqlPropValue("name", "dsaf").setRelationCondition(SqlCondDef.AND),
                 new SqlPropValue("tel", "af")
         };
-        userInfoDAO.delete(pvs);
+        System.out.println(userInfoDAO.delete(pvs));
         UserInfo u = userInfoDAO.get(10002);
         System.out.println(u);
     }
