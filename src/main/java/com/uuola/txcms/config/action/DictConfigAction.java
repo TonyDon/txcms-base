@@ -75,8 +75,8 @@ public class DictConfigAction extends BaseAction {
     
     @RequestMapping(value = "/jsonp", method = RequestMethod.GET)
     public ResponseEntity<String> jsonp(
-           @RequestParam(value = "dictCode")String dictCode, 
-           @RequestParam(value = IConstant.CALL_BACK_NAME)String callbackName){
+           @RequestParam("dictCode")String dictCode, 
+           @RequestParam(IConstant.CALL_BACK_NAME)String callbackName){
         List<DictConfig> dicts = dictConfigService.getDict(dictCode);
         StringBuilder sb = new StringBuilder(callbackName + "(");
         sb.append(JsonUtil.toJSONString(dicts));
