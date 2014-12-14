@@ -13,6 +13,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.UserInfo;
+import com.uuola.txweb.framework.dao.support.SqlPropValue;
 import com.uuola.txweb.framework.dao.support.TsBaseDAO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
@@ -34,8 +35,9 @@ public class UserInfoDAO extends TsBaseDAO<UserInfo> {
      * @return
      */
     public boolean isNotExistTel(String tel) {
-        List<Map<String, Object>> list = this.executeQuery("select id from user_info where tel=? limit 0,1", tel);
-        return CollectionUtils.isEmpty(list);
+//        List<Map<String, Object>> list = this.executeQuery("select id from user_info where tel=? limit 0,1", tel);
+        Number count = this.countByProperty(new SqlPropValue("tel", tel));
+        return count.intValue() == 0;
     }
     
     public List<UserInfo> findByRange(BaseQuery query){
