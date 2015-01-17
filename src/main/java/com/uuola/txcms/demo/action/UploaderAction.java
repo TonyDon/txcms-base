@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.commons.DateUtil;
 import com.uuola.commons.StringUtil;
@@ -29,6 +30,7 @@ import com.uuola.commons.constant.CST_CHAR;
 import com.uuola.commons.constant.CST_DATE_FORMAT;
 import com.uuola.commons.file.FileUtil;
 import com.uuola.commons.image.ImageUtil;
+import com.uuola.commons.listener.WebContext;
 import com.uuola.txcms.component.FileExtNameValidator;
 import com.uuola.txcms.constants.CST_ERROR_MSG;
 import com.uuola.txweb.framework.utils.ContextUtil;
@@ -56,20 +58,18 @@ public class UploaderAction {
     /**
      * 上传图片文件，返回上传后的图片URL资源路径
      * 
-     * @param imageFile
+     * @param image
      * @return
      */
     @RequestMapping(value = "/image", method = RequestMethod.POST)
-    @ResponseBody
-    public String saveImage(@RequestParam(value = "imageFile")
-    MultipartFile imageFile) {
-        if(null == imageFile || imageFile.getSize() == 0){
-            return CST_ERROR_MSG.UPLOAD_FILE_SIZE_EMPTY;
+    public ModelAndView saveImage(@RequestParam(value = "imageFile") MultipartFile image) {
+        if (null == image || image.getSize() == 0) {
+            return getModel(null, CST_ERROR_MSG.UPLOAD_FILE_SIZE_EMPTY, 1);
         }
         String result = CST_CHAR.STR_EMPTY;
-        String extName = FileUtil.getFileExt(imageFile.getOriginalFilename());
+        String extName = FileUtil.getFileExt(image.getOriginalFilename());
         if (!fileExtNameValidator.checkImageExt(extName)) {
-            return CST_ERROR_MSG.IMAGE_EXT_NAME_INVALID;
+            return getModel(null, CST_ERROR_MSG.IMAGE_EXT_NAME_INVALID, 1);
         }
         try {
             // 保存文件路径
@@ -82,27 +82,30 @@ public class UploaderAction {
             FileUtil.createNoExistsDirs(distImageDir);
 
             // 新文件名
-            String distImageName = KeyGenerator.getRndChr(8).concat(CST_CHAR.STR_UNDER_LINE)
+            String imageName = KeyGenerator.getRndChr(8).concat(CST_CHAR.STR_UNDER_LINE)
                     .concat(Long.toHexString(DateUtil.getCurrMsTime())).concat(CST_CHAR.STR_UNDER_LINE)
-                    .concat(Long.toHexString(imageFile.getSize())).concat(CST_CHAR.STR_DOT).concat(extName);
-
+                    .concat(Long.toHexString(image.getSize()));
+            extName = CST_CHAR.STR_DOT.concat(extName);
+            String distImageName = imageName.concat(extName);
             File distImage = new File(distImageDir, distImageName);
-            imageFile.transferTo(distImage);
+            image.transferTo(distImage);
 
             // 缩图
             if (distImage.exists() && distImage.canRead()) {
-                File w1Image = new File(distImageDir, distImageName.concat(".w1.thumb"));
+                File w1Image = new File(distImageDir, imageName.concat(".150").concat(extName));
                 ImageUtil.resize(distImage, w1Image, 150, 0, false);
 
-                File w2Image = new File(distImageDir, distImageName.concat(".w2.thumb"));
+                File w2Image = new File(distImageDir, imageName.concat(".350").concat(extName));
                 ImageUtil.resize(distImage, w2Image, 350, 0, false);
             }
 
-            result = UPLOAD_ROOT_DIR.concat(imgDir).concat("/").concat(distImageName);
+            result = WebContext.getServletContext().getContextPath().concat(UPLOAD_ROOT_DIR).concat(imgDir)
+                    .concat(CST_CHAR.STR_SLASH).concat(distImageName);
+
         } catch (Exception e) {
             log.error("saveImage()", e);
         }
-        return result;
+        return getModel(result, null, 0);
     }
 
     /**
@@ -114,30 +117,44 @@ public class UploaderAction {
      */
     @RequestMapping(value = "/image", method = RequestMethod.DELETE)
     @ResponseBody
-    public boolean deleteImage(@RequestParam(value = "imageUrl")
-    String imageUrl) throws FileNotFoundException {
+    public boolean deleteImage(@RequestParam(value = "imageUrl") String imageUrl) throws FileNotFoundException {
         if (StringUtil.isEmpty(imageUrl)) {
             return false;
         }
-        String lowerImageUrl = imageUrl.toLowerCase();
-        String imageExtName = FileUtil.getFileExt(lowerImageUrl);
-        if (StringUtil.startsNotWith(lowerImageUrl, UPLOAD_ROOT_DIR) || lowerImageUrl.contains("..")
-                || lowerImageUrl.contains("web-inf") || lowerImageUrl.contains("meta-inf")
-                || !fileExtNameValidator.checkImageExt(imageExtName)) {
+        imageUrl = StringUtil.replace(imageUrl.trim(), WebContext.getServletContext().getContextPath(),
+                CST_CHAR.STR_EMPTY);
+        String extName = FileUtil.getFileExt(imageUrl);
+        if (StringUtil.startsNotWith(imageUrl, UPLOAD_ROOT_DIR) || imageUrl.contains("..")
+                || imageUrl.toLowerCase().contains("web-inf") || imageUrl.toLowerCase().contains("meta-inf")
+                || !fileExtNameValidator.checkImageExt(extName)) {
             return false;
         }
-        String imagePath = ContextUtil.getRealPath("/").concat(imageUrl.trim());
+
+        String imagePath = ContextUtil.getRealPath("/").concat(imageUrl);
         File imageFile = new File(imagePath);
-        if (imageFile.isDirectory()) {
+        if (imageFile.isDirectory() || !imageFile.exists()) {
             return false;
         }
 
-        File w1Thumb = new File(imagePath.concat(".w1.thumb"));
-        FileUtils.deleteQuietly(w1Thumb);
+        String thumbPath = StringUtil.replace(imagePath, extName, CST_CHAR.STR_EMPTY);
+        File w1Thumb = new File(thumbPath.concat("150.").concat(extName));
+        if (w1Thumb.exists()) {
+            FileUtils.deleteQuietly(w1Thumb);
+        }
 
-        File w2Thumb = new File(imagePath.concat(".w2.thumb"));
-        FileUtils.deleteQuietly(w2Thumb);
+        File w2Thumb = new File(thumbPath.concat("350.").concat(extName));
+        if (w2Thumb.exists()) {
+            FileUtils.deleteQuietly(w2Thumb);
+        }
 
         return FileUtils.deleteQuietly(imageFile);
+    }
+
+    private ModelAndView getModel(String url, String messsge, Integer error) {
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("url", url);
+        mv.addObject("message", messsge);
+        mv.addObject("error", error);
+        return mv;
     }
 }
