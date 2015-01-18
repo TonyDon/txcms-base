@@ -61,17 +61,26 @@ public class FileExtNameValidator {
      * @param inputExtName
      * @return
      */
-    public boolean checkImageExt(String inputExtName){
-        return validate(inputExtName, imageExtNames);
+    public boolean checkImageExt(String extName){
+        return validate(extName, imageExtNames);
     }
     
-    public boolean validate(String inputExtName, String extNames) {
-        if (StringUtil.isEmpty(inputExtName)) {
+    /**
+     * 校验扩展是否合法，通过返回true
+     * @param extName
+     * @return
+     */
+    public boolean checkCommonExt(String extName){
+        return validate(extName, commonExtNames);
+    }
+    
+    public boolean validate(String extName, String allowExtNames) {
+        if (StringUtil.isEmpty(extName)) {
             return false;
         }
         
-        if (StringUtil.isNotEmpty(extNames)) {
-            return extNames.contains(inputExtName.toLowerCase());
+        if (StringUtil.isNotEmpty(allowExtNames)) {
+            return allowExtNames.contains(extName.toLowerCase());
         }
         
         log.error("FileExtNameValidator properties[imageExtNames or commonExtNames] don't be confg!");
