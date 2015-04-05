@@ -99,11 +99,8 @@ public class UploaderAction {
 
             // 缩图
             if (needThumb && dist.exists() && dist.canRead() && fileExtNameValidator.checkImageExt(extName)) {
-                File w1Image = new File(distDir, fileName.concat(".150.").concat(extName));
-                ImageUtil.resize(dist, w1Image, 150, 0, false);
-
-                File w2Image = new File(distDir, fileName.concat(".350.").concat(extName));
-                ImageUtil.resize(dist, w2Image, 350, 0, false);
+                File w1Image = new File(distDir, fileName.concat(".100.").concat(extName));
+                ImageUtil.resize(dist, w1Image, 100, 0, false);
             }
 
             url = WebContext.getServletContext().getContextPath().concat(UPLOAD_ROOT_DIR).concat(dirPath)
@@ -117,7 +114,7 @@ public class UploaderAction {
     }
 
     /**
-     * 删除单个图片文件
+     * 删除单个文件
      * 
      * @param url
      * @return
@@ -145,14 +142,9 @@ public class UploaderAction {
         
         if (fileExtNameValidator.checkImageExt(extName)) {
             String thumbPath = StringUtil.replace(path, extName, CST_CHAR.STR_EMPTY);
-            File w1Thumb = new File(thumbPath.concat("150.").concat(extName));
+            File w1Thumb = new File(thumbPath.concat("100.").concat(extName));
             if (w1Thumb.exists()) {
                 FileUtils.deleteQuietly(w1Thumb);
-            }
-
-            File w2Thumb = new File(thumbPath.concat("350.").concat(extName));
-            if (w2Thumb.exists()) {
-                FileUtils.deleteQuietly(w2Thumb);
             }
         }
 
