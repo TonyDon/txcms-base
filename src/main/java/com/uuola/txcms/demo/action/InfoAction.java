@@ -51,4 +51,22 @@ public class InfoAction extends BaseAction {
         });
         return assignViewName(mv, "show");
     }
+    
+    /**
+     * 信息首页
+     * @return
+     */
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index(){
+        return getViewName("index");
+    }
+    
+    /**
+     * 列表页面
+     * @return
+     */
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public String list(){
+        return getViewName("list");
+    }
 }
