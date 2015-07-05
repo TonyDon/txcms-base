@@ -8,7 +8,8 @@
     	sys_value as sysValue,
     	sys_type as sysType,
     	general_class as generalClass,
-    	update_time as updateTime
+    	update_time as updateTime, 
+    	remark
     </sql>
 
     <select id="findByRange"  resultType="SysConfig" parameterType="SysConfigQuery">

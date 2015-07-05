@@ -31,6 +31,8 @@ public class SysConfigDTO extends ValidateDTO {
     private String generalClass;
     
     private Long updateTime;
+    
+    private String remark;
 
     
     public Integer getId() {
@@ -90,6 +92,18 @@ public class SysConfigDTO extends ValidateDTO {
     
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
+    }
+
+
+    
+    public String getRemark() {
+        return remark;
+    }
+
+
+    
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
     
 }

@@ -44,6 +44,9 @@ public class SysConfig extends BaseEntity {
     
     @Column(name ="UPDATE_TIME")
     private Long updateTime;
+    
+    @Column(name ="REMARK")
+    private String remark;
 
     
     public Integer getId() {
@@ -103,6 +106,18 @@ public class SysConfig extends BaseEntity {
     
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
+    }
+
+
+    
+    public String getRemark() {
+        return remark;
+    }
+
+
+    
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
     
 
