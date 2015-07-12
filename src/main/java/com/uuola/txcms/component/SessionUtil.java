@@ -43,4 +43,22 @@ public class SessionUtil {
       HttpServletRequest request = ContextUtil.getHttpServletRequest();
       WebUtils.setSessionAttribute(request, CST_SESSION_NAME.VALID_CODE, code);
   }
+  
+  /**
+   * 得到回话中的管理员对象
+   */
+  public static Object getAdmin(){
+      HttpServletRequest request = ContextUtil.getHttpServletRequest();
+      return WebUtils.getSessionAttribute(request, CST_SESSION_NAME.ADMIN_SESS_CODE);
+  }
+  
+  /**
+   * 设置管理员对象到回话中
+   * @param admin
+   */
+  public static void setAdmin(Object admin){
+      HttpServletRequest request = ContextUtil.getHttpServletRequest();
+      WebUtils.setSessionAttribute(request, CST_SESSION_NAME.ADMIN_SESS_CODE, admin);
+  }
+  
 }

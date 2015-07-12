@@ -23,4 +23,8 @@ public class CST_ERROR_MSG {
     public static final String UPLOAD_FILE_SIZE_EMPTY = "上传了空文件." ;
     
     public static final String UPLOAD_DIR_INVALID = "上传文件目录无效.";
+    
+    public static final String VERIFY_USER_NOT_EXIST = "账户信息不存在.";
+    
+    public static final String VERIFY_USER_CHECK_FAIL = "账户验证失败.";
 }

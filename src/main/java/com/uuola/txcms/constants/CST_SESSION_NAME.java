@@ -17,4 +17,6 @@ package com.uuola.txcms.constants;
 public class CST_SESSION_NAME {
 
     public static final String VALID_CODE = "#sess_valid_code";
+    
+    public static final String ADMIN_SESS_CODE = "#admin_sess_code";
 }

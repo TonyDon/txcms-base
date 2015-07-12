@@ -61,7 +61,8 @@ public class CaptchaAction {
     public void show(@PathVariable("sid")
     String sid, HttpServletResponse response, HttpServletRequest request) throws IOException {
         String randomText = makeRndText();
-        String rndChar = Md5.encode(KeyGenerator.getRndChr(8));
+        // 随机字符加密验证码明文
+        String rndChar = KeyGenerator.getRndChr(40);
         SessionUtil.setValidCode(randomText);
         response.addCookie(makeRndCharCookie(rndChar));
         response.addCookie(makeCaptchaHashTextCookie(randomText, rndChar));

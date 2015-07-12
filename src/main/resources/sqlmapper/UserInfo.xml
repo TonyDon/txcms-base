@@ -27,8 +27,13 @@
     </select>
     
     <select id="findSingle"  resultType="UserInfo" parameterType="UserInfoQuery">
-        select <include refid="userInfoCols"/> 
-        from user_info where name=#{name} limit 0, 1
+		select
+		<include refid="userInfoCols" />
+		from user_info where name=#{name}
+			<if test="adminFlag != null">
+				and admin_flag = #{adminFlag}
+			</if>
+		limit 0, 1
     </select>
     
 </mapper>
