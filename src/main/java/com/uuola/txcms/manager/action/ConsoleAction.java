@@ -9,6 +9,7 @@ package com.uuola.txcms.manager.action;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.txcms.base.entity.UserInfo;
@@ -43,5 +44,15 @@ public class ConsoleAction extends BaseAction {
     public String logout(){
         SessionUtil.setAdmin(null);
         return "redirect:/manager/verify/login";
+    }
+    
+    @RequestMapping(value="/session_check", method=RequestMethod.GET)
+    @ResponseBody
+    public Object sessionCheck() {
+        Object user = SessionUtil.getAdmin();
+        if (null != user) {
+            return System.currentTimeMillis();
+        }
+        return "error";
     }
 }
