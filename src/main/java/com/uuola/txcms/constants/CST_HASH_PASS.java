@@ -14,7 +14,7 @@ package com.uuola.txcms.constants;
  * 创建日期: 2013-12-7
  * </pre>
  */
-public class CST_HASH_PASS {
+public abstract class CST_HASH_PASS {
 
     public static final String USER_PASS_KEY = "#asd~fjk";
     

@@ -14,7 +14,7 @@ package com.uuola.txcms.constants;
  * 创建日期: 2013-12-15
  * </pre>
  */
-public class CST_ERROR_MSG {
+public abstract class CST_ERROR_MSG {
 
     public static final String CAPTCHA_ERROR = "验证码填写错误,请重试.";
     

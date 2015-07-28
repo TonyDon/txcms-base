@@ -14,7 +14,7 @@ package com.uuola.txcms.constants;
  * 创建日期: 2013-11-17
  * </pre>
  */
-public class CST_SESSION_NAME {
+public abstract class CST_SESSION_NAME {
 
     public static final String VALID_CODE = "#sess_valid_code";
     
