@@ -31,11 +31,9 @@ public class ConsoleAction extends BaseAction {
     @RequestMapping(value="", method=RequestMethod.GET)
     public ModelAndView index(){
         ModelAndView model = this.makeModelView("index");
-        UserInfo user = (UserInfo)SessionUtil.getAdmin();
+        Object user = SessionUtil.getAdmin();
         if(null == user){
             model.setViewName("redirect:/manager/verify/login");
-        }else{
-            model.addObject("admin", user);
         }
         return model;
     }
@@ -51,7 +49,7 @@ public class ConsoleAction extends BaseAction {
     public Object sessionCheck() {
         Object user = SessionUtil.getAdmin();
         if (null != user) {
-            return System.currentTimeMillis();
+            return ((UserInfo)user).getName();
         }
         return "error";
     }
