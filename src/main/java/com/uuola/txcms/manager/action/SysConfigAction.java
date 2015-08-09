@@ -4,7 +4,7 @@
  * Copy Right@ uuola
  */ 
 
-package com.uuola.txcms.config.action;
+package com.uuola.txcms.manager.action;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,18 +26,23 @@ import com.uuola.txweb.framework.query.BaseQuery;
 
 /**
  * <pre>
- *
+ * 系统参数配置
  * @author tangxiaodong
  * 创建日期: 2014-11-8
  * </pre>
  */
 @Controller
-@RequestMapping("/config/sys")
+@RequestMapping("/manager/app/sysconfig")
 public class SysConfigAction extends BaseAction {
     
     @Autowired
     private SysConfigService sysConfigService;
 
+    @RequestMapping(value="", method=RequestMethod.GET)
+    public ModelAndView index(){
+        return this.makeModelView("index");
+    }
+    
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ModelAndView search(SysConfigQuery query, ServletWebRequest webRequest) {
         ModelAndView mv = queryAction(query, new QueryCallbackHandler<PageDTO>() {
