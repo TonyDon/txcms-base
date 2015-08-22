@@ -1,10 +1,10 @@
 /*
- * @(#)SiteCatAction.java 2014-10-19
+ * @(#)SietCatAction.java 2015年8月22日
  * 
  * Copy Right@ uuola
  */ 
 
-package com.uuola.txcms.demo.action;
+package com.uuola.txcms.manager.action;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,20 +26,26 @@ import com.uuola.txweb.framework.query.BaseQuery;
 
 /**
  * <pre>
- * 站点类目
+ * 站点类目管理
  * @author tangxiaodong
- * 创建日期: 2014-10-19
+ * 创建日期: 2015年8月22日
  * </pre>
  */
 @Controller
-@RequestMapping("/sitecat")
+@RequestMapping("/manager/app/sitecat")
 public class SiteCatAction extends BaseAction {
 
     @Autowired
     private SiteCatService siteCatService;
     
+    @RequestMapping(value="", method=RequestMethod.GET)
+    public ModelAndView index(){
+        return this.makeModelView("index");
+    }
+    
+    
     /**
-     * 查询用户信息
+     * 查询类目列表信息
      * @param query
      * @param webRequest
      * @return

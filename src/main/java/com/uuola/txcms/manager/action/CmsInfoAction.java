@@ -1,10 +1,10 @@
 /*
- * @(#)InfoPostAction.java 2014年11月23日
+ * @(#)CmsInfoAction.java 2015年8月22日
  * 
  * Copy Right@ uuola
  */ 
 
-package com.uuola.txcms.demo.action;
+package com.uuola.txcms.manager.action;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,19 +22,25 @@ import com.uuola.txweb.framework.dto.ValidateDTO;
 
 /**
  * <pre>
- *
+ * cms内容管理
  * @author tangxiaodong
- * 创建日期: 2014年11月23日
+ * 创建日期: 2015年8月22日
  * </pre>
  */
 @Controller
-public class InfoPostAction extends BaseAction {
+@RequestMapping("/manager/app/cmsinfo")
+public class CmsInfoAction extends BaseAction {
 
     @Autowired
     private InfoPostService infoPostService;
     
-    @RequestMapping(value="/info/add", method=RequestMethod.POST)
-    public ModelAndView add(InfoPostDTO infoPostDTO, ServletWebRequest webRequest) {
+    @RequestMapping(value="/addpage", method=RequestMethod.GET)
+    public ModelAndView addPage(){
+        return this.makeModelView("addpage");
+    }
+    
+    @RequestMapping(value="/post", method=RequestMethod.POST)
+    public ModelAndView post(InfoPostDTO infoPostDTO, ServletWebRequest webRequest) {
         ModelAndView mv = updateAction(infoPostDTO, new UpdateCallbackHandler<Object>() {
             @Override
             public Object doUpdate(ValidateDTO infoPostDTO) {
