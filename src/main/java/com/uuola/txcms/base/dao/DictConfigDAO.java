@@ -11,8 +11,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.DictConfig;
-import com.uuola.txweb.framework.dao.support.SqlPropValue;
-import com.uuola.txweb.framework.dao.support.TsBaseDAO;
+import com.uuola.txweb.framework.dao.support.TxWebDAO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
 
@@ -24,7 +23,7 @@ import com.uuola.txweb.framework.query.BaseQuery;
  * </pre>
  */
 @Repository
-public class DictConfigDAO extends TsBaseDAO<DictConfig> {
+public class DictConfigDAO extends TxWebDAO<DictConfig> {
 
     public List<DictConfig> findByRange(BaseQuery query){
         return this.selectList("com.uuola.txcms.sqlmapper.DictConfigMapper.findByRange", query);
@@ -36,8 +35,6 @@ public class DictConfigDAO extends TsBaseDAO<DictConfig> {
      * @return
      */
     public List<DictConfig> findByCode(String dictCode) {
-        return this.findByProperty(
-                new String[] { "id", "name", "dictCode", "dictValue" }, 
-                new SqlPropValue("dictCode", dictCode));
+        return this.selectList("com.uuola.txcms.sqlmapper.DictConfigMapper.findByDictCode", dictCode);
     }
 }

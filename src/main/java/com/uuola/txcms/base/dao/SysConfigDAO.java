@@ -11,7 +11,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.SysConfig;
-import com.uuola.txweb.framework.dao.support.TsBaseDAO;
+import com.uuola.txweb.framework.dao.support.TxWebDAO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
 
@@ -23,7 +23,7 @@ import com.uuola.txweb.framework.query.BaseQuery;
  * </pre>
  */
 @Repository
-public class SysConfigDAO extends TsBaseDAO<SysConfig> {
+public class SysConfigDAO extends TxWebDAO<SysConfig> {
 
     public List<SysConfig> findByRange(BaseQuery query){
         return this.selectList("com.uuola.txcms.sqlmapper.SysConfigMapper.findByRange", query);

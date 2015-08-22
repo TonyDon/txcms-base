@@ -17,7 +17,7 @@ import com.uuola.txcms.base.dto.InfoDTO;
 import com.uuola.txcms.base.entity.InfoBase;
 import com.uuola.txcms.base.entity.InfoContent;
 import com.uuola.txcms.base.service.InfoService;
-import com.uuola.txweb.framework.dao.support.TsBaseTx;
+import com.uuola.txweb.framework.dao.support.TxWebTs;
 
 
 /**
@@ -28,7 +28,7 @@ import com.uuola.txweb.framework.dao.support.TsBaseTx;
  * </pre>
  */
 @Service
-@TsBaseTx
+@TxWebTs
 public class InfoServiceImpl implements InfoService {
 
 

@@ -18,7 +18,7 @@ import com.uuola.txcms.base.dto.InfoPostDTO;
 import com.uuola.txcms.base.entity.InfoBase;
 import com.uuola.txcms.base.entity.InfoContent;
 import com.uuola.txcms.base.service.InfoPostService;
-import com.uuola.txweb.framework.dao.support.TsBaseTx;
+import com.uuola.txweb.framework.dao.support.TxWebTs;
 
 
 /**
@@ -29,7 +29,7 @@ import com.uuola.txweb.framework.dao.support.TsBaseTx;
  * </pre>
  */
 @Service
-@TsBaseTx
+@TxWebTs
 public class InfoPostServiceImpl implements InfoPostService {
 
     @Autowired

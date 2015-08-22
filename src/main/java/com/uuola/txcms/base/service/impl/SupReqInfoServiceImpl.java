@@ -17,7 +17,7 @@ import com.uuola.txcms.base.dao.SupReqInfoDAO;
 import com.uuola.txcms.base.dto.SupReqInfoDTO;
 import com.uuola.txcms.base.entity.SupReqInfo;
 import com.uuola.txcms.base.service.SupReqInfoService;
-import com.uuola.txweb.framework.dao.support.TsBaseTx;
+import com.uuola.txweb.framework.dao.support.TxWebTs;
 
 
 /**
@@ -28,7 +28,7 @@ import com.uuola.txweb.framework.dao.support.TsBaseTx;
  * </pre>
  */
 @Service("supReqInfoService")
-@TsBaseTx
+@TxWebTs
 public class SupReqInfoServiceImpl implements SupReqInfoService {
 
     @Autowired

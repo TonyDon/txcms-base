@@ -7,14 +7,12 @@
 package com.uuola.txcms.base.dao;
 
 import java.util.List;
-import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.UserInfo;
-import com.uuola.txweb.framework.dao.support.SqlPropValue;
-import com.uuola.txweb.framework.dao.support.TsBaseDAO;
+import com.uuola.txcms.base.query.UserInfoQuery;
+import com.uuola.txweb.framework.dao.support.TxWebDAO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
 
@@ -26,18 +24,13 @@ import com.uuola.txweb.framework.query.BaseQuery;
  * </pre>
  */
 @Repository
-public class UserInfoDAO extends TsBaseDAO<UserInfo> {
+public class UserInfoDAO extends TxWebDAO<UserInfo> {
 
-    /**
-     * 判断是否存在该移动号码的用户<br/>
-     * 不存在返回true,否则返回false 存在记录
-     * @param tel
-     * @return
-     */
     public boolean isNotExistTel(String tel) {
-//        List<Map<String, Object>> list = this.executeQuery("select id from user_info where tel=? limit 0,1", tel);
-        Number count = this.countByProperty(new SqlPropValue("tel", tel));
-        return count.intValue() == 0;
+        UserInfoQuery query =  new UserInfoQuery();
+        query.setTel(tel);
+        UserInfo userInfo = this.selectOne("com.uuola.txcms.sqlmapper.UserInfoMapper.findSingle", query);
+        return null == userInfo ;
     }
     
     public List<UserInfo> findByRange(BaseQuery query){

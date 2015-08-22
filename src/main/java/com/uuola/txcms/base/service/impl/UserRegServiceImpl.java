@@ -17,7 +17,7 @@ import com.uuola.txcms.base.entity.UserInfo;
 import com.uuola.txcms.base.service.UserRegService;
 import com.uuola.txcms.component.PassKeyManager;
 import com.uuola.txcms.component.SequenceManager;
-import com.uuola.txweb.framework.dao.support.TsBaseTx;
+import com.uuola.txweb.framework.dao.support.TxWebTs;
 
 
 /**
@@ -28,7 +28,7 @@ import com.uuola.txweb.framework.dao.support.TsBaseTx;
  * </pre>
  */
 @Service
-@TsBaseTx
+@TxWebTs
 public class UserRegServiceImpl implements UserRegService {
     
     @Autowired

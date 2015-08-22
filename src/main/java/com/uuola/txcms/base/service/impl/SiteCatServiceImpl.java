@@ -17,7 +17,7 @@ import com.uuola.txcms.base.entity.SiteCat;
 import com.uuola.txcms.base.exception.SiteCatException;
 import com.uuola.txcms.base.query.SiteCatQuery;
 import com.uuola.txcms.base.service.SiteCatService;
-import com.uuola.txweb.framework.dao.support.TsBaseTx;
+import com.uuola.txweb.framework.dao.support.TxWebTs;
 import com.uuola.txweb.framework.dto.PageDTO;
 
 
@@ -29,7 +29,7 @@ import com.uuola.txweb.framework.dto.PageDTO;
  * </pre>
  */
 @Service
-@TsBaseTx
+@TxWebTs
 public class SiteCatServiceImpl implements SiteCatService {
 
 

@@ -26,6 +26,8 @@ public class UserInfoQuery extends BaseQuery {
     @Size(min=3, max=16)
     private String name;
     
+    private String tel;
+    
     private Byte adminFlag;
 
     @Override
@@ -55,6 +57,18 @@ public class UserInfoQuery extends BaseQuery {
     
     public void setAdminFlag(Byte adminFlag) {
         this.adminFlag = adminFlag;
+    }
+
+
+    
+    public String getTel() {
+        return tel;
+    }
+
+
+    
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
 }

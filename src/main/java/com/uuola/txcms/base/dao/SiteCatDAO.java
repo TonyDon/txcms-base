@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.SiteCat;
 import com.uuola.txcms.base.query.SiteCatQuery;
-import com.uuola.txweb.framework.dao.support.TsBaseDAO;
+import com.uuola.txweb.framework.dao.support.TxWebDAO;
 
 
 /**
@@ -23,7 +23,7 @@ import com.uuola.txweb.framework.dao.support.TsBaseDAO;
  * </pre>
  */
 @Repository
-public class SiteCatDAO extends TsBaseDAO<SiteCat> {
+public class SiteCatDAO extends TxWebDAO<SiteCat> {
 
     public List<SiteCat> findByRange(SiteCatQuery query){
         return this.selectList("com.uuola.txcms.sqlmapper.SiteCatMapper.findByRange", query);

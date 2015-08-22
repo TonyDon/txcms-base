@@ -9,7 +9,7 @@ package com.uuola.txcms.base.dao;
 import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.InfoBase;
-import com.uuola.txweb.framework.dao.support.TsBaseDAO;
+import com.uuola.txweb.framework.dao.support.TxWebDAO;
 
 
 /**
@@ -20,6 +20,6 @@ import com.uuola.txweb.framework.dao.support.TsBaseDAO;
  * </pre>
  */
 @Repository
-public class InfoBaseDAO extends TsBaseDAO<InfoBase> {
+public class InfoBaseDAO extends TxWebDAO<InfoBase> {
 
 }

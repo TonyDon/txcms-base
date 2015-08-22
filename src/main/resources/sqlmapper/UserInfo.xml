@@ -29,7 +29,13 @@
     <select id="findSingle"  resultType="UserInfo" parameterType="UserInfoQuery">
 		select
 		<include refid="userInfoCols" />
-		from user_info where name=#{name}
+		from user_info where id>0 
+			<if test="name != null">
+				and	name=#{name}
+			</if>
+			<if test="tel != null">
+				and	tel=#{tel}
+			</if>
 			<if test="adminFlag != null">
 				and admin_flag = #{adminFlag}
 			</if>

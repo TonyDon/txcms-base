@@ -19,7 +19,7 @@ import com.uuola.txcms.base.dao.DictConfigDAO;
 import com.uuola.txcms.base.dto.DictConfigDTO;
 import com.uuola.txcms.base.entity.DictConfig;
 import com.uuola.txcms.base.service.DictConfigService;
-import com.uuola.txweb.framework.dao.support.TsBaseTx;
+import com.uuola.txweb.framework.dao.support.TxWebTs;
 import com.uuola.txweb.framework.dto.PageDTO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
@@ -32,7 +32,7 @@ import com.uuola.txweb.framework.query.BaseQuery;
  * </pre>
  */
 @Service
-@TsBaseTx
+@TxWebTs
 public class DictConfigServiceImpl implements DictConfigService {
 
     @Autowired

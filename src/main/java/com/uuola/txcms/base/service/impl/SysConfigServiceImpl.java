@@ -15,7 +15,7 @@ import com.uuola.txcms.base.dao.SysConfigDAO;
 import com.uuola.txcms.base.dto.SysConfigDTO;
 import com.uuola.txcms.base.entity.SysConfig;
 import com.uuola.txcms.base.service.SysConfigService;
-import com.uuola.txweb.framework.dao.support.TsBaseTx;
+import com.uuola.txweb.framework.dao.support.TxWebTs;
 import com.uuola.txweb.framework.dto.PageDTO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
@@ -28,7 +28,7 @@ import com.uuola.txweb.framework.query.BaseQuery;
  * </pre>
  */
 @Service
-@TsBaseTx
+@TxWebTs
 public class SysConfigServiceImpl implements SysConfigService {
 
     @Autowired
