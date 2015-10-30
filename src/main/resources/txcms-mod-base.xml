@@ -22,17 +22,17 @@
     " />
     
 	<bean id="seq-0" class="com.uuola.commons.coder.SequenceBuilder">
-		<constructor-arg name="fixedValue" value="1414675898010" />
+		<constructor-arg name="fixedValue" value="1444675898010" />
 		<constructor-arg name="maxExtDigit" value="9" />
 	</bean>
 	
 	<bean id="seq-1" class="com.uuola.commons.coder.SequenceBuilder">
-		<constructor-arg name="fixedValue" value="1414675898020" />
+		<constructor-arg name="fixedValue" value="1444675898020" />
 		<constructor-arg name="maxExtDigit" value="9" />
 	</bean>
 	
 	<bean id="seq-2" class="com.uuola.commons.coder.SequenceBuilder">
-		<constructor-arg name="fixedValue" value="1414675898030" />
+		<constructor-arg name="fixedValue" value="1444675898030" />
 		<constructor-arg name="maxExtDigit" value="9" />
 	</bean>
 	
