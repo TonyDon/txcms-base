@@ -34,6 +34,7 @@ public class UserAccessActionInterceptor extends HandlerInterceptorAdapter {
             HandlerMethod method = (HandlerMethod)handler;
             System.out.println(method.getBeanType().getCanonicalName());
             System.out.println(method.getMethod().getName());
+            System.out.println(method.getBean().getClass().getCanonicalName());
             MethodParameter[] params = method.getMethodParameters();
             for (MethodParameter mp : params) {
                 System.out.println(" MethodParameter: " + mp.getParameterName() + " "+mp.getParameterType().getCanonicalName());
