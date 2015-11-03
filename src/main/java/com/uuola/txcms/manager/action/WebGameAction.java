@@ -7,7 +7,6 @@
 package com.uuola.txcms.manager.action;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,6 +25,7 @@ import com.uuola.txweb.framework.action.BaseAction;
 public class WebGameAction extends BaseAction {
 
     @RequestMapping(value="/addpage", method=RequestMethod.GET)
-    public void addPage(){
+    public String addPage(){
+        return this.getViewName("addpage");
     }
 }
