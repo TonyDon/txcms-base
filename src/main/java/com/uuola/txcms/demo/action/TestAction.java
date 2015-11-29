@@ -30,8 +30,16 @@ public class TestAction {
 
     @RequestMapping("/show")
     public void show(Model model){
+        StackTraceElement[] stes = Thread.currentThread().getStackTrace();
+        StringBuilder sb = new StringBuilder();
+        for(StackTraceElement ste : stes){
+            sb.append(" className:").append(ste.getClassName()).append(", methodName:").append(ste.getMethodName());
+            sb.append("<br/>");
+        }
+        
         model.addAttribute("show", this.getClass().getCanonicalName());
         model.addAttribute("seqId", sequenceManager.makeId());
+        model.addAttribute("stackInfo", sb);
     }
 
 }
