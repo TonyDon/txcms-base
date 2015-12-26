@@ -40,14 +40,14 @@ public class SiteCatServiceImpl implements SiteCatService {
     @Override
     public void create(SiteCatDTO siteCatDTO) {
         Long rid = siteCatDTO.getRid();
-        String catPath = CST_CHAR.STR_EMPTY;
+        String catPath = "0-";
         // 创建一个顶级类目
         if(0 != rid){
             SiteCat parentCat = siteCatDAO.get(rid);
             siteCatDTO.setSiteType(parentCat.getSiteType());
             parentCat.setNodeNum(parentCat.getNodeNum()+1);
             siteCatDAO.update(parentCat);
-            catPath = parentCat.getCatPath(); // 12-345-
+            catPath = parentCat.getCatPath(); // 0-12-345-
         }
         SiteCat  targetCat = new SiteCat();
         BeanUtils.copyProperties(siteCatDTO, targetCat, "id");
