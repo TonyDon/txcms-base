@@ -40,8 +40,7 @@ public class DictConfigServiceImpl implements DictConfigService {
     
     @Override
     public PageDTO fetchByRange(BaseQuery query) {
-        // TODO Auto-generated method stub
-        return new PageDTO(dictConfigDAO.findByRange(query), 32);
+        return new PageDTO(dictConfigDAO.findByRange(query), dictConfigDAO.findCount(query));
     }
 
 

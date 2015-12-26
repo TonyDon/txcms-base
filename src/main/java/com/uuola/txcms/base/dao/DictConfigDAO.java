@@ -29,6 +29,10 @@ public class DictConfigDAO extends TxWebDAO<DictConfig> {
         return this.selectList("com.uuola.txcms.sqlmapper.DictConfigMapper.findByRange", query);
     }
     
+    public Integer findCount(BaseQuery query){
+        return this.selectOne("com.uuola.txcms.sqlmapper.DictConfigMapper.findCount", query);
+    }
+    
     /**
      * 通过字典编码查询字典参数列表
      * @param dictCode

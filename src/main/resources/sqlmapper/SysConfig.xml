@@ -11,7 +11,11 @@
     	update_time as updateTime, 
     	remark
     </sql>
-
+    
+    <select id="findCount" resultType="Integer" parameterType="SysConfigQuery">
+    	select count(*) from sys_config 
+    </select>
+    
     <select id="findByRange"  resultType="SysConfig" parameterType="SysConfigQuery">
         select 
         <include refid="sysConfigCols"/> 

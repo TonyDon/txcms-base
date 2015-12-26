@@ -36,8 +36,7 @@ public class SysConfigServiceImpl implements SysConfigService {
 
     @Override
     public PageDTO fetchByRange(BaseQuery query) {
-        // TODO Auto-generated method stub
-        return new PageDTO(sysConfigDAO.findByRange(query), 32);
+        return new PageDTO(sysConfigDAO.findByRange(query), sysConfigDAO.findCount(query));
     }
 
     @Override

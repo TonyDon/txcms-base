@@ -28,4 +28,8 @@ public class SysConfigDAO extends TxWebDAO<SysConfig> {
     public List<SysConfig> findByRange(BaseQuery query){
         return this.selectList("com.uuola.txcms.sqlmapper.SysConfigMapper.findByRange", query);
     }
+    
+    public Integer findCount(BaseQuery query){
+        return this.selectOne("com.uuola.txcms.sqlmapper.SysConfigMapper.findCount", query);
+    }
 }
