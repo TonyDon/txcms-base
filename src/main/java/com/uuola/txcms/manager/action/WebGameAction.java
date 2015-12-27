@@ -71,7 +71,7 @@ public class WebGameAction extends BaseAction {
         // 保存文件路径
         String dateDir = DateUtil.formatDate(new Date(), CST_DATE_FORMAT.YYYYsMMsDD);
         // dirPath : /2015/12/31/gh
-        String dirPath = CST_CHAR.STR_SLASH.concat(dateDir).concat(CST_CHAR.STR_SLASH).concat(KeyGenerator.getRndChr(4));
+        String dirPath = CST_CHAR.STR_SLASH.concat(dateDir).concat(CST_CHAR.STR_SLASH).concat(KeyGenerator.getRndChr(8));
         String url = null;
         try {
             //  /h5gfile/2015/12/31/gh
