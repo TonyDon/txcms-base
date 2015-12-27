@@ -78,8 +78,7 @@ public class UploaderAction {
         String url = null;
         try {
             // 保存文件路径
-            String dateDir = StringUtils.replace(DateUtil.formatDate(new Date(), CST_DATE_FORMAT.YYYY_MM_DD),
-                    CST_CHAR.STR_LINE, CST_CHAR.STR_SLASH);
+            String dateDir = DateUtil.formatDate(new Date(), CST_DATE_FORMAT.YYYYsMMsDD);
             String dirPath = CST_CHAR.STR_SLASH.concat(storeDir)
                     .concat(CST_CHAR.STR_SLASH).concat(dateDir)
                     .concat(CST_CHAR.STR_SLASH).concat(KeyGenerator.getRndChr(1));
