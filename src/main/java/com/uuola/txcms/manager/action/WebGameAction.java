@@ -9,9 +9,10 @@ package com.uuola.txcms.manager.action;
 import java.io.File;
 import java.util.Date;
 
-import org.apache.commons.io.FileUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,7 +60,6 @@ public class WebGameAction extends BaseAction {
      */
     @RequestMapping(value="/upload", method = RequestMethod.POST)
     public ModelAndView upload(@RequestParam(value = "zipfile") MultipartFile zipFile) {
-        // TODO
         if (null == zipFile || zipFile.getSize() == 0) {
             return getModel(null, CST_ERROR_MSG.UPLOAD_FILE_SIZE_EMPTY, 1);
         }
@@ -68,29 +68,31 @@ public class WebGameAction extends BaseAction {
         if (!"zip".equalsIgnoreCase(extName)) {
             return getModel(null, CST_ERROR_MSG.EXT_NAME_INVALID, 1);
         }
-        // 保存文件路径
         String dateDir = DateUtil.formatDate(new Date(), CST_DATE_FORMAT.YYYYsMMsDD);
-        // dirPath : /2015/12/31/gh
+        // /2015/12/31/ghddfa01
         String dirPath = CST_CHAR.STR_SLASH.concat(dateDir).concat(CST_CHAR.STR_SLASH).concat(KeyGenerator.getRndChr(8));
         String url = null;
         try {
-            //  /h5gfile/2015/12/31/gh
-            String urlPath = UPLOAD_ROOT_DIR.concat(dirPath);
+            String urlPath = UPLOAD_ROOT_DIR.concat(dirPath);//  /h5gfile/2015/12/31/ghddfa01
             String distDir = ContextUtil.getRealPath(UPLOAD_ROOT_DIR).concat(dirPath);
             FileUtil.createNoExistsDirs(distDir);
-            // TODO 解压文件
-            // TODO 读取模版 _index.ga 生成index.html
-            // TODO 删除ZIP文件
-            // TODO 返回index.html url地址
-            File dist = new File(distDir, fileName); // .../h5gfile/2015/12/31/gh/leidian.zip
+            File dist = new File(distDir, fileName); // .../h5gfile/2015/12/31/ghddfa01/leidian.zip
             zipFile.transferTo(dist);
-            url = resovleGameZip(dist, new File(distDir), urlPath); // .../h5gfile/2015/12/31/gh/leidian/index.html
+            url = resovleGameZip(dist, new File(distDir), urlPath);
         } catch (Exception e) {
             log.error("upload()", e);
         }
         return getModel(url, null, 0);
     }
     
+    /**
+     * 解压文件,读取模版 _index.ga 生成index.html,删除ZIP文件<br/>
+     * 返回index.html url地址
+     * @param dist
+     * @param outDir
+     * @param urlPath
+     * @return
+     */
     private String resovleGameZip(File dist, File outDir, String urlPath) {
         ZipUtil.unpack(dist, outDir, "utf-8");
         String outDirPath = outDir.getAbsolutePath();
@@ -102,11 +104,32 @@ public class WebGameAction extends BaseAction {
         // 替换模版内容生成html
         String tplText = FileUtil.readStringByFile(indexTplPath, "utf-8");
         if(StringUtil.isNotEmpty(tplText)){
-            FileUtil.writeStringToFile(indexHtmPath, StringUtils.replace(tplText, "<#IncludePage#>", "<b>test</b>"));
+            FileUtil.writeStringToFile(indexHtmPath, parseHtml(tplText));
         }
         FileUtil.delete(dist);
-        // return : /h5gfile/2015/12/31/gh/leidian/index.html
-        return urlPath.concat(CST_CHAR.STR_SLASH).concat(zipFileName).concat(CST_CHAR.STR_SLASH).concat(OUT_GAME_INDEX);
+        // return : /h5gfile/2015/12/31/gh/leidian/
+        return urlPath.concat(CST_CHAR.STR_SLASH).concat(zipFileName).concat(CST_CHAR.STR_SLASH);
+    }
+
+    /**
+     * 转换tpl html，修改title, 插入JS代码等
+     * @param tplText
+     * @return
+     */
+    private String parseHtml(String tplText) {
+        Document doc = Jsoup.parse(tplText);
+        Element title = doc.select("title").first();
+        String titleText = null;
+        if(null != title){
+             titleText = title.text();
+             title.text(titleText + "-986001娱乐在线");
+        }else{
+            Element head = doc.getElementsByTag("head").first();
+            head.prepend("<title>小游戏-986001娱乐在线</title>");
+        }
+        Element body = doc.body();
+        body.append("<span>js 代码插入</span>");
+        return doc.html();
     }
 
     /**
