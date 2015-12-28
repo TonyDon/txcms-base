@@ -54,14 +54,20 @@ public class InfoBase extends BaseEntity {
     @Column(name ="INFO_TYPE")
     private Byte infoType;
     
-    @Column(name ="IS_PIC")
-    private Byte isPic;
+    @Column(name ="HAS_PIC")
+    private Byte hasPic;
     
-    @Column(name ="IS_VIDEO")
-    private Byte isVideo;
+    @Column(name ="HAS_VIDEO")
+    private Byte hasVideo;
     
     @Column(name ="PIC_URL")
     private String picUrl;
+    
+    @Column(name ="VIDEO_URL")
+    private String videoUrl;
+    
+    @Column(name ="SITE_URL")
+    private String siteUrl;
     
     @Column(name ="INFO_STATE")
     private Byte infoState;
@@ -162,26 +168,30 @@ public class InfoBase extends BaseEntity {
     }
 
     
-    public Byte getIsPic() {
-        return isPic;
+    
+    public Byte getHasPic() {
+        return hasPic;
     }
 
-    
-    public void setIsPic(Byte isPic) {
-        this.isPic = isPic;
-    }
 
     
-    public Byte getIsVideo() {
-        return isVideo;
+    public void setHasPic(Byte hasPic) {
+        this.hasPic = hasPic;
     }
 
-    
-    public void setIsVideo(Byte isVideo) {
-        this.isVideo = isVideo;
-    }
 
     
+    public Byte getHasVideo() {
+        return hasVideo;
+    }
+
+
+    
+    public void setHasVideo(Byte hasVideo) {
+        this.hasVideo = hasVideo;
+    }
+
+
     public String getPicUrl() {
         return picUrl;
     }
@@ -192,6 +202,27 @@ public class InfoBase extends BaseEntity {
     }
 
     
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+
+    public String getSiteUrl() {
+        return siteUrl;
+    }
+
+
+    
+    public void setSiteUrl(String siteUrl) {
+        this.siteUrl = siteUrl;
+    }
+
+
     public Byte getInfoState() {
         return infoState;
     }

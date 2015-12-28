@@ -38,11 +38,15 @@ public class InfoPostDTO extends ValidateDTO {
     
     private Byte infoType;
     
-    private Byte isPic;
+    private Byte hasPic;
     
-    private Byte isVideo;
+    private Byte hasVideo;
+    
+    private String siteUrl;
     
     private String picUrl;
+    
+    private String videoUrl;
     
     private Byte infoState;
     
@@ -141,28 +145,43 @@ public class InfoPostDTO extends ValidateDTO {
     public void setInfoType(Byte infoType) {
         this.infoType = infoType;
     }
-
     
-    public Byte getIsPic() {
-        return isPic;
+    
+    public Byte getHasPic() {
+        return hasPic;
     }
 
-    
-    public void setIsPic(Byte isPic) {
-        this.isPic = isPic;
-    }
 
     
-    public Byte getIsVideo() {
-        return isVideo;
+    public void setHasPic(Byte hasPic) {
+        this.hasPic = hasPic;
     }
 
-    
-    public void setIsVideo(Byte isVideo) {
-        this.isVideo = isVideo;
-    }
 
     
+    public Byte getHasVideo() {
+        return hasVideo;
+    }
+
+
+    
+    public void setHasVideo(Byte hasVideo) {
+        this.hasVideo = hasVideo;
+    }
+
+
+    
+    public String getSiteUrl() {
+        return siteUrl;
+    }
+
+
+    
+    public void setSiteUrl(String siteUrl) {
+        this.siteUrl = siteUrl;
+    }
+
+
     public String getPicUrl() {
         return picUrl;
     }
@@ -173,6 +192,18 @@ public class InfoPostDTO extends ValidateDTO {
     }
 
     
+    
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+
+    
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+
     public Byte getInfoState() {
         return infoState;
     }

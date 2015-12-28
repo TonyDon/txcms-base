@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uuola.commons.CollectionUtil;
 import com.uuola.txcms.base.dao.InfoBaseDAO;
 import com.uuola.txcms.base.dao.InfoContentDAO;
 import com.uuola.txcms.base.dto.InfoDTO;
@@ -44,7 +45,7 @@ public class InfoServiceImpl implements InfoService {
         InfoBase infoBase = infoBaseDAO.get(id);
         List<InfoContent> infoContents = infoContentDAO.findByPropValue("infoId", id);
         infoDTO.setInfoBase(infoBase);
-        if(infoContents.size()==1){
+        if(CollectionUtil.isNotEmpty(infoContents)){
             infoDTO.setInfoContent(infoContents.get(0));
         }
         return infoDTO;
