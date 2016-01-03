@@ -8,6 +8,7 @@ package com.uuola.txcms.manager.action;
 
 import java.io.File;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -47,6 +48,9 @@ public class WebGameAction extends BaseAction {
     private final String GAME_TPL_NAME = "_index.hgt";
     
     private final String OUT_GAME_INDEX = "index.html";
+    
+    // 删除路径合法性正则 /h5gfile/2016/01/01/a1234567b1234567 
+    private final Pattern REGEX_URL_VALID = Pattern.compile(UPLOAD_ROOT_DIR + "/\\d{4}/\\d{2}/\\d{2}/\\w{16}");
 
     @RequestMapping(value="/addpage", method=RequestMethod.GET)
     public String addPage(){
@@ -75,7 +79,7 @@ public class WebGameAction extends BaseAction {
         }
         String dateDir = DateUtil.formatDate(new Date(), CST_DATE_FORMAT.YYYYsMMsDD);
         // /2015/12/31/ghddfa01
-        String dirPath = CST_CHAR.STR_SLASH.concat(dateDir).concat(CST_CHAR.STR_SLASH).concat(KeyGenerator.getRndChr(8));
+        String dirPath = CST_CHAR.STR_SLASH.concat(dateDir).concat(CST_CHAR.STR_SLASH).concat(KeyGenerator.getRndChr(16));
         String url = null;
         try {
             String urlPath = UPLOAD_ROOT_DIR.concat(dirPath);//  /h5gfile/2015/12/31/ghddfa01
@@ -93,7 +97,7 @@ public class WebGameAction extends BaseAction {
     @RequestMapping(value="/removeupload", method = RequestMethod.GET)
     public String removeUpload(@RequestParam(value = "url") String url){
         if(null != url && url.indexOf(UPLOAD_ROOT_DIR)==0 && url.indexOf("..")<0 && 
-                url.matches(UPLOAD_ROOT_DIR + "/\\d{4}/\\d{2}/\\d{2}/\\w{8}")){
+                REGEX_URL_VALID.matcher(url).matches()){
             try{
                 FileUtil.deleteDirs(ContextUtil.getRealPath(url));
             }catch(Exception e){
@@ -151,14 +155,12 @@ public class WebGameAction extends BaseAction {
     }
 
     /**
-     * 保存游戏信息
+     * 上传结果返回model定义
+     * @param url
+     * @param messsge
+     * @param error
      * @return
      */
-    @RequestMapping(value="/save", method = RequestMethod.POST)
-    public ModelAndView save(){
-        return null;
-    }
-    
     private ModelAndView getModel(String url, String messsge, Integer error) {
         ModelAndView mv = this.makeModelView("upload");
         mv.addObject("url", url);
