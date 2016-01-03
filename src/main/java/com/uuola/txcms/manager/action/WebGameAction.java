@@ -53,6 +53,11 @@ public class WebGameAction extends BaseAction {
         return this.getViewName("addpage");
     }
     
+    @RequestMapping(value="/initupload", method=RequestMethod.GET)
+    public String initUpload(){
+        return this.getViewName("initupload");
+    }
+    
     /**
      * 上传H5 GAME 游戏ZIP包
      * @param zipFile
@@ -83,6 +88,19 @@ public class WebGameAction extends BaseAction {
             log.error("upload()", e);
         }
         return getModel(url, null, 0);
+    }
+    
+    @RequestMapping(value="/removeupload", method = RequestMethod.GET)
+    public String removeUpload(@RequestParam(value = "url") String url){
+        if(null != url && url.indexOf(UPLOAD_ROOT_DIR)==0 && url.indexOf("..")<0 && 
+                url.matches(UPLOAD_ROOT_DIR + "/\\d{4}/\\d{2}/\\d{2}/\\w{8}")){
+            try{
+                FileUtil.deleteDirs(ContextUtil.getRealPath(url));
+            }catch(Exception e){
+                // ignore 
+            }
+        }
+        return this.getViewName("removeupload");
     }
     
     /**
@@ -142,7 +160,7 @@ public class WebGameAction extends BaseAction {
     }
     
     private ModelAndView getModel(String url, String messsge, Integer error) {
-        ModelAndView mv = new ModelAndView();
+        ModelAndView mv = this.makeModelView("upload");
         mv.addObject("url", url);
         mv.addObject("message", messsge);
         mv.addObject("error", error);
