@@ -20,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.uuola.commons.NumberUtil;
 import com.uuola.commons.coder.KeyGenerator;
-import com.uuola.commons.image.ImageVerifier;
+import com.uuola.commons.image.checkcode.ImageCodeParams;
+import com.uuola.commons.image.checkcode.ImageVerifier;
 import com.uuola.txcms.component.SessionUtil;
 
 
@@ -58,8 +59,17 @@ public class CaptchaAction {
     String sid, HttpServletResponse response, HttpServletRequest request) throws IOException {
         String randomText = makeRndText();
         SessionUtil.setValidCode(randomText);
-        ImageVerifier.outputImage(80, 32, 26, 32, true, true, fontcolor, bgcolor, false, false, randomText,
-                font[NumberUtil.genRndInt(0, 2)], "png", response.getOutputStream());
+        ImageCodeParams params = new ImageCodeParams(randomText)
+        .setBackgroundColors(bgcolor)
+        .setFontColors(fontcolor)
+        .setFont(font[NumberUtil.genRndInt(0, 2)])
+        .setWidth(80)
+        .setHeight(32)
+        .setCharBoxSize(26)
+        .setPointNum(0)
+        .setRotate(true).setMixedColor(true).setDrawArc(false).setDrawLine(true)
+        .setOutputStream(response.getOutputStream());
+        ImageVerifier.outputImage(params);
     }
 
     private String makeRndText() {
