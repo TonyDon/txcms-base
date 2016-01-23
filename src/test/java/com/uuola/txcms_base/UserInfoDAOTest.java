@@ -77,7 +77,7 @@ public class UserInfoDAOTest {
     public void test_delete_pv(){
         SqlPropValue[] pvs = {
                 new SqlPropValue("name", "sdfasdf").setRelationCondition(SqlCondDef.AND),
-                new SqlPropValue("tel", "1111")
+                new SqlPropValue().setPropertyName("tel").setFilterCondition(SqlCondDef.EQUAL).setValue("1111")
         };
         System.out.println(userInfoDAO.delete(pvs));
         UserInfo u = userInfoDAO.get(10001l);
