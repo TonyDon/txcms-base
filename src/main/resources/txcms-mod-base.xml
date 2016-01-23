@@ -12,9 +12,11 @@
 
 	<context:annotation-config />
 	
+	<!-- 	预加载实体到实体管理器中 EntityDefManager
 	<bean id="baseEntityClassLoader" class="com.uuola.txweb.framework.dao.support.EntityClassLoader">
 		<property name="entityPackagePaths" value="com.uuola.txcms.base.entity" />
-	</bean>
+	</bean> 
+	-->
 	
 	<context:component-scan base-package="
     	com.uuola.txcms.base.dao,
