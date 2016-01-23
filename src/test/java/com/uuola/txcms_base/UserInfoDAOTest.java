@@ -66,10 +66,9 @@ public class UserInfoDAOTest {
     @Test
     public void test_deleteByPropValue(){
         UserInfo ui = new UserInfo();
-        ui.setName("dsaf");
-        ui.setTel("af");
+        ui.setTel("13911111111");
         ui.setId(10002l);
-        userInfoDAO.delete(ui);
+        userInfoDAO.deleteByPropValue(ui);
         UserInfo u = userInfoDAO.get(10002);
         System.out.println(u);
     }
@@ -77,11 +76,11 @@ public class UserInfoDAOTest {
     @Test
     public void test_delete_pv(){
         SqlPropValue[] pvs = {
-                new SqlPropValue("name", "dsaf").setRelationCondition(SqlCondDef.AND),
-                new SqlPropValue("tel", "af")
+                new SqlPropValue("name", "sdfasdf").setRelationCondition(SqlCondDef.AND),
+                new SqlPropValue("tel", "1111")
         };
         System.out.println(userInfoDAO.delete(pvs));
-        UserInfo u = userInfoDAO.get(10002);
+        UserInfo u = userInfoDAO.get(10001l);
         System.out.println(u);
     }
 }
