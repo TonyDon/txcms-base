@@ -78,7 +78,7 @@ public class SiteCatServiceImpl implements SiteCatService {
             throw new SiteCatException(SiteCatException.EXIST_NODE_CAT_THEN_DEL);
         }
         Integer effectNum = 0;
-        effectNum += siteCatDAO.delete(cat);
+        effectNum += siteCatDAO.deleteById(id);
         SiteCat parentCat = siteCatDAO.get(cat.getRid());
         if(null != parentCat){
             Integer nodeNum = parentCat.getNodeNum();
