@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uuola.txcms.sqlmapper.InfoBaseMapper">
+
+    <sql id="cols"> 
+    	id,
+    	cat_id as catId,
+    	title,
+    	summary,
+    	author_id as authorId,
+    	create_time as createTime,
+    	update_time as updateTime,
+    	last_operator_id as lastOperatorId,
+    	info_type as infoType,
+    	has_pic as hasPic,
+    	has_video as hasVideo,
+    	pic_url as picUrl,
+    	video_url as videoUrl,
+    	site_url as siteUrl,
+    	info_state as infoState,
+    	is_delete as isDelete
+    </sql>
+
+    <select id="findById"  resultType="InfoBase" parameterType="Long">
+        select 
+        <include refid="cols"/> 
+        from info_base where id=#{id, jdbcType=BIGINT} limit 0, 1
+    </select>
+    
+</mapper>

@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.DictConfig;
+import com.uuola.txweb.framework.dao.annotation.MapperNamespace;
 import com.uuola.txweb.framework.dao.support.TxWebDAO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
@@ -22,15 +23,16 @@ import com.uuola.txweb.framework.query.BaseQuery;
  * 创建日期: 2014-11-8
  * </pre>
  */
+@MapperNamespace("com.uuola.txcms.sqlmapper.DictConfigMapper")
 @Repository
 public class DictConfigDAO extends TxWebDAO<DictConfig> {
 
     public List<DictConfig> findByRange(BaseQuery query){
-        return this.selectList("com.uuola.txcms.sqlmapper.DictConfigMapper.findByRange", query);
+        return this.selectList("findByRange", query);
     }
     
     public Integer findCount(BaseQuery query){
-        return this.selectOne("com.uuola.txcms.sqlmapper.DictConfigMapper.findCount", query);
+        return this.selectOne("findCount", query);
     }
     
     /**
@@ -39,6 +41,6 @@ public class DictConfigDAO extends TxWebDAO<DictConfig> {
      * @return
      */
     public List<DictConfig> findByCode(String dictCode) {
-        return this.selectList("com.uuola.txcms.sqlmapper.DictConfigMapper.findByDictCode", dictCode);
+        return this.selectList("findByDictCode", dictCode);
     }
 }

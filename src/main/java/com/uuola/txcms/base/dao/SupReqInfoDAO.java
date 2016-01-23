@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.SupReqInfo;
 import com.uuola.txcms.base.query.SupReqInfoQuery;
+import com.uuola.txweb.framework.dao.annotation.MapperNamespace;
 import com.uuola.txweb.framework.dao.support.TxWebDAO;
 
 
@@ -22,6 +23,7 @@ import com.uuola.txweb.framework.dao.support.TxWebDAO;
  * 创建日期: 2013-12-30
  * </pre>
  */
+@MapperNamespace("com.uuola.txcms.sqlmapper.SupReqInfoMapper")
 @Repository
 public class SupReqInfoDAO extends TxWebDAO<SupReqInfo> {
 
@@ -38,6 +40,6 @@ public class SupReqInfoDAO extends TxWebDAO<SupReqInfo> {
         SupReqInfoQuery query = new SupReqInfoQuery();
         query.setCrow(startIndex);
         query.setListSize(rowSize);
-        return this.selectList("com.uuola.txcms.sqlmapper.SupReqInfoMapper.findInfosByRowRange", query);
+        return this.selectList("findInfosByRowRange", query);
     }
 }

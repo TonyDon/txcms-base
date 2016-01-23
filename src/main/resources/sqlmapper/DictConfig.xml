@@ -14,6 +14,7 @@
 	<select id="findCount" resultType="Integer" parameterType="DictConfigQuery">
 		select count(*) from dict_config
 	</select>
+	
 	<select id="findByRange" resultType="DictConfig" parameterType="DictConfigQuery">
 		select
 		<include refid="dictConfigCols" />

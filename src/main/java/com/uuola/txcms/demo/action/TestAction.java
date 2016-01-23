@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.uuola.txcms.base.dto.InfoDTO;
 import com.uuola.txcms.component.SequenceManager;
 
 
@@ -32,6 +33,7 @@ public class TestAction {
     public void show(Model model){
         model.addAttribute("show", this.getClass().getCanonicalName());
         model.addAttribute("seqId", sequenceManager.makeId());
+        model.addAttribute("test", (InfoDTO)null);
     }
 
 }
