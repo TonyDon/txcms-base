@@ -40,7 +40,7 @@ public class InfoServiceImpl implements InfoService {
     public InfoDTO fetchById(Long id) {
         InfoDTO infoDTO = new InfoDTO();
         InfoBase infoBase = infoBaseDAO.get(id);
-        InfoContent content = infoContentDAO.findById(id);
+        InfoContent content = infoContentDAO.get(id);
         infoDTO.setInfoBase(infoBase);
         if(null != content){
             infoDTO.setInfoContent(content);
