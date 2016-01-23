@@ -25,6 +25,6 @@ import com.uuola.txweb.framework.dao.support.TxWebDAO;
 public class InfoBaseDAO extends TxWebDAO<InfoBase> {
 
     public InfoBase findById(Long id){
-        return this.getByMapper(id);
+        return this.selectById(id);
     }
 }

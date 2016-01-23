@@ -25,7 +25,7 @@ import com.uuola.txweb.framework.dao.support.TxWebDAO;
 public class InfoContentDAO extends TxWebDAO<InfoContent> {
     
     public InfoContent findById(Long infoId){
-        return getByMapper(infoId);
+        return selectById(infoId);
     }
 
     public InfoContent findEffectById(Long infoId){
