@@ -8,6 +8,7 @@ package com.uuola.txcms.base.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.uuola.txweb.framework.dao.support.BaseEntity;
@@ -26,7 +27,7 @@ public class InfoContent extends BaseEntity {
 
     private static final long serialVersionUID = -5708005116481543961L;
     
-
+    @Id
     @Column(name="INFO_ID")
     private Long infoId;
     
