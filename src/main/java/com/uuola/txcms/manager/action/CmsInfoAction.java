@@ -34,6 +34,11 @@ public class CmsInfoAction extends BaseAction {
     @Autowired
     private InfoPostService infoPostService;
     
+    @RequestMapping(value="", method=RequestMethod.GET)
+    public ModelAndView index(){
+        return this.makeModelView("index");
+    }
+    
     @RequestMapping(value="/addpage", method=RequestMethod.GET)
     public ModelAndView addPage(){
         return this.makeModelView("addpage");
