@@ -4,7 +4,7 @@
  * Copy Right@ uuola
  */
 
-package com.uuola.txcms.demo.action;
+package com.uuola.txcms.common.action;
 
 import java.io.File;
 import java.io.FileNotFoundException;

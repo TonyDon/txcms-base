@@ -4,7 +4,7 @@
  * Copy Right@ uuola
  */ 
 
-package com.uuola.txcms.front.action;
+package com.uuola.txcms.common.action;
 
 import java.awt.Color;
 import java.awt.Font;
