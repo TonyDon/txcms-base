@@ -66,8 +66,8 @@ public class DictConfigAction extends BaseAction {
     }
     
     
-    @RequestMapping(value="/add", method=RequestMethod.POST)
-    public ModelAndView add(DictConfigDTO sysConfigDTO, ServletWebRequest webRequest) {
+    @RequestMapping(value="/post", method=RequestMethod.POST)
+    public ModelAndView post(DictConfigDTO sysConfigDTO, ServletWebRequest webRequest) {
         ModelAndView mv = updateAction(sysConfigDTO, new UpdateCallbackHandler<Object>() {
             @Override
             public Object doUpdate(ValidateDTO dto) {
@@ -75,7 +75,7 @@ public class DictConfigAction extends BaseAction {
                 return true;
             }
         });
-        return assignViewName(mv, "add");
+        return assignViewName(mv, "post");
     }
     
     @RequestMapping(value = "/jsonp", method = RequestMethod.GET)

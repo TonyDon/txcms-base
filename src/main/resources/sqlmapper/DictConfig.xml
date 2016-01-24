@@ -10,17 +10,30 @@
 		remark,
 		update_time as updateTime
 	</sql>
-
+	
+	<sql id="rangeWhereCondition">
+    	<if test="name!=null">
+    		and name like concat('%', #{name}, '%')
+    	</if>
+    	<if test="dictCode!=null">
+    		and dict_code like concat('%', #{dictCode}, '%')
+    	</if>
+    </sql>
+    
 	<select id="findCount" resultType="Integer" parameterType="DictConfigQuery">
-		select count(*) from dict_config
+		select count(*) from dict_config where id!=0  <include refid="rangeWhereCondition"/> 
 	</select>
 	
 	<select id="findByRange" resultType="DictConfig" parameterType="DictConfigQuery">
 		select
 		<include refid="dictConfigCols" />
 		from dict_config where id>=(
-			select id from dict_config order by id asc limit #{crow}, 1
+			select id from dict_config 
+			where id!=0 
+			<include refid="rangeWhereCondition"/> 
+			order by id asc limit #{crow}, 1
 		)
+		 <include refid="rangeWhereCondition"/> 
 		order by id asc
 		limit 0, #{listSize}
 	</select>

@@ -6,8 +6,6 @@
 
 package com.uuola.txcms.base.query;
 
-import javax.validation.constraints.Size;
-
 import com.uuola.txweb.framework.query.BaseQuery;
 
 
@@ -22,8 +20,9 @@ public class DictConfigQuery extends BaseQuery {
 
     private static final long serialVersionUID = -6244726027741362533L;
 
-    @Size(min=1, max=64)
     private String dictCode;
+    
+    private String name;
     
     @Override
     public void filter() {
@@ -39,6 +38,18 @@ public class DictConfigQuery extends BaseQuery {
     
     public void setDictCode(String dictCode) {
         this.dictCode = dictCode;
+    }
+
+
+    
+    public String getName() {
+        return name;
+    }
+
+
+    
+    public void setName(String name) {
+        this.name = name;
     }
 
 }
