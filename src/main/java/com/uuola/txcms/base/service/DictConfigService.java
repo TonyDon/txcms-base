@@ -37,4 +37,10 @@ public interface DictConfigService {
      * @return
      */
     List<DictConfig> getDict(String dictCode);
+
+    DictConfig findById(Long id);
+
+    Integer update(DictConfigDTO dto);
+
+    Integer delete(Integer id);
 }

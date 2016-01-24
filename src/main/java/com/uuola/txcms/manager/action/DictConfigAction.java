@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -77,6 +78,42 @@ public class DictConfigAction extends BaseAction {
         });
         return assignViewName(mv, "post");
     }
+    
+    /**
+     * 展示记录
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ModelAndView show(@PathVariable("id") Long id) {
+        DictConfig config = dictConfigService.findById(id);
+        return makeModelView("show").addObject("dictConfig", config);
+    } 
+    
+    /**
+     * 更新记录
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ModelAndView update(@PathVariable("id") Long id, DictConfigDTO dictConfigDTO ) {
+        ModelAndView mv = updateAction(dictConfigDTO, new UpdateCallbackHandler<Object>() {
+            @Override
+            public Object doUpdate(ValidateDTO dto) {
+                return dictConfigService.update((DictConfigDTO)dto);
+            }
+        });
+        return assignViewName(mv, "update");
+    } 
+    
+    /**
+     * 删除记录
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ModelAndView delete(@PathVariable("id") Integer id) {
+        Integer num = dictConfigService.delete(id);
+        return makeModelView("delete").addObject("num", num);
+    } 
     
     @RequestMapping(value = "/jsonp", method = RequestMethod.GET)
     public ResponseEntity<String> jsonp(

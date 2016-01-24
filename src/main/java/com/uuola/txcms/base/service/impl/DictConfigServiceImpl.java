@@ -62,4 +62,25 @@ public class DictConfigServiceImpl implements DictConfigService {
         return dictConfigDAO.findByCode(dictCode);
     }
 
+
+    @Override
+    public DictConfig findById(Long id) {
+        return dictConfigDAO.get(id);
+    }
+
+
+    @Override
+    public Integer update(DictConfigDTO dto) {
+        DictConfig entity = dictConfigDAO.get(dto.getId());
+        BeanUtils.copyProperties(dto, entity);
+        entity.setUpdateTime(DateUtil.getCurrTime());
+        return dictConfigDAO.update(entity);
+    }
+
+
+    @Override
+    public Integer delete(Integer id) {
+        return dictConfigDAO.deleteById(id);
+    }
+
 }
