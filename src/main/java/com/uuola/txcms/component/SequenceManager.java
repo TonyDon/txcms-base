@@ -38,8 +38,22 @@ public class SequenceManager {
         }
     }
     
+    /**
+     * 随机获取ID
+     * @return
+     */
     public long makeId() {
         int index = NumberUtil.genRndInt(0, this.sequenceBuilderCount);
+        return (this.sequenceBuilders.get(index).getSid() * multiples) + index + 1;
+    }
+    
+    /**
+     * 根据text.hashCode获取对应的ID
+     * @param text
+     * @return
+     */
+    public long makeId(String text) {
+        int index = Math.abs(text.hashCode()) % this.sequenceBuilderCount;
         return (this.sequenceBuilders.get(index).getSid() * multiples) + index + 1;
     }
 }
