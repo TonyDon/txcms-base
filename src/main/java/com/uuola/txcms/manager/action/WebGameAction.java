@@ -52,6 +52,11 @@ public class WebGameAction extends BaseAction {
     // 删除路径合法性正则 /h5gfile/2016/01/01/a1234567b1234567 
     private final Pattern REGEX_URL_VALID = Pattern.compile(UPLOAD_ROOT_DIR + "/\\d{4}/\\d{2}/\\d{2}/\\w{16}");
 
+    @RequestMapping(value="", method=RequestMethod.GET)
+    public ModelAndView index(){
+        return this.makeModelView("index");
+    }
+    
     @RequestMapping(value="/addpage", method=RequestMethod.GET)
     public String addPage(){
         return this.getViewName("addpage");
