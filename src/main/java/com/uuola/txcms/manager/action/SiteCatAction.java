@@ -69,6 +69,7 @@ public class SiteCatAction extends BaseAction {
      */
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public ModelAndView add(SiteCatDTO siteCatDTO) {
+        siteCatDTO.openValid();
         ModelAndView mv = updateAction(siteCatDTO, new UpdateCallbackHandler<Object>() {
             @Override
             public Object doUpdate(ValidateDTO siteCatDTO) {
