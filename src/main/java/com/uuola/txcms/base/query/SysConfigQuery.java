@@ -6,8 +6,6 @@
 
 package com.uuola.txcms.base.query;
 
-import javax.validation.constraints.Size;
-
 import com.uuola.txweb.framework.query.BaseQuery;
 
 
@@ -22,7 +20,6 @@ public class SysConfigQuery extends BaseQuery {
 
     private static final long serialVersionUID = -1296732157110435683L;
     
-    @Size(min=1, max=64)
     private String name;
 
     @Override

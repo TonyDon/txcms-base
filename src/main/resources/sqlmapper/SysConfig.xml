@@ -12,16 +12,26 @@
     	remark
     </sql>
     
+    <sql id="rangeWhereCondition">
+    	<if test="name!=null">
+    		and name like concat('%', #{name}, '%')
+    	</if>
+    </sql>
+    
     <select id="findCount" resultType="Integer" parameterType="SysConfigQuery">
-    	select count(*) from sys_config 
+    	select count(*) from sys_config where id!=0 <include refid="rangeWhereCondition"/> 
     </select>
     
     <select id="findByRange"  resultType="SysConfig" parameterType="SysConfigQuery">
         select 
         <include refid="sysConfigCols"/> 
         from sys_config where id>=(
-			select id from sys_config order by id asc limit #{crow}, 1
+			select id from sys_config 
+			where id!=0 
+			<include refid="rangeWhereCondition"/> 
+			order by id asc limit #{crow}, 1
 		)
+		<include refid="rangeWhereCondition"/> 
 		order by id asc limit 0, #{listSize}
     </select>
     

@@ -47,4 +47,26 @@ public class SysConfigServiceImpl implements SysConfigService {
         sysConfigDAO.save(entity);
     }
 
+    @Override
+    public Integer delete(Long id) {
+        return sysConfigDAO.deleteById(id);
+    }
+
+    @Override
+    public SysConfig findById(Long id) {
+        return sysConfigDAO.get(id);
+    }
+
+    @Override
+    public Integer update(SysConfigDTO dto) {
+        SysConfig entity = sysConfigDAO.get(dto.getId());
+        entity.setGeneralClass(dto.getGeneralClass());
+        entity.setName(dto.getName());
+        entity.setRemark(dto.getRemark());
+        entity.setSysType(dto.getSysType());
+        entity.setSysValue(dto.getSysValue());
+        entity.setUpdateTime(DateUtil.getCurrTime());
+        return sysConfigDAO.update(entity);
+    }
+
 }
