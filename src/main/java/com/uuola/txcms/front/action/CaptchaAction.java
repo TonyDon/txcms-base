@@ -4,7 +4,7 @@
  * Copy Right@ uuola
  */ 
 
-package com.uuola.txcms.demo.action;
+package com.uuola.txcms.front.action;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -67,7 +67,7 @@ public class CaptchaAction {
         .setHeight(32)
         .setCharBoxSize(26)
         .setPointNum(0)
-        .setRotate(true).setMixedColor(true).setDrawArc(false).setDrawLine(true)
+        .setRotate(true).setMixedColor(true).setDrawArc(false).setDrawLine(false)
         .setOutputStream(response.getOutputStream());
         ImageVerifier.outputImage(params);
     }
