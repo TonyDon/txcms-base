@@ -14,10 +14,15 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.txcms.base.dto.InfoPostDTO;
+import com.uuola.txcms.base.query.InfoQuery;
 import com.uuola.txcms.base.service.InfoPostService;
+import com.uuola.txcms.base.service.InfoQueryService;
 import com.uuola.txweb.framework.action.BaseAction;
+import com.uuola.txweb.framework.action.methods.QueryCallbackHandler;
 import com.uuola.txweb.framework.action.methods.UpdateCallbackHandler;
+import com.uuola.txweb.framework.dto.PageDTO;
 import com.uuola.txweb.framework.dto.ValidateDTO;
+import com.uuola.txweb.framework.query.BaseQuery;
 
 
 /**
@@ -33,6 +38,9 @@ public class CmsInfoAction extends BaseAction {
 
     @Autowired
     private InfoPostService infoPostService;
+    
+    @Autowired
+    private InfoQueryService infoQueryService;
     
     @RequestMapping(value="", method=RequestMethod.GET)
     public ModelAndView index(){
@@ -54,5 +62,16 @@ public class CmsInfoAction extends BaseAction {
             }
         });
         return mv;
+    }
+    
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public ModelAndView search(InfoQuery query, ServletWebRequest webRequest) {
+        ModelAndView mv = queryAction(query, new QueryCallbackHandler<PageDTO>() {
+            @Override
+            public PageDTO doQuery(BaseQuery query) {
+                return infoQueryService.fetchByRange(query);
+            }
+        });
+        return assignViewName(mv, "search");
     }
 }

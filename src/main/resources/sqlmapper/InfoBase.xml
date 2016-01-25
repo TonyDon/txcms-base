@@ -27,4 +27,31 @@
         from info_base where id=#{id, jdbcType=BIGINT} limit 0, 1
     </select>
     
+    
+    <sql id="rangeWhereCondition">
+    	<if test="title!=null">
+    		and title like concat('%', #{title}, '%') 
+    	</if>
+    	<if test="id!=null">
+    		and id=#{id} 
+    	</if>
+    </sql>
+    
+    <select id="findCount" resultType="Integer" parameterType="InfoQuery">
+    	select count(*) from info_base where id!=0 <include refid="rangeWhereCondition"/> 
+    </select>
+    
+    <select id="findByRange"  resultType="InfoBase" parameterType="InfoQuery">
+        select 
+        <include refid="cols"/> 
+        from info_base where id>=(
+			select id from info_base 
+			where id!=0 
+			<include refid="rangeWhereCondition"/> 
+			order by id asc limit #{crow}, 1
+		)
+		<include refid="rangeWhereCondition"/> 
+		order by id asc limit 0, #{listSize}
+    </select>
+    
 </mapper>
