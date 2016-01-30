@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.util.WebUtils;
 
+import com.uuola.txcms.base.entity.UserInfo;
 import com.uuola.txcms.constants.CST_SESSION_NAME;
 import com.uuola.txweb.framework.utils.ContextUtil;
 
@@ -29,8 +30,8 @@ public class SessionUtil {
    */
   public static String getValidCode(){
       HttpServletRequest request = ContextUtil.getHttpServletRequest();
-      String vcode = (String)WebUtils.getSessionAttribute(request, CST_SESSION_NAME.VALID_CODE);
-      WebUtils.setSessionAttribute(request, CST_SESSION_NAME.VALID_CODE, null);
+      String vcode = (String)WebUtils.getSessionAttribute(request, CST_SESSION_NAME.VALID_CODE_SESS);
+      WebUtils.setSessionAttribute(request, CST_SESSION_NAME.VALID_CODE_SESS, null);
       return vcode;
   }
   
@@ -41,24 +42,28 @@ public class SessionUtil {
    */
   public static void setValidCode(String code){
       HttpServletRequest request = ContextUtil.getHttpServletRequest();
-      WebUtils.setSessionAttribute(request, CST_SESSION_NAME.VALID_CODE, code);
+      WebUtils.setSessionAttribute(request, CST_SESSION_NAME.VALID_CODE_SESS, code);
   }
   
   /**
-   * 得到回话中的管理员对象
+   * 得到回话中的登录用户对象
    */
-  public static Object getAdmin(){
+  public static UserInfo getUser(){
       HttpServletRequest request = ContextUtil.getHttpServletRequest();
-      return WebUtils.getSessionAttribute(request, CST_SESSION_NAME.ADMIN_SESS_CODE);
+      Object admin = WebUtils.getSessionAttribute(request, CST_SESSION_NAME.MANAGE_USER_SESS);
+      if(admin instanceof UserInfo){
+          return (UserInfo)admin;
+      }
+      return admin instanceof UserInfo ? (UserInfo)admin : null;
   }
   
   /**
-   * 设置管理员对象到回话中
+   * 设置登录用户对象到回话中
    * @param admin
    */
-  public static void setAdmin(Object admin){
+  public static void setUser(Object admin){
       HttpServletRequest request = ContextUtil.getHttpServletRequest();
-      WebUtils.setSessionAttribute(request, CST_SESSION_NAME.ADMIN_SESS_CODE, admin);
+      WebUtils.setSessionAttribute(request, CST_SESSION_NAME.MANAGE_USER_SESS, admin);
   }
   
 }

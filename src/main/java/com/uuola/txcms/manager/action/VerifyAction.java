@@ -70,7 +70,7 @@ public class VerifyAction extends BaseAction{
                 errors.add(CST_ERROR_MSG.VERIFY_USER_CHECK_FAIL);
             }else{
                 // 验证通过 设置管理员对象到回话
-                SessionUtil.setAdmin(user);
+                SessionUtil.setUser(user);
             }
         }
         

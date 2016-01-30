@@ -17,6 +17,7 @@ import com.uuola.txcms.base.dto.InfoPostDTO;
 import com.uuola.txcms.base.query.InfoQuery;
 import com.uuola.txcms.base.service.InfoPostService;
 import com.uuola.txcms.base.service.InfoQueryService;
+import com.uuola.txcms.component.SessionUtil;
 import com.uuola.txweb.framework.action.BaseAction;
 import com.uuola.txweb.framework.action.methods.QueryCallbackHandler;
 import com.uuola.txweb.framework.action.methods.UpdateCallbackHandler;
@@ -54,6 +55,7 @@ public class CmsInfoAction extends BaseAction {
     
     @RequestMapping(value="/post", method=RequestMethod.POST)
     public ModelAndView post(InfoPostDTO infoPostDTO, ServletWebRequest webRequest) {
+        infoPostDTO.setAuthorId(SessionUtil.getUser().getId());
         ModelAndView mv = updateAction(infoPostDTO, new UpdateCallbackHandler<Object>() {
             @Override
             public Object doUpdate(ValidateDTO infoPostDTO) {

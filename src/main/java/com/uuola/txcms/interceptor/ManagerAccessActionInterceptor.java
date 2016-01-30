@@ -28,7 +28,7 @@ public class ManagerAccessActionInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if(handler instanceof HandlerMethod && null == SessionUtil.getAdmin()){
+        if(handler instanceof HandlerMethod && null == SessionUtil.getUser()){
             response.sendRedirect(request.getContextPath() + redirectUrl);                 
             return false;
         }
