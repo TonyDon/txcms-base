@@ -18,6 +18,7 @@ import com.uuola.txcms.base.dto.InfoPostDTO;
 import com.uuola.txcms.base.entity.InfoBase;
 import com.uuola.txcms.base.entity.InfoContent;
 import com.uuola.txcms.base.service.InfoPostService;
+import com.uuola.txcms.component.SequenceManager;
 import com.uuola.txweb.framework.dao.support.TxWebTs;
 
 
@@ -38,11 +39,15 @@ public class InfoPostServiceImpl implements InfoPostService {
     @Autowired
     private InfoContentDAO infoContentDAO;
     
+    @Autowired
+    private SequenceManager sequenceManager;
+    
     @Override
     public void save(InfoPostDTO infoPostDTO) {
         InfoBase base = new InfoBase();
         InfoContent content = new InfoContent();
         BeanUtils.copyProperties(infoPostDTO, base);
+        base.setId(sequenceManager.makeId(infoPostDTO.getTitle()));
         base.setAuthorId(-1L);
         base.setCreateTime(DateUtil.getCurrTime());
         infoBaseDAO.save(base);
