@@ -86,9 +86,7 @@ public class UploaderAction {
             FileUtil.createNoExistsDirs(distDir);
 
             // 新文件名
-            String fileName = KeyGenerator.getRndChr(8).concat(CST_CHAR.STR_UNDER_LINE)
-                    .concat(Long.toHexString(DateUtil.getCurrMsTime()))
-                    .concat(CST_CHAR.STR_UNDER_LINE)
+            String fileName = KeyGenerator.getRndChr(4).concat(Long.toHexString(DateUtil.getCurrMsTime()))
                     .concat(Long.toHexString(mpFile.getSize()));
             
             String distName = fileName.concat(CST_CHAR.STR_DOT).concat(extName);

@@ -44,14 +44,14 @@
     <select id="findByRange"  resultType="InfoBase" parameterType="InfoQuery">
         select 
         <include refid="cols"/> 
-        from info_base where id>=(
+        from info_base where id<=(
 			select id from info_base 
 			where id!=0 
 			<include refid="rangeWhereCondition"/> 
-			order by id asc limit #{crow}, 1
+			order by create_time desc limit #{crow}, 1
 		)
 		<include refid="rangeWhereCondition"/> 
-		order by id asc limit 0, #{listSize}
+		order by create_time desc limit 0, #{listSize}
     </select>
     
 </mapper>
