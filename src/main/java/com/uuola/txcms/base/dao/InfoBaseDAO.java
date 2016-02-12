@@ -38,4 +38,8 @@ public class InfoBaseDAO extends TxWebDAO<InfoBase> {
     public Integer findCount(BaseQuery query) {
         return this.selectOne("findCount", query);
     }
+    
+    public Integer markDelete(List<Long> ids){
+        return this.updateByMapper("markDelete", ids);
+    }
 }

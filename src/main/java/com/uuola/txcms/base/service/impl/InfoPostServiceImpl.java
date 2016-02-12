@@ -6,6 +6,8 @@
 
 package com.uuola.txcms.base.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +58,11 @@ public class InfoPostServiceImpl implements InfoPostService {
             content.setInfoId(base.getId());
             infoContentDAO.save(content);
         }
+    }
+
+    @Override
+    public Integer markDelete(List<Long> ids) {
+        return infoBaseDAO.markDelete(ids);
     }
 
 }

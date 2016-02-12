@@ -60,4 +60,11 @@
 		
     </select>
     
+    <update id="markDelete" parameterType="java.util.List">
+    	update info_base set is_delete=1 where id in 
+    	<foreach item="id" index="index" collection="list" open="(" separator="," close=")">
+    		#{id, jdbcType=BIGINT}
+    	</foreach>
+    </update>
+    
 </mapper>

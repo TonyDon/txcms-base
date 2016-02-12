@@ -6,13 +6,17 @@
 
 package com.uuola.txcms.manager.action;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.uuola.commons.CollectionUtil;
 import com.uuola.txcms.base.dto.InfoPostDTO;
 import com.uuola.txcms.base.query.InfoQuery;
 import com.uuola.txcms.base.service.InfoPostService;
@@ -64,6 +68,18 @@ public class CmsInfoAction extends BaseAction {
             }
         });
         return mv;
+    }
+    
+    /**
+     * 标记删除记录
+     */
+    @RequestMapping(value = "/markdelete", method = RequestMethod.POST)
+    public ModelAndView markDelete(@RequestParam("ids[]") ArrayList<Long> ids) {
+        Integer num = 0;
+        if (CollectionUtil.isNotEmpty(ids)) {
+            num = infoPostService.markDelete(ids);
+        }
+        return makeModelView("markdelete").addObject("num", num);
     }
     
     @RequestMapping(value = "/search", method = RequestMethod.GET)

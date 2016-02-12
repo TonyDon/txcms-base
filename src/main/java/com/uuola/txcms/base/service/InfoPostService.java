@@ -6,6 +6,8 @@
 
 package com.uuola.txcms.base.service;
 
+import java.util.List;
+
 import com.uuola.txcms.base.dto.InfoPostDTO;
 
 
@@ -19,4 +21,6 @@ import com.uuola.txcms.base.dto.InfoPostDTO;
 public interface InfoPostService {
 
     public void save(InfoPostDTO infoPostDTO);
+
+    public Integer markDelete(List<Long> ids);
 }
