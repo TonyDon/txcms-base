@@ -16,7 +16,6 @@ import com.uuola.txcms.base.dto.UserInfoDTO;
 import com.uuola.txcms.base.entity.UserInfo;
 import com.uuola.txcms.base.service.UserRegService;
 import com.uuola.txcms.component.PassKeyManager;
-import com.uuola.txcms.component.SequenceManager;
 import com.uuola.txweb.framework.dao.support.TxWebTs;
 
 
@@ -30,9 +29,6 @@ import com.uuola.txweb.framework.dao.support.TxWebTs;
 @Service
 @TxWebTs
 public class UserRegServiceImpl implements UserRegService {
-    
-    @Autowired
-    private SequenceManager sequenceManager;
 
     @Autowired
     private UserInfoDAO userInfoDAO;
