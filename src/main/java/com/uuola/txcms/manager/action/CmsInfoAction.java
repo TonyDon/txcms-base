@@ -83,6 +83,18 @@ public class CmsInfoAction extends BaseAction {
         return makeModelView("markdelete").addObject("num", num);
     }
     
+    /**
+     * 更新状态
+     */
+    @RequestMapping(value = "/infostate", method = RequestMethod.POST)
+    public ModelAndView infoState(@RequestParam("ids[]") ArrayList<Long> ids, @RequestParam("state") Byte state) {
+        Integer num = 0;
+        if (CollectionUtil.isNotEmpty(ids)) {
+            num = infoPostService.updateInfoState(ids, state);
+        }
+        return makeModelView("infoState").addObject("num", num);
+    }
+    
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public ModelAndView search(InfoQuery query, ServletWebRequest webRequest) {
         ModelAndView mv = queryAction(query, new QueryCallbackHandler<PageDTO>() {

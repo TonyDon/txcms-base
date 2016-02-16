@@ -23,4 +23,7 @@ public interface InfoPostService {
     public void save(InfoPostDTO infoPostDTO);
 
     public Integer markDelete(List<Long> ids);
+
+    public Integer updateInfoState(List<Long> ids, Byte state);
+    
 }

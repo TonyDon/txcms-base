@@ -6,10 +6,13 @@
 
 package com.uuola.txcms.base.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.uuola.commons.DateUtil;
 import com.uuola.txcms.base.entity.InfoBase;
 import com.uuola.txweb.framework.dao.annotation.MapperNamespace;
 import com.uuola.txweb.framework.dao.support.TxWebDAO;
@@ -45,5 +48,13 @@ public class InfoBaseDAO extends TxWebDAO<InfoBase> {
     
     public InfoBase findEffective(Long id){
         return this.selectOne("findEffective", id);
+    }
+
+    public Integer updateInfoState(List<Long> ids, Byte state) {
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("ids", ids);
+        params.put("state", state);
+        params.put("updateTime", DateUtil.getCurrTime());
+        return this.updateByMapper("updateInfoState", params);
     }
 }

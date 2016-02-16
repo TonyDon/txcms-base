@@ -73,4 +73,14 @@
     	</foreach>
     </update>
     
+    <update id="updateInfoState" parameterType="java.util.Map">
+    	update info_base set 
+	    	info_state=#{state, jdbcType=TINYINT} ,
+	    	update_time=#{updateTime, jdbcType=BIGINT} 
+    	where id in 
+    	<foreach item="id" index="index" collection="ids" open="(" separator="," close=")">
+    		#{id, jdbcType=BIGINT}
+    	</foreach>
+    </update>
+    
 </mapper>

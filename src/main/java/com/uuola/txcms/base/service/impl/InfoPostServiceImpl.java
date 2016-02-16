@@ -65,4 +65,9 @@ public class InfoPostServiceImpl implements InfoPostService {
         return infoBaseDAO.markDelete(ids);
     }
 
+    @Override
+    public Integer updateInfoState(List<Long> ids, Byte state) {
+        return infoBaseDAO.updateInfoState(ids, state);
+    }
+
 }
