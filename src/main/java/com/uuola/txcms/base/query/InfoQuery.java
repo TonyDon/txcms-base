@@ -29,6 +29,8 @@ public class InfoQuery extends BaseQuery {
     
     private Byte isDelete;
     
+    private Byte infoState;
+    
 
     @Override
     public void filter() {
@@ -74,6 +76,20 @@ public class InfoQuery extends BaseQuery {
     
     public void setIsDelete(Byte isDelete) {
         this.isDelete = isDelete;
+    }
+
+
+
+    
+    public Byte getInfoState() {
+        return infoState;
+    }
+
+
+
+    
+    public void setInfoState(Byte infoState) {
+        this.infoState = infoState;
     }
 
 }

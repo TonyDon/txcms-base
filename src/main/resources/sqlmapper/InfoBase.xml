@@ -44,6 +44,9 @@
     	<if test="isDelete!=null">
     		and is_delete=#{isDelete, jdbcType=TINYINT} 
     	</if>
+    	<if test="infoState!=null">
+    		and info_state=#{infoState, jdbcType=TINYINT} 
+    	</if>
     </sql>
     
     <select id="findCount" resultType="Integer" parameterType="InfoQuery">
