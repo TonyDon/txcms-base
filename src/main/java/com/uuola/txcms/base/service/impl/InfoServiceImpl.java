@@ -42,7 +42,17 @@ public class InfoServiceImpl implements InfoService {
         InfoBase infoBase = infoBaseDAO.get(id);
         InfoContent content = infoContentDAO.get(id);
         infoDTO.setInfoBase(infoBase);
-        if(null != content){
+        infoDTO.setInfoContent(content);
+        return infoDTO;
+    }
+
+    @Override
+    public InfoDTO fetchEffective(Long id) {
+        InfoDTO infoDTO = new InfoDTO();
+        InfoBase infoBase = infoBaseDAO.findEffective(id);
+        if (null != infoBase) {
+            InfoContent content = infoContentDAO.get(id);
+            infoDTO.setInfoBase(infoBase);
             infoDTO.setInfoContent(content);
         }
         return infoDTO;

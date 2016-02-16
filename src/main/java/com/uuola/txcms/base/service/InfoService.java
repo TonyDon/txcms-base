@@ -18,5 +18,17 @@ import com.uuola.txcms.base.dto.InfoDTO;
  */
 public interface InfoService {
 
+    /**
+     * 获取info记录
+     * @param id
+     * @return
+     */
     InfoDTO fetchById(Long id);
+    
+    /**
+     * 获取未删除的info记录
+     * @param id
+     * @return
+     */
+    InfoDTO fetchEffective(Long id);
 }

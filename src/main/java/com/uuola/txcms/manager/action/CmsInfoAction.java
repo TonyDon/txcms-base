@@ -17,6 +17,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.commons.CollectionUtil;
+import com.uuola.txcms.base.dto.InfoDTO;
 import com.uuola.txcms.base.dto.InfoPostDTO;
 import com.uuola.txcms.base.query.InfoQuery;
 import com.uuola.txcms.base.service.InfoPostService;
@@ -91,5 +92,18 @@ public class CmsInfoAction extends BaseAction {
             }
         });
         return assignViewName(mv, "search");
+    }
+    
+    /**
+     * 展示信息
+     * @param query
+     * @return
+     */
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
+    public ModelAndView view(InfoQuery query){
+        InfoDTO info = infoQueryService.fetchById(query.getId());
+        ModelAndView mv = this.makeModelView("view");
+        mv.addObject("infoDTO", info);
+        return mv;
     }
 }

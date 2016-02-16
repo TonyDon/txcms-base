@@ -6,6 +6,7 @@
 
 package com.uuola.txcms.base.service;
 
+import com.uuola.txcms.base.dto.InfoDTO;
 import com.uuola.txweb.framework.dto.PageDTO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
@@ -25,5 +26,12 @@ public interface InfoQueryService {
      * @return
      */
     PageDTO fetchByRange(BaseQuery query);
+    
+    /**
+     * 获取info记录
+     * @param id
+     * @return
+     */
+    InfoDTO fetchById(Long id);
 
 }

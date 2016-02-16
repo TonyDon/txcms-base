@@ -42,4 +42,8 @@ public class InfoBaseDAO extends TxWebDAO<InfoBase> {
     public Integer markDelete(List<Long> ids){
         return this.updateByMapper("markDelete", ids);
     }
+    
+    public InfoBase findEffective(Long id){
+        return this.selectOne("findEffective", id);
+    }
 }

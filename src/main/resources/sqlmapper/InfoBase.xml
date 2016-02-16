@@ -27,6 +27,12 @@
         from info_base where id=#{id, jdbcType=BIGINT} limit 0, 1
     </select>
     
+    <select id="findEffective"  resultType="InfoBase" parameterType="Long">
+        select 
+        <include refid="cols"/> 
+        from info_base where id=#{id, jdbcType=BIGINT} and is_delete=0 limit 0, 1
+    </select>
+    
     
     <sql id="rangeWhereCondition">
     	<if test="title!=null and title!=''">
