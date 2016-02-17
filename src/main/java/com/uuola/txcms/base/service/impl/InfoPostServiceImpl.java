@@ -50,7 +50,6 @@ public class InfoPostServiceImpl implements InfoPostService {
         InfoContent content = new InfoContent();
         BeanUtils.copyProperties(infoPostDTO, base);
         base.setId(sequenceManager.makeId(infoPostDTO.getTitle()));
-        base.setAuthorId(-1L);
         base.setCreateTime(DateUtil.getCurrTime());
         infoBaseDAO.save(base);
         if (StringUtil.isNotEmpty(infoPostDTO.getContent())) {
