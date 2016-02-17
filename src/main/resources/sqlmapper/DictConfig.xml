@@ -41,7 +41,7 @@
 	<select id="findByDictCode" resultType="DictConfig" parameterType="java.lang.String">
 		select
 		<include refid="dictConfigCols" />
-		from dict_config where dict_code=#{dict_code}
+		from dict_config where dict_code=#{dict_code} order by id asc
 	</select>
 
 </mapper>

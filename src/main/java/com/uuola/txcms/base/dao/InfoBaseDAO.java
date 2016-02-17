@@ -43,7 +43,10 @@ public class InfoBaseDAO extends TxWebDAO<InfoBase> {
     }
     
     public Integer markDelete(List<Long> ids){
-        return this.updateByMapper("markDelete", ids);
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("ids", ids);
+        params.put("updateTime", DateUtil.getCurrTime());
+        return this.updateByMapper("markDelete", params);
     }
     
     public InfoBase findEffective(Long id){
