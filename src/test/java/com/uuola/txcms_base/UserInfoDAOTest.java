@@ -68,8 +68,8 @@ public class UserInfoDAOTest {
         UserInfo ui = new UserInfo();
         ui.setTel("13911111111");
         ui.setId(10002l);
-        userInfoDAO.deleteByPropValue(ui);
-        UserInfo u = userInfoDAO.get(10002);
+        userInfoDAO.deleteByEntity(ui);
+        UserInfo u = userInfoDAO.get(10002l);
         System.out.println(u);
     }
     
