@@ -8,7 +8,7 @@ package com.uuola.txcms.common.action;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Date;
+import java.util.Calendar;
 
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -26,7 +26,6 @@ import com.uuola.commons.DateUtil;
 import com.uuola.commons.StringUtil;
 import com.uuola.commons.coder.KeyGenerator;
 import com.uuola.commons.constant.CST_CHAR;
-import com.uuola.commons.constant.CST_DATE_FORMAT;
 import com.uuola.commons.file.FileUtil;
 import com.uuola.commons.image.ImageUtil;
 import com.uuola.commons.listener.WebContext;
@@ -77,10 +76,9 @@ public class UploaderAction {
         String url = null;
         try {
             // 保存文件路径
-            String dateDir = DateUtil.formatDate(new Date(), CST_DATE_FORMAT.YYYYsMMsDD);
-            String dirPath = CST_CHAR.STR_SLASH.concat(storeDir)
-                    .concat(CST_CHAR.STR_SLASH).concat(dateDir)
-                    .concat(CST_CHAR.STR_SLASH).concat(KeyGenerator.getRndChr(1));
+            Calendar cal = Calendar.getInstance();
+            String dateDir = String.format("/%s/%d/", Integer.toHexString(DateUtil.getYear(cal)), DateUtil.getDayInYear(cal));
+            String dirPath = CST_CHAR.STR_SLASH.concat(storeDir).concat(dateDir).concat(KeyGenerator.getRndChr(2));
 
             String distDir = ContextUtil.getRealPath(UPLOAD_ROOT_DIR).concat(dirPath);
             FileUtil.createNoExistsDirs(distDir);

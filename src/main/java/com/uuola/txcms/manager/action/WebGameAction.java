@@ -7,7 +7,7 @@
 package com.uuola.txcms.manager.action;
 
 import java.io.File;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
@@ -24,7 +24,6 @@ import com.uuola.commons.DateUtil;
 import com.uuola.commons.StringUtil;
 import com.uuola.commons.coder.KeyGenerator;
 import com.uuola.commons.constant.CST_CHAR;
-import com.uuola.commons.constant.CST_DATE_FORMAT;
 import com.uuola.commons.file.FileUtil;
 import com.uuola.commons.packzip.ZipUtil;
 import com.uuola.txcms.constants.CST_ERROR_MSG;
@@ -82,15 +81,16 @@ public class WebGameAction extends BaseAction {
         if (!"zip".equalsIgnoreCase(extName)) {
             return getModel(null, CST_ERROR_MSG.EXT_NAME_INVALID, 1);
         }
-        String dateDir = DateUtil.formatDate(new Date(), CST_DATE_FORMAT.YYYYsMMsDD);
-        // /2015/12/31/ghddfa01
-        String dirPath = CST_CHAR.STR_SLASH.concat(dateDir).concat(CST_CHAR.STR_SLASH).concat(KeyGenerator.getRndChr(16));
+        Calendar cal = Calendar.getInstance();
+        String dateDir = String.format("/%s/%d/", Integer.toHexString(DateUtil.getYear(cal)), DateUtil.getDayInYear(cal));
+        // /7e0/72/RndChr(16)
+        String dirPath = dateDir.concat(KeyGenerator.getRndChr(16));
         String url = null;
         try {
-            String urlPath = UPLOAD_ROOT_DIR.concat(dirPath);//  /h5gfile/2015/12/31/ghddfa01
+            String urlPath = UPLOAD_ROOT_DIR.concat(dirPath);//  /h5gfile/7e0/72/RndChr(16)
             String distDir = ContextUtil.getRealPath(UPLOAD_ROOT_DIR).concat(dirPath);
             FileUtil.createNoExistsDirs(distDir);
-            File dist = new File(distDir, fileName); // .../h5gfile/2015/12/31/ghddfa01/leidian.zip
+            File dist = new File(distDir, fileName); // .../h5gfile/7e0/72/RndChr(16)/leidian.zip
             zipFile.transferTo(dist);
             url = resovleGameZip(dist, new File(distDir), urlPath);
         } catch (Exception e) {
