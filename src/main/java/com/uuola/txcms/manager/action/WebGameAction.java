@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.commons.DateUtil;
+import com.uuola.commons.NumberUtil;
 import com.uuola.commons.StringUtil;
 import com.uuola.commons.coder.KeyGenerator;
 import com.uuola.commons.constant.CST_CHAR;
@@ -82,12 +83,12 @@ public class WebGameAction extends BaseAction {
             return getModel(null, CST_ERROR_MSG.EXT_NAME_INVALID, 1);
         }
         Calendar cal = Calendar.getInstance();
-        String dateDir = String.format("/%s/%d/", Integer.toHexString(DateUtil.getYear(cal)), DateUtil.getDayInYear(cal));
-        // /7e0/72/RndChr(16)
-        String dirPath = dateDir.concat(KeyGenerator.getRndChr(16));
+        // /7e0/072/0123/RndChr(8)
+        String dirPath = String.format("/%x/%03d/%04d/%s", DateUtil.getYear(cal), DateUtil.getDayInYear(cal),
+                NumberUtil.genRndInt(100, 1000), KeyGenerator.getRndChr(8));
         String url = null;
         try {
-            String urlPath = UPLOAD_ROOT_DIR.concat(dirPath);//  /h5gfile/7e0/72/RndChr(16)
+            String urlPath = UPLOAD_ROOT_DIR.concat(dirPath);//  /h5gfile/7e0/072/0123/RndChr(8)
             String distDir = ContextUtil.getRealPath(UPLOAD_ROOT_DIR).concat(dirPath);
             FileUtil.createNoExistsDirs(distDir);
             File dist = new File(distDir, fileName); // .../h5gfile/7e0/72/RndChr(16)/leidian.zip

@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.commons.DateUtil;
+import com.uuola.commons.NumberUtil;
 import com.uuola.commons.StringUtil;
 import com.uuola.commons.coder.KeyGenerator;
 import com.uuola.commons.constant.CST_CHAR;
@@ -77,8 +78,8 @@ public class UploaderAction {
         try {
             // 保存文件路径
             Calendar cal = Calendar.getInstance();
-            String dateDir = String.format("/%s/%d/", Integer.toHexString(DateUtil.getYear(cal)), DateUtil.getDayInYear(cal));
-            String dirPath = CST_CHAR.STR_SLASH.concat(storeDir).concat(dateDir).concat(KeyGenerator.getRndChr(2));
+            String dirPath = String.format("/%s/%x/%03d/%04d", storeDir, DateUtil.getYear(cal), DateUtil.getDayInYear(cal),
+                    NumberUtil.genRndInt(100, 1000));
 
             String distDir = ContextUtil.getRealPath(UPLOAD_ROOT_DIR).concat(dirPath);
             FileUtil.createNoExistsDirs(distDir);
