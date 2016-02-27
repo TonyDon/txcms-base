@@ -48,7 +48,7 @@ public class UploaderAction extends BaseAction {
 
     private Logger log = LoggerFactory.getLogger(getClass());
 
-    private final String UPLOAD_ROOT_DIR = "/upfile";
+    private final String UPLOAD_ROOT_DIR = "/store";
 
     private final String UPLOAD_DIR_CONFIG = "image|file";
 
