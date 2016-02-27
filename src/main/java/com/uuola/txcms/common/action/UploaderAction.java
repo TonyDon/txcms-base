@@ -54,6 +54,11 @@ public class UploaderAction extends BaseAction {
 
     @Autowired
     private FileExtNameValidator fileExtNameValidator;
+    
+    @RequestMapping(value="", method=RequestMethod.GET)
+    public ModelAndView index(){
+        return this.makeModelView("index");
+    }
 
     /**
      * 上传图片,常规文件，返回上传后的文件URL资源路径
@@ -152,7 +157,6 @@ public class UploaderAction extends BaseAction {
         mv.addObject("url", url);
         mv.addObject("message", messsge);
         mv.addObject("error", error);
-        this.assignViewName(mv, "");
         return mv;
     }
 }
