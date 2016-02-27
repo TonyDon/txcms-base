@@ -32,6 +32,7 @@ import com.uuola.commons.image.ImageUtil;
 import com.uuola.commons.listener.WebContext;
 import com.uuola.txcms.component.FileExtNameValidator;
 import com.uuola.txcms.constants.CST_ERROR_MSG;
+import com.uuola.txweb.framework.action.BaseAction;
 import com.uuola.txweb.framework.utils.ContextUtil;
 
 /**
@@ -43,7 +44,7 @@ import com.uuola.txweb.framework.utils.ContextUtil;
  */
 @Controller
 @RequestMapping("/uploader")
-public class UploaderAction {
+public class UploaderAction extends BaseAction {
 
     private Logger log = LoggerFactory.getLogger(getClass());
 
@@ -61,7 +62,7 @@ public class UploaderAction {
      * @return
      */
     @RequestMapping(value = "/store", method = RequestMethod.POST)
-    public ModelAndView save(@RequestParam(value = "mpfile") MultipartFile mpFile ,
+    public ModelAndView store(@RequestParam(value = "mpfile") MultipartFile mpFile ,
             @RequestParam(value = "dir") String storeDir, 
             @RequestParam(value = "needThumb", defaultValue="false") boolean needThumb) {
         if (null == mpFile || mpFile.getSize() == 0) {
@@ -147,10 +148,11 @@ public class UploaderAction {
     }
 
     private ModelAndView getModel(String url, String messsge, Integer error) {
-        ModelAndView mv = new ModelAndView();
+        ModelAndView mv = this.makeModelView("store");
         mv.addObject("url", url);
         mv.addObject("message", messsge);
         mv.addObject("error", error);
+        this.assignViewName(mv, "");
         return mv;
     }
 }
