@@ -49,8 +49,8 @@ public class WebGameAction extends BaseAction {
     
     private final String OUT_GAME_INDEX = "index.html";
     
-    // 删除路径合法性正则 /h5gfile/2016/01/01/a1234567b1234567 
-    private final Pattern REGEX_URL_VALID = Pattern.compile(UPLOAD_ROOT_DIR + "/\\d{4}/\\d{2}/\\d{2}/\\w{16}");
+    // 删除路径合法性正则 eg: /h5gfile/7e0/058/0648/OTefdIB8/... 
+    private final Pattern REGEX_URL_VALID = Pattern.compile(UPLOAD_ROOT_DIR + "/[a-f0-9]{3,4}/\\d{3}/\\d{4}/\\w{8}");
 
     @RequestMapping(value="", method=RequestMethod.GET)
     public ModelAndView index(){
