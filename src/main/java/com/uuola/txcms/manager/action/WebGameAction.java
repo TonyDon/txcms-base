@@ -43,7 +43,7 @@ import com.uuola.txweb.framework.utils.ContextUtil;
 @RequestMapping("/manager/app/webgame")
 public class WebGameAction extends BaseAction {
     
-    private final String UPLOAD_ROOT_DIR = "/h5gfile";
+    private final String UPLOAD_ROOT_DIR = "/h5gfs";
     
     private final String GAME_TPL_NAME = "_index.hgt";
     
