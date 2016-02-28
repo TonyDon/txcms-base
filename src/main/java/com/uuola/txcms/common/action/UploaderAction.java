@@ -100,8 +100,8 @@ public class UploaderAction extends BaseAction {
 
             // 缩图
             if (needThumb && dist.exists() && dist.canRead() && fileExtNameValidator.checkImageExt(extName)) {
-                File w1Image = new File(distDir, fileName.concat(".100.").concat(extName));
-                ImageUtil.resize(dist, w1Image, 100, 0, false);
+                File w1Image = new File(distDir, fileName.concat(".w120.").concat(extName));
+                ImageUtil.resize(dist, w1Image, 120, 0, false);
             }
 
             url = WebContext.getServletContext().getContextPath().concat(UPLOAD_ROOT_DIR).concat(dirPath)
@@ -143,7 +143,7 @@ public class UploaderAction extends BaseAction {
         
         if (fileExtNameValidator.checkImageExt(extName)) {
             String thumbPath = StringUtil.replace(path, extName, CST_CHAR.STR_EMPTY);
-            File w1Thumb = new File(thumbPath.concat("100.").concat(extName));
+            File w1Thumb = new File(thumbPath.concat("w120.").concat(extName));
             if (w1Thumb.exists()) {
                 FileUtils.deleteQuietly(w1Thumb);
             }
