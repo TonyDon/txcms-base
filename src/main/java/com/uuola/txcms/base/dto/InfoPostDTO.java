@@ -50,6 +50,8 @@ public class InfoPostDTO extends ValidateDTO {
     
     private Byte infoState;
     
+    private Long viewNum;
+    
     private Byte isDelete;
     
     private String content;
@@ -214,6 +216,18 @@ public class InfoPostDTO extends ValidateDTO {
     }
 
     
+    
+    public Long getViewNum() {
+        return viewNum;
+    }
+
+
+    
+    public void setViewNum(Long viewNum) {
+        this.viewNum = viewNum;
+    }
+
+
     public Byte getIsDelete() {
         return isDelete;
     }

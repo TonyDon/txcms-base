@@ -18,6 +18,7 @@
     	video_url as videoUrl,
     	site_url as siteUrl,
     	info_state as infoState,
+    	view_num as viewNum,
     	is_delete as isDelete
     </sql>
 

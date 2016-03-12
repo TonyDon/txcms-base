@@ -72,6 +72,9 @@ public class InfoBase extends BaseEntity {
     @Column(name ="INFO_STATE")
     private Byte infoState;
     
+    @Column(name ="VIEW_NUM")
+    private Long viewNum;
+    
     @Column(name ="IS_DELETE")
     private Byte isDelete;
 
@@ -233,6 +236,16 @@ public class InfoBase extends BaseEntity {
     }
 
     
+    public Long getViewNum() {
+        return viewNum;
+    }
+
+
+    public void setViewNum(Long viewNum) {
+        this.viewNum = viewNum;
+    }
+
+
     public Byte getIsDelete() {
         return isDelete;
     }
