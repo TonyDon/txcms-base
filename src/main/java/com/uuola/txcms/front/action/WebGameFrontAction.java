@@ -46,7 +46,7 @@ public class WebGameFrontAction extends BaseAction {
 
             @Override
             public InfoDTO doQuery(BaseQuery query) {
-                return infoService.fetchById(((InfoQuery)query).getId());
+                return infoService.fetchEffective(((InfoQuery)query).getId());
             }
             
         });
@@ -64,7 +64,7 @@ public class WebGameFrontAction extends BaseAction {
 
             @Override
             public InfoDTO doQuery(BaseQuery query) {
-                return infoService.fetchById(((InfoQuery)query).getId());
+                return infoService.fetchEffective(((InfoQuery)query).getId());
             }
             
         });
