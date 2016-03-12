@@ -90,4 +90,10 @@
     	</foreach>
     </update>
     
+    <update id="adjustViewNum" parameterType="java.util.Map">
+    	update info_base set 
+	    	view_num = view_num + (#{diffNum, jdbcType=BIGINT}) 
+    	where id = #{id, jdbcType=BIGINT} 
+    </update>
+    
 </mapper>

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.txcms.base.dto.InfoDTO;
@@ -50,5 +51,24 @@ public class InfoFrontAction extends BaseAction {
             
         });
         return assignViewName(mv, "view");
+    }
+    
+    /**
+     * 增加浏览次数
+     * @param id
+     */
+    @RequestMapping(value = "/viewnum/hit", method = RequestMethod.PUT)
+    public void hitViewNum(@RequestParam("id") Long id){
+        infoService.adjustViewNum(id, 1L);
+    }
+    
+    /**
+     * 调整浏览次数
+     * @param id
+     * @param diff 正为增加，负为减少
+     */
+    @RequestMapping(value = "/viewnum/adjust", method = RequestMethod.GET)
+    public void adjustViewNum(@RequestParam("id") Long id, @RequestParam("diff") Long diff){
+        infoService.adjustViewNum(id, diff);
     }
 }

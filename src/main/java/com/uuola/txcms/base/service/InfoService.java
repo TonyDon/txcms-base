@@ -31,4 +31,11 @@ public interface InfoService {
      * @return
      */
     InfoDTO fetchEffective(Long id);
+
+    /**
+     * 调整浏览次数
+     * @param id
+     * @param diffNum
+     */
+    void adjustViewNum(Long id, Long diffNum);
 }

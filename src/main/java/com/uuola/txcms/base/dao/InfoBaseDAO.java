@@ -60,4 +60,11 @@ public class InfoBaseDAO extends TxWebDAO<InfoBase> {
         params.put("updateTime", DateUtil.getCurrTime());
         return this.updateByMapper("updateInfoState", params);
     }
+
+    public void adjustViewNum(Long id, Long diffNum) {
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("id", id);
+        params.put("diffNum", diffNum);
+        this.updateByMapper("adjustViewNum", params);
+    }
 }

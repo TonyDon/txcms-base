@@ -58,4 +58,9 @@ public class InfoServiceImpl implements InfoService {
         return infoDTO;
     }
 
+    @Override
+    public void adjustViewNum(Long id, Long diffNum) {
+        infoBaseDAO.adjustViewNum(id, diffNum);
+    }
+
 }
