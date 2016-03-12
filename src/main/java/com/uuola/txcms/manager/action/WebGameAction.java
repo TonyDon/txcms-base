@@ -26,6 +26,7 @@ import com.uuola.commons.StringUtil;
 import com.uuola.commons.coder.KeyGenerator;
 import com.uuola.commons.constant.CST_CHAR;
 import com.uuola.commons.file.FileUtil;
+import com.uuola.commons.listener.WebContext;
 import com.uuola.commons.packzip.ZipUtil;
 import com.uuola.txcms.constants.CST_ERROR_MSG;
 import com.uuola.txweb.framework.action.BaseAction;
@@ -150,13 +151,14 @@ public class WebGameAction extends BaseAction {
         String titleText = null;
         if(null != title){
              titleText = title.text();
-             title.text(titleText + "-986001娱乐在线");
+             title.text(titleText + "-m.986001.com-开心驿站");
         }else{
             Element head = doc.getElementsByTag("head").first();
-            head.prepend("<title>小游戏-986001娱乐在线</title>");
+            head.prepend("<title>小游戏-m.986001.com-开心驿站</title>");
         }
         Element body = doc.body();
-        body.append("<span>js 代码插入</span>");
+        String gmtraceJS = WebContext.getServletContext().getContextPath() + "/static/js/gmtrace.js";
+        body.append("<script src=\""+gmtraceJS+"\"></script>");
         return doc.html();
     }
 
