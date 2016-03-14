@@ -19,6 +19,8 @@
     	site_url as siteUrl,
     	info_state as infoState,
     	view_num as viewNum,
+    	love_num as loveNum,
+    	hate_num as hateNum,
     	is_delete as isDelete
     </sql>
 

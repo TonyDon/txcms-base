@@ -75,6 +75,12 @@ public class InfoBase extends BaseEntity {
     @Column(name ="VIEW_NUM")
     private Long viewNum;
     
+    @Column(name ="LOVE_NUM")
+    private Long loveNum;
+    
+    @Column(name ="HATE_NUM")
+    private Long hateNum;
+    
     @Column(name ="IS_DELETE")
     private Byte isDelete;
 
@@ -243,6 +249,30 @@ public class InfoBase extends BaseEntity {
 
     public void setViewNum(Long viewNum) {
         this.viewNum = viewNum;
+    }
+
+
+    
+    public Long getLoveNum() {
+        return loveNum;
+    }
+
+
+    
+    public void setLoveNum(Long loveNum) {
+        this.loveNum = loveNum;
+    }
+
+
+    
+    public Long getHateNum() {
+        return hateNum;
+    }
+
+
+    
+    public void setHateNum(Long hateNum) {
+        this.hateNum = hateNum;
     }
 
 

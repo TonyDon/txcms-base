@@ -51,6 +51,10 @@ public class InfoPostDTO extends ValidateDTO {
     private Byte infoState;
     
     private Long viewNum;
+
+    private Long loveNum;
+
+    private Long hateNum;
     
     private Byte isDelete;
     
@@ -225,6 +229,30 @@ public class InfoPostDTO extends ValidateDTO {
     
     public void setViewNum(Long viewNum) {
         this.viewNum = viewNum;
+    }
+
+
+    
+    public Long getLoveNum() {
+        return loveNum;
+    }
+
+
+    
+    public void setLoveNum(Long loveNum) {
+        this.loveNum = loveNum;
+    }
+
+
+    
+    public Long getHateNum() {
+        return hateNum;
+    }
+
+
+    
+    public void setHateNum(Long hateNum) {
+        this.hateNum = hateNum;
     }
 
 
