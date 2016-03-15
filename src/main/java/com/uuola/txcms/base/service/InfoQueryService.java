@@ -34,4 +34,11 @@ public interface InfoQueryService {
      */
     InfoDTO fetchById(Long id);
 
+    /**
+     * 前端分页查询
+     * @param query
+     * @return
+     */
+    PageDTO fetchRangeView(BaseQuery query);
+
 }

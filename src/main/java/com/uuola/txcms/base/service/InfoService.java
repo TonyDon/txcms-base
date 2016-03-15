@@ -38,4 +38,5 @@ public interface InfoService {
      * @param diffNum
      */
     void adjustViewNum(Long id, Long diffNum);
+
 }

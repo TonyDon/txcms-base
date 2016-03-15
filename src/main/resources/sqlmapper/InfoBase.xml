@@ -72,6 +72,16 @@
 		
     </select>
     
+    <select id="fetchRangeView" resultType="InfoViewDTO" parameterType="InfoQuery">
+    	select 
+    		<include refid="cols"/> 
+    	from info_base 
+    	where
+    		info_state=1 and is_delete=0 
+	    	order by id desc 
+	    	limit #{crow}, #{listSize}
+    </select>
+    
     <update id="markDelete" parameterType="java.util.Map">
     	update info_base set
     	    is_delete=1 ,

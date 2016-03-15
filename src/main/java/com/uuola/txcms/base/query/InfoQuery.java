@@ -34,8 +34,9 @@ public class InfoQuery extends BaseQuery {
 
     @Override
     public void filter() {
-        // TODO Auto-generated method stub
-
+        if(this.listSize>100){
+            this.listSize = 100;
+        }
     }
 
 

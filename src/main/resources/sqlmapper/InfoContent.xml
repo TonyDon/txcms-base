@@ -23,4 +23,14 @@
 		limit 0, 1
     </select>
     
+    <select id="fetchHavingContentIds" resultType="Long" parameterType="java.util.List">
+    	select info_id 
+    	from info_content
+    	where
+    		info_id in 
+    		<foreach item="id" index="index" collection="list" open="(" separator="," close=")">
+    			#{id, jdbcType=BIGINT}
+    		</foreach>
+    </select>
+    
 </mapper>

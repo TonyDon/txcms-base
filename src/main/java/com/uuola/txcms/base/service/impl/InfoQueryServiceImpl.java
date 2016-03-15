@@ -6,15 +6,23 @@
 
 package com.uuola.txcms.base.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uuola.commons.CollectionUtil;
 import com.uuola.txcms.base.dao.InfoBaseDAO;
 import com.uuola.txcms.base.dao.InfoContentDAO;
 import com.uuola.txcms.base.dto.InfoDTO;
+import com.uuola.txcms.base.dto.InfoViewDTO;
 import com.uuola.txcms.base.entity.InfoBase;
 import com.uuola.txcms.base.entity.InfoContent;
 import com.uuola.txcms.base.service.InfoQueryService;
+import com.uuola.txcms.component.BooleanUtil;
 import com.uuola.txweb.framework.dao.support.TxWebTs;
 import com.uuola.txweb.framework.dto.PageDTO;
 import com.uuola.txweb.framework.query.BaseQuery;
@@ -50,6 +58,25 @@ public class InfoQueryServiceImpl implements InfoQueryService {
         infoDTO.setInfoBase(infoBase);
         infoDTO.setInfoContent(content);
         return infoDTO;
+    }
+
+    @Override
+    public PageDTO fetchRangeView(BaseQuery query) {
+        List<InfoViewDTO> list = infoBaseDAO.fetchRangeView(query);
+        if(CollectionUtil.isNotEmpty(list)){
+            List<Long> ids = new ArrayList<Long>();
+            for(InfoViewDTO dto : list){
+                ids.add(dto.getId());
+            }
+            List<Long> hasContIds = infoContentDAO.fetchHavingContentIds(ids);
+            if(CollectionUtil.isNotEmpty(hasContIds)){
+                Set<Long> contIdSet = new HashSet<Long>(hasContIds);
+                for(InfoViewDTO dto : list){
+                    dto.setHasContent(BooleanUtil.getByte(contIdSet.contains(dto.getId())));
+                }
+            }
+        }
+        return new PageDTO(list, -1);
     }
 
 }

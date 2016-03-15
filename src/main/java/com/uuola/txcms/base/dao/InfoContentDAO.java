@@ -6,6 +6,8 @@
 
 package com.uuola.txcms.base.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.InfoContent;
@@ -30,5 +32,9 @@ public class InfoContentDAO extends TxWebDAO<InfoContent> {
 
     public InfoContent findEffectById(Long infoId){
         return selectOne("findEffectById", infoId);
+    }
+
+    public List<Long> fetchHavingContentIds(List<Long> infoIds) {
+        return selectList("fetchHavingContentIds", infoIds);
     }
 }

@@ -13,6 +13,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.uuola.commons.DateUtil;
+import com.uuola.txcms.base.dto.InfoViewDTO;
 import com.uuola.txcms.base.entity.InfoBase;
 import com.uuola.txweb.framework.dao.annotation.MapperNamespace;
 import com.uuola.txweb.framework.dao.support.TxWebDAO;
@@ -66,5 +67,9 @@ public class InfoBaseDAO extends TxWebDAO<InfoBase> {
         params.put("id", id);
         params.put("diffNum", diffNum);
         this.updateByMapper("adjustViewNum", params);
+    }
+
+    public List<InfoViewDTO> fetchRangeView(BaseQuery query) {
+        return this.selectList("fetchRangeView", query);
     }
 }

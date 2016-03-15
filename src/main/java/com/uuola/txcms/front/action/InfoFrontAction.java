@@ -15,9 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.txcms.base.dto.InfoDTO;
 import com.uuola.txcms.base.query.InfoQuery;
+import com.uuola.txcms.base.service.InfoQueryService;
 import com.uuola.txcms.base.service.InfoService;
 import com.uuola.txweb.framework.action.BaseAction;
 import com.uuola.txweb.framework.action.methods.QueryCallbackHandler;
+import com.uuola.txweb.framework.dto.PageDTO;
 import com.uuola.txweb.framework.query.BaseQuery;
 
 
@@ -34,6 +36,9 @@ public class InfoFrontAction extends BaseAction {
 
     @Autowired
     private InfoService infoService;
+    
+    @Autowired
+    private InfoQueryService infoQueryService;
     
     /**
      * 展示信息
@@ -70,5 +75,23 @@ public class InfoFrontAction extends BaseAction {
     @RequestMapping(value = "/viewnum/adjust", method = RequestMethod.GET)
     public void adjustViewNum(@RequestParam("id") Long id, @RequestParam("diff") Long diff){
         infoService.adjustViewNum(id, diff);
+    }
+    
+    /**
+     * 查询最近的信息集合
+     * @param query
+     * @return
+     */
+    @RequestMapping(value = "/api/fetch-latest", method = RequestMethod.GET)
+    public ModelAndView fetchLatestApi(InfoQuery query){
+        ModelAndView mv = queryAction(query, new QueryCallbackHandler<PageDTO>() {
+
+            @Override
+            public PageDTO doQuery(BaseQuery query) {
+                return infoQueryService.fetchRangeView(query);
+            }
+            
+        });
+        return assignViewName(mv, "fetchLatest");
     }
 }
