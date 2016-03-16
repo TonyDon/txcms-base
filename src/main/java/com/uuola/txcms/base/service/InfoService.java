@@ -39,4 +39,13 @@ public interface InfoService {
      */
     void adjustViewNum(Long id, Long diffNum);
 
+    /**
+     * 调整心情数
+     * @param id
+     * @param mood
+     * @param num
+     */
+    void adjustMood(Long id, String mood, Integer num);
+    
+
 }

@@ -33,4 +33,13 @@
     		</foreach>
     </select>
     
+    <select id="fetchContent" resultType="InfoContent" parameterType="InfoQuery">
+    	select 
+    		<include refid="cols"/> 
+    	from info_content t
+    	where info_id = #{id, jdbcType=BIGINT}
+    	and exists (select 1 from info_base 
+    	where id=t.info_id and is_delete=#{isDelete, jdbcType=TINYINT} and info_state=#{infoState, jdbcType=TINYINT})
+    </select>
+    
 </mapper>

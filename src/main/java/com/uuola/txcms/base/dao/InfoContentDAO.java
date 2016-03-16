@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.uuola.txcms.base.entity.InfoContent;
+import com.uuola.txcms.base.query.InfoQuery;
 import com.uuola.txweb.framework.dao.annotation.MapperNamespace;
 import com.uuola.txweb.framework.dao.support.TxWebDAO;
 
@@ -36,5 +37,9 @@ public class InfoContentDAO extends TxWebDAO<InfoContent> {
 
     public List<Long> fetchHavingContentIds(List<Long> infoIds) {
         return selectList("fetchHavingContentIds", infoIds);
+    }
+
+    public InfoContent fetchContent(InfoQuery query) {
+        return selectOne("fetchContent", query);
     }
 }

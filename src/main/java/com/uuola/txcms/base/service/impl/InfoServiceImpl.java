@@ -63,4 +63,12 @@ public class InfoServiceImpl implements InfoService {
         infoBaseDAO.adjustViewNum(id, diffNum);
     }
 
+    @Override
+    public void adjustMood(Long id, String mood, Integer num) {
+        if(null==id || null == mood || null==num || !(mood.equalsIgnoreCase("love") ||  mood.equalsIgnoreCase("hate"))){
+            return;
+        }
+        infoBaseDAO.adjustMoodNum(id, mood.toLowerCase(), num);
+    }
+
 }

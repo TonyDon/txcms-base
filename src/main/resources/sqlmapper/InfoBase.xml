@@ -108,4 +108,14 @@
     	where id = #{id, jdbcType=BIGINT} 
     </update>
     
+    <update id="adjustMoodNum" parameterType="java.util.Map">
+    	update info_base set 
+    		<if test="mood=='love'">
+    			love_num = love_num + (#{num, jdbcType=INTEGER})
+    		</if>
+	    	<if test="mood=='hate'">
+    			hate_num = hate_num + (#{num, jdbcType=INTEGER})
+    		</if>
+    	where id = #{id, jdbcType=BIGINT} 
+    </update>
 </mapper>

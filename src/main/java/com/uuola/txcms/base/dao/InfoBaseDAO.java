@@ -72,4 +72,12 @@ public class InfoBaseDAO extends TxWebDAO<InfoBase> {
     public List<InfoViewDTO> fetchRangeView(BaseQuery query) {
         return this.selectList("fetchRangeView", query);
     }
+
+    public void adjustMoodNum(Long id, String mood, Integer num) {
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("id", id);
+        params.put("mood", mood);
+        params.put("num", num);
+        this.updateByMapper("adjustMoodNum", params);
+    }
 }

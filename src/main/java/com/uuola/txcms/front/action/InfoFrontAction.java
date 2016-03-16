@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.txcms.base.dto.InfoDTO;
+import com.uuola.txcms.base.entity.InfoContent;
 import com.uuola.txcms.base.query.InfoQuery;
 import com.uuola.txcms.base.service.InfoQueryService;
 import com.uuola.txcms.base.service.InfoService;
@@ -93,5 +94,18 @@ public class InfoFrontAction extends BaseAction {
             
         });
         return assignViewName(mv, "fetchLatest");
+    }
+    
+    @RequestMapping(value = "/api/post-mood", method = RequestMethod.GET)
+    public void postMoodApi(@RequestParam("id") Long id, @RequestParam("mood") String mood){
+        infoService.adjustMood(id, mood, 1);
+    }
+    
+    @RequestMapping(value = "/api/view-cont", method = RequestMethod.GET)
+    public ModelAndView viewContentApi(@RequestParam("id") Long id){
+        InfoContent content = infoQueryService.fetchEffectContent(id);
+        ModelAndView mv = this.makeModelView("viewContent");
+        mv.addObject("infoConent", content);
+        return mv;
     }
 }

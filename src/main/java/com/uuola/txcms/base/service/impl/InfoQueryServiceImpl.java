@@ -17,10 +17,13 @@ import org.springframework.stereotype.Service;
 import com.uuola.commons.CollectionUtil;
 import com.uuola.txcms.base.dao.InfoBaseDAO;
 import com.uuola.txcms.base.dao.InfoContentDAO;
+import com.uuola.txcms.base.dict.INFO_STATE;
+import com.uuola.txcms.base.dict.TRUE_OR_FALSE;
 import com.uuola.txcms.base.dto.InfoDTO;
 import com.uuola.txcms.base.dto.InfoViewDTO;
 import com.uuola.txcms.base.entity.InfoBase;
 import com.uuola.txcms.base.entity.InfoContent;
+import com.uuola.txcms.base.query.InfoQuery;
 import com.uuola.txcms.base.service.InfoQueryService;
 import com.uuola.txcms.component.BooleanUtil;
 import com.uuola.txweb.framework.dao.support.TxWebTs;
@@ -77,6 +80,15 @@ public class InfoQueryServiceImpl implements InfoQueryService {
             }
         }
         return new PageDTO(list, -1);
+    }
+
+    @Override
+    public InfoContent fetchEffectContent(Long id) {
+        InfoQuery query = new InfoQuery();
+        query.setId(id);
+        query.setInfoState(INFO_STATE.PASS.value());
+        query.setIsDelete(TRUE_OR_FALSE.F.value());
+        return infoContentDAO.fetchContent(query);
     }
 
 }
