@@ -28,8 +28,7 @@ public class FileResourceWebAccessInterceptor extends HandlerInterceptorAdapter 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String hash = request.getParameter("frwahash");
         if(!WebResourceAccessUtil.checkHash(hash)){
-            response.setStatus(HTTP_STATUS_CODE.SC_FORBIDDEN);
-            response.getWriter().print("deny access.");
+            response.setStatus(HTTP_STATUS_CODE.SC_NOT_FOUND);
             return false;
         }
         return true;

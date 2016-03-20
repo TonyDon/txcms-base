@@ -96,7 +96,7 @@ public class InfoFrontAction extends BaseAction {
         return assignViewName(mv, "fetchLatest");
     }
     
-    @RequestMapping(value = "/api/post-mood", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/post-mood", method = RequestMethod.PUT)
     public void postMoodApi(@RequestParam("id") Long id, @RequestParam("mood") String mood){
         infoService.adjustMood(id, mood, 1);
     }
