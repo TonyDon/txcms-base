@@ -30,7 +30,7 @@ public class AjaxRequestSourceInterceptor extends HandlerInterceptorAdapter {
     
     private final String HEADER_REFERER = "Referer";
     private final String HEADER_X_REQUESTED_WITH = "X-Requested-With";
-
+    
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
