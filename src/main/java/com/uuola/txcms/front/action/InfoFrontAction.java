@@ -63,8 +63,8 @@ public class InfoFrontAction extends BaseAction {
      * 增加浏览次数
      * @param id
      */
-    @RequestMapping(value = "/viewnum/hit", method = RequestMethod.PUT)
-    public void hitViewNum(@RequestParam("id") Long id){
+    @RequestMapping(value = "/api/hit-viewnum", method = RequestMethod.PUT)
+    public void hitViewNumApi(@RequestParam("id") Long id){
         infoService.adjustViewNum(id, 1L);
     }
     
