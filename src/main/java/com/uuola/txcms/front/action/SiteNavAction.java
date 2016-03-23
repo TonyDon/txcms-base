@@ -30,4 +30,19 @@ public class SiteNavAction extends BaseAction {
     public ModelAndView latest(){
         return this.makeModelView("latest");
     }
+    
+    @RequestMapping(value = "/qiqu", method = RequestMethod.GET)
+    public ModelAndView qiqu(){
+        return this.makeModelView("qiqu");
+    }
+    
+    @RequestMapping(value = "/gaosiao", method = RequestMethod.GET)
+    public ModelAndView gaosiao(){
+        return this.makeModelView("gaosiao");
+    }
+    
+    @RequestMapping(value = "/xiaoyouxi", method = RequestMethod.GET)
+    public ModelAndView xiaoyouxi(){
+        return this.makeModelView("xiaoyouxi");
+    }
 }
