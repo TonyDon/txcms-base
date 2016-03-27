@@ -6,6 +6,8 @@
 
 package com.uuola.txcms.base.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,6 +90,12 @@ public class SiteCatServiceImpl implements SiteCatService {
             }
         }
         return effectNum;
+    }
+
+
+    @Override
+    public List<SiteCat> fetch(SiteCatQuery query) {
+        return siteCatDAO.find(query);
     }
     
 

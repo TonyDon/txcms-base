@@ -6,7 +6,10 @@
 
 package com.uuola.txcms.base.service;
 
+import java.util.List;
+
 import com.uuola.txcms.base.dto.SiteCatDTO;
+import com.uuola.txcms.base.entity.SiteCat;
 import com.uuola.txcms.base.query.SiteCatQuery;
 import com.uuola.txweb.framework.dto.PageDTO;
 
@@ -39,4 +42,10 @@ public interface SiteCatService {
      * @return
      */
     Integer delete(Long id);
+    
+    /**
+     * 获取所有类目
+     * @return
+     */
+    List<SiteCat> fetch(SiteCatQuery query);
 }

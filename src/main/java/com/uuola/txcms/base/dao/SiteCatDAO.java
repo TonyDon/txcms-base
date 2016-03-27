@@ -30,4 +30,8 @@ public class SiteCatDAO extends TxWebDAO<SiteCat> {
     public List<SiteCat> findByRange(SiteCatQuery query){
         return this.selectList("findByRange", query);
     }
+
+    public List<SiteCat> find(SiteCatQuery query) {
+        return this.selectList("findAll", query);
+    }
 }

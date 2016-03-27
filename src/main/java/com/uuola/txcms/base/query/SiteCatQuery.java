@@ -23,6 +23,9 @@ public class SiteCatQuery extends BaseQuery {
     // 父类目ID
     private Long rid;
     
+    // 状态
+    private Byte status;
+    
     @Override
     public void filter() {
         if (this.listSize > 100) {
@@ -41,6 +44,18 @@ public class SiteCatQuery extends BaseQuery {
     
     public void setRid(Long rid) {
         this.rid = rid;
+    }
+
+
+    
+    public Byte getStatus() {
+        return status;
+    }
+
+
+    
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
 }

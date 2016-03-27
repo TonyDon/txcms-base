@@ -6,6 +6,10 @@
 
 package com.uuola.txcms.manager.action;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.uuola.commons.JsonUtil;
+import com.uuola.commons.constant.CST_ENCODING;
+import com.uuola.commons.file.FileUtil;
+import com.uuola.txcms.base.dict.TRUE_OR_FALSE;
 import com.uuola.txcms.base.dto.SiteCatDTO;
+import com.uuola.txcms.base.entity.SiteCat;
 import com.uuola.txcms.base.query.SiteCatQuery;
 import com.uuola.txcms.base.service.SiteCatService;
 import com.uuola.txweb.framework.action.BaseAction;
@@ -22,6 +31,7 @@ import com.uuola.txweb.framework.action.methods.UpdateCallbackHandler;
 import com.uuola.txweb.framework.dto.PageDTO;
 import com.uuola.txweb.framework.dto.ValidateDTO;
 import com.uuola.txweb.framework.query.BaseQuery;
+import com.uuola.txweb.framework.utils.ContextUtil;
 
 
 /**
@@ -88,5 +98,19 @@ public class SiteCatAction extends BaseAction {
     public ModelAndView delete(@PathVariable("id") Long id) {
         Integer num = siteCatService.delete(id);
         return makeModelView("delete").addObject("num", num);
+    }
+    
+    /**
+     * 生成JSON类目数据
+     * @throws FileNotFoundException 
+     */
+    @RequestMapping(value = "/rebuild", method = RequestMethod.GET)
+    public void rebuild() throws FileNotFoundException{
+        SiteCatQuery query = new SiteCatQuery();
+        query.setStatus(TRUE_OR_FALSE.T.value());
+        List<SiteCat> list = siteCatService.fetch(query);
+        String json = JsonUtil.toJSONString(list);
+        File outJson = new File(ContextUtil.getRealPath("/static/js"), "cat.js");
+        FileUtil.writeStringToFile(outJson, "var SITE_CAT_LIST="+json+";", CST_ENCODING.UTF8);
     }
 }
