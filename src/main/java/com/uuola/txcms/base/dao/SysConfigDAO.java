@@ -34,4 +34,8 @@ public class SysConfigDAO extends TxWebDAO<SysConfig> {
     public Integer findCount(BaseQuery query){
         return this.selectOne("findCount", query);
     }
+
+    public SysConfig findByName(String name) {
+        return this.selectOne("findByName", name);
+    }
 }

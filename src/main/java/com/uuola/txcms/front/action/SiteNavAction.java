@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.uuola.txcms.component.ConfigUtil;
+import com.uuola.txcms.constants.CST_SYSCONFIG_NAME;
 import com.uuola.txweb.framework.action.BaseAction;
 
 
@@ -43,6 +45,8 @@ public class SiteNavAction extends BaseAction {
     
     @RequestMapping(value = "/xiaoyouxi", method = RequestMethod.GET)
     public ModelAndView xiaoyouxi(){
-        return this.makeModelView("xiaoyouxi");
+        ModelAndView mv = this.makeModelView("xiaoyouxi");
+        mv.addObject("topCid", ConfigUtil.getNumberVal(CST_SYSCONFIG_NAME.SITE_CONFIG_H5GAME_TOP_CID));
+        return mv;
     }
 }

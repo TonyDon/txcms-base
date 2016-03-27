@@ -35,4 +35,10 @@
 		order by id asc limit 0, #{listSize}
     </select>
     
+    <select id="findByName"  resultType="SysConfig" parameterType="java.lang.String">
+        select 
+        <include refid="sysConfigCols"/> 
+        from sys_config where name=#{name}
+    </select>
+    
 </mapper>

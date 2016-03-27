@@ -69,4 +69,9 @@ public class SysConfigServiceImpl implements SysConfigService {
         return sysConfigDAO.update(entity);
     }
 
+    @Override
+    public SysConfig findByName(String name) {
+        return sysConfigDAO.findByName(name);
+    }
+
 }

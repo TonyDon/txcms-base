@@ -34,4 +34,6 @@ public interface SysConfigService {
     SysConfig findById(Long id);
 
     Integer update(SysConfigDTO dto);
+    
+    SysConfig findByName(String name);
 }
