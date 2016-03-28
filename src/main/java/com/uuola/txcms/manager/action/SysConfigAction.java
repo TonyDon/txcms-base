@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +19,7 @@ import com.uuola.txcms.base.dto.SysConfigDTO;
 import com.uuola.txcms.base.entity.SysConfig;
 import com.uuola.txcms.base.query.SysConfigQuery;
 import com.uuola.txcms.base.service.SysConfigService;
+import com.uuola.txcms.component.WebResourceAccessUtil;
 import com.uuola.txweb.framework.action.BaseAction;
 import com.uuola.txweb.framework.action.methods.QueryCallbackHandler;
 import com.uuola.txweb.framework.action.methods.UpdateCallbackHandler;
@@ -104,4 +106,14 @@ public class SysConfigAction extends BaseAction {
         });
         return assignViewName(mv, "update");
     } 
+    
+    /**
+     * 刷新WEB资源方问token值
+     */
+    @RequestMapping(value = "/webtoken/refresh", method = RequestMethod.GET)
+    @ResponseBody
+    public String refreshwebToken(){
+        WebResourceAccessUtil.refresh();
+        return WebResourceAccessUtil.makeHash();
+    }
 }

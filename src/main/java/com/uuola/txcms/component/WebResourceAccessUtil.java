@@ -6,6 +6,7 @@
 
 package com.uuola.txcms.component;
 
+import com.uuola.txcms.constants.CST_SYSCONFIG_NAME;
 
 /**
  * <pre>
@@ -17,12 +18,21 @@ package com.uuola.txcms.component;
 public abstract class WebResourceAccessUtil {
     
     public final static String URL_HASH_PARAM_NAME = "frwahash";
+    
+    private static String token = "" ;
 
     public static String makeHash(){
-        return "bcbe3365e6ac95ea2c0343a2395834dd";
+        if(null == token || token.isEmpty()){
+            token = ConfigUtil.getTextVal(CST_SYSCONFIG_NAME.SITE_WEB_RESOURCE_ACCESS_TOKEN);
+        }
+        return token;
     }
     
     public static boolean checkHash(String hash){
-        return "bcbe3365e6ac95ea2c0343a2395834dd".equals(hash);
+        return token.equals(hash);
+    }
+    
+    public synchronized static void refresh(){
+        token = ConfigUtil.getTextVal(CST_SYSCONFIG_NAME.SITE_WEB_RESOURCE_ACCESS_TOKEN);
     }
 }

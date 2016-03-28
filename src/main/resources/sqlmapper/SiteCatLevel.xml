@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uuola.txcms.sqlmapper.SiteCatLevelMapper">
+
+	<sql id="cols"> 
+    	   id ,  
+           cat_id as catId, 
+           c1 , 
+           c2 , 
+           c3 , 
+           c4 
+    </sql>
+
+    <delete id="deleteAll">
+    	delete from site_cat_level
+    </delete>
+    
+</mapper>

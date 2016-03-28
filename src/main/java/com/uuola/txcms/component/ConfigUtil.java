@@ -12,12 +12,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+
 import com.uuola.commons.JsonUtil;
 import com.uuola.commons.exception.Assert;
 import com.uuola.txcms.base.dict.SYS_CONFIG_TYPE;
 import com.uuola.txcms.base.entity.SysConfig;
 import com.uuola.txcms.base.service.SysConfigService;
-import com.uuola.txweb.framework.utils.ContextUtil;
 
 /**
  * <pre>
@@ -26,7 +29,9 @@ import com.uuola.txweb.framework.utils.ContextUtil;
  * 创建日期: 2016年3月27日
  * </pre>
  */
-public class ConfigUtil {
+public class ConfigUtil implements ApplicationContextAware {
+    
+    private static ApplicationContext context;
 
     /**
      * 得到文本参数值
@@ -35,7 +40,7 @@ public class ConfigUtil {
      */
     public static String getTextVal(String name) {
         Assert.hasText(name);
-        SysConfigService service = ContextUtil.getBean(SysConfigService.class);
+        SysConfigService service = context.getBean(SysConfigService.class);
         SysConfig cfg = service.findByName(name);
         return null != cfg && SYS_CONFIG_TYPE.STRING.name().equalsIgnoreCase(cfg.getSysType()) ? 
                 cfg.getSysValue() : null;
@@ -48,7 +53,7 @@ public class ConfigUtil {
      */
     public static Number getNumberVal(String name) {
         Assert.hasText(name);
-        SysConfigService service = ContextUtil.getBean(SysConfigService.class);
+        SysConfigService service = context.getBean(SysConfigService.class);
         SysConfig cfg = service.findByName(name);
         return null != cfg && null != cfg.getSysValue()
                 && SYS_CONFIG_TYPE.NUMBER.name().equalsIgnoreCase(cfg.getSysType()) ? new BigDecimal(cfg.getSysValue())
@@ -62,7 +67,7 @@ public class ConfigUtil {
      */
     public static Boolean getBoolean(String name){
         Assert.hasText(name);
-        SysConfigService service = ContextUtil.getBean(SysConfigService.class);
+        SysConfigService service = context.getBean(SysConfigService.class);
         SysConfig cfg = service.findByName(name);
         return null != cfg && SYS_CONFIG_TYPE.BOOLEAN.name().equalsIgnoreCase(cfg.getSysType()) ? 
                 Boolean.valueOf(cfg.getSysValue()) : false;
@@ -76,7 +81,7 @@ public class ConfigUtil {
      */
     public static <T> List<T> getList(String name, Class<T> clazz){
         Assert.hasText(name);
-        SysConfigService service = ContextUtil.getBean(SysConfigService.class);
+        SysConfigService service = context.getBean(SysConfigService.class);
         SysConfig cfg = service.findByName(name);
         String gClazzName = clazz.getSimpleName();
         if(null != cfg && null != cfg.getSysValue() && SYS_CONFIG_TYPE.LIST.name().equalsIgnoreCase(cfg.getSysType()) && 
@@ -95,7 +100,7 @@ public class ConfigUtil {
     @SuppressWarnings("unchecked")
     public static <T> T[] getArray(String name, Class<T> clazz) {
         Assert.hasText(name);
-        SysConfigService service = ContextUtil.getBean(SysConfigService.class);
+        SysConfigService service = context.getBean(SysConfigService.class);
         SysConfig cfg = service.findByName(name);
         String gClazzName = clazz.getSimpleName();
         if (null != cfg && null != cfg.getSysValue() && SYS_CONFIG_TYPE.ARRAY.name().equalsIgnoreCase(cfg.getSysType())
@@ -114,12 +119,17 @@ public class ConfigUtil {
     @SuppressWarnings("rawtypes")
     public  static Map getMap(String name){
         Assert.hasText(name);
-        SysConfigService service = ContextUtil.getBean(SysConfigService.class);
+        SysConfigService service = context.getBean(SysConfigService.class);
         SysConfig cfg = service.findByName(name);
         if(null != cfg && null != cfg.getSysValue() && SYS_CONFIG_TYPE.MAP.name().equalsIgnoreCase(cfg.getSysType())){
             return JsonUtil.toJsonObject(cfg.getSysValue(), Map.class);
         }
         return Collections.emptyMap();
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        context = applicationContext;
     }
     
 

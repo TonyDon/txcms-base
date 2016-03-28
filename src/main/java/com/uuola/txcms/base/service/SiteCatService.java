@@ -48,4 +48,11 @@ public interface SiteCatService {
      * @return
      */
     List<SiteCat> fetch(SiteCatQuery query);
+    
+    /**
+     * 得到
+     * @param id
+     * @return
+     */
+    SiteCat fetchById(Long id);
 }

@@ -47,5 +47,7 @@
 			</list>
 		</constructor-arg>
 	</bean>
-
+	
+	<bean id="siteCatUtil" class="com.uuola.txcms.component.SiteCatUtil"/>
+	<bean id="configUtil" class="com.uuola.txcms.component.ConfigUtil"/>
 </beans>

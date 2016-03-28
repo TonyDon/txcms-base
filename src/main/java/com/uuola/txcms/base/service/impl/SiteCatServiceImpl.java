@@ -97,6 +97,12 @@ public class SiteCatServiceImpl implements SiteCatService {
     public List<SiteCat> fetch(SiteCatQuery query) {
         return siteCatDAO.find(query);
     }
+
+
+    @Override
+    public SiteCat fetchById(Long id) {
+        return siteCatDAO.get(id);
+    }
     
 
 }
