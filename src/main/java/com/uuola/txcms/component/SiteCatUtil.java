@@ -7,9 +7,9 @@
 package com.uuola.txcms.component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +37,7 @@ public class SiteCatUtil implements ApplicationContextAware, InitializingBean{
     
     private static Logger log = LoggerFactory.getLogger(SiteCatUtil.class);
     
-    private static ConcurrentHashMap<Long, SiteCat> cidCatholder = new ConcurrentHashMap<Long, SiteCat>();
+    private static Map<Long, SiteCat> cidCatholder = new HashMap<Long, SiteCat>();
     
     private static ApplicationContext context;
     
@@ -76,13 +76,7 @@ public class SiteCatUtil implements ApplicationContextAware, InitializingBean{
      * @return
      */
     public static SiteCat getSiteCat(Long cid){
-        SiteCat cat = cidCatholder.get(cid);
-        if(null == cat){
-            SiteCatService service = context.getBean(SiteCatService.class);
-            cat = service.fetchById(cid);
-            cidCatholder.putIfAbsent(cid, cat);
-        }
-        return cat;
+        return cidCatholder.get(cid);
     }
 
     /**
