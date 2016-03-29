@@ -64,8 +64,27 @@ public class InfoQueryServiceImpl implements InfoQueryService {
     }
 
     @Override
-    public PageDTO fetchRangeView(BaseQuery query) {
-        List<InfoViewDTO> list = infoBaseDAO.fetchRangeView(query);
+    public PageDTO fetchRangeLatestView(BaseQuery query) {
+        List<InfoViewDTO> list = infoBaseDAO.fetchRangeLatestView(query);
+        if(CollectionUtil.isNotEmpty(list)){
+            List<Long> ids = new ArrayList<Long>();
+            for(InfoViewDTO dto : list){
+                ids.add(dto.getId());
+            }
+            List<Long> hasContIds = infoContentDAO.fetchHavingContentIds(ids);
+            if(CollectionUtil.isNotEmpty(hasContIds)){
+                Set<Long> contIdSet = new HashSet<Long>(hasContIds);
+                for(InfoViewDTO dto : list){
+                    dto.setHasContent(BooleanUtil.getByte(contIdSet.contains(dto.getId())));
+                }
+            }
+        }
+        return new PageDTO(list, -1);
+    }
+    
+    @Override
+    public PageDTO fetchRangeCatView(BaseQuery query) {
+        List<InfoViewDTO> list = infoBaseDAO.fetchRangeCatView(query);
         if(CollectionUtil.isNotEmpty(list)){
             List<Long> ids = new ArrayList<Long>();
             for(InfoViewDTO dto : list){

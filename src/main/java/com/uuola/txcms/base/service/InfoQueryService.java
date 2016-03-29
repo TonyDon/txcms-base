@@ -40,7 +40,14 @@ public interface InfoQueryService {
      * @param query
      * @return
      */
-    PageDTO fetchRangeView(BaseQuery query);
+    PageDTO fetchRangeLatestView(BaseQuery query);
+    
+    /**
+     * 前端按类别分页查询 query.catPath需要设置 类别路径
+     * @param query
+     * @return
+     */
+    PageDTO fetchRangeCatView(BaseQuery query);
 
     /**
      * 查询信息正文内容

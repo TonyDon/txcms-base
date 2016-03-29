@@ -48,6 +48,7 @@ public class SiteCatUtil implements ApplicationContextAware, InitializingBean{
         SiteCatService service = context.getBean(SiteCatService.class);
         List<SiteCat> list = service.fetch(new SiteCatQuery());
         if(CollectionUtil.isNotEmpty(list)){
+            cidCatholder.clear();
             for(SiteCat cat : list){
                 cidCatholder.put(cat.getId(), cat);
             }

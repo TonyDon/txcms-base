@@ -15,9 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.txcms.base.dto.InfoDTO;
 import com.uuola.txcms.base.entity.InfoContent;
+import com.uuola.txcms.base.entity.SiteCat;
 import com.uuola.txcms.base.query.InfoQuery;
 import com.uuola.txcms.base.service.InfoQueryService;
 import com.uuola.txcms.base.service.InfoService;
+import com.uuola.txcms.component.SiteCatUtil;
 import com.uuola.txweb.framework.action.BaseAction;
 import com.uuola.txweb.framework.action.methods.QueryCallbackHandler;
 import com.uuola.txweb.framework.dto.PageDTO;
@@ -89,11 +91,37 @@ public class InfoFrontAction extends BaseAction {
 
             @Override
             public PageDTO doQuery(BaseQuery query) {
-                return infoQueryService.fetchRangeView(query);
+                return infoQueryService.fetchRangeLatestView(query);
             }
             
         });
         return assignViewName(mv, "fetchLatest");
+    }
+    
+    /**
+     * 按类别查询信息集合
+     * @param query
+     * @return
+     */
+    @RequestMapping(value = "/api/fetch-cat-list", method = RequestMethod.GET)
+    public ModelAndView fetchCatApi(InfoQuery query){
+        if(null == query.getCatId()){
+            return null;
+        }
+        SiteCat cat = SiteCatUtil.getSiteCat(query.getCatId());
+        if(null == cat){
+            return null;
+        }
+        query.setCatPath(cat.getCatPath());
+        ModelAndView mv = queryAction(query, new QueryCallbackHandler<PageDTO>() {
+
+            @Override
+            public PageDTO doQuery(BaseQuery query) {
+                return infoQueryService.fetchRangeCatView(query);
+            }
+            
+        });
+        return assignViewName(mv, "fetchCatList");
     }
     
     @RequestMapping(value = "/api/post-mood", method = RequestMethod.PUT)

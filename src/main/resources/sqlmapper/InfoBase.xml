@@ -23,6 +23,28 @@
     	hate_num as hateNum,
     	is_delete as isDelete
     </sql>
+    
+    <sql id="prefixCols"> 
+    	ib.id,
+    	ib.cat_id as catId,
+    	ib.title,
+    	ib.summary,
+    	ib.author_id as authorId,
+    	ib.create_time as createTime,
+    	ib.update_time as updateTime,
+    	ib.last_operator_id as lastOperatorId,
+    	ib.info_type as infoType,
+    	ib.has_pic as hasPic,
+    	ib.has_video as hasVideo,
+    	ib.pic_url as picUrl,
+    	ib.video_url as videoUrl,
+    	ib.site_url as siteUrl,
+    	ib.info_state as infoState,
+    	ib.view_num as viewNum,
+    	ib.love_num as loveNum,
+    	ib.hate_num as hateNum,
+    	ib.is_delete as isDelete
+    </sql>
 
     <select id="findById"  resultType="InfoBase" parameterType="Long">
         select 
@@ -72,13 +94,26 @@
 		
     </select>
     
-    <select id="fetchRangeView" resultType="InfoViewDTO" parameterType="InfoQuery">
+    <select id="fetchRangeLatestView" resultType="InfoViewDTO" parameterType="InfoQuery">
     	select 
     		<include refid="cols"/> 
     	from info_base 
     	where
     		info_state=1 and is_delete=0 
 	    	order by id desc 
+	    	limit #{crow}, #{listSize}
+    </select>
+    
+    <select id="fetchRangeCatView" resultType="InfoViewDTO" parameterType="InfoQuery">
+    	select 
+    		<include refid="prefixCols"/> 
+    	from info_base ib, site_cat sc
+    	where
+    		ib.info_state=1
+    		and ib.is_delete=0 
+    		and ib.cat_id=sc.id
+    		and sc.cat_path like #{catPath}
+	    	order by ib.id desc 
 	    	limit #{crow}, #{listSize}
     </select>
     

@@ -69,8 +69,12 @@ public class InfoBaseDAO extends TxWebDAO<InfoBase> {
         this.updateByMapper("adjustViewNum", params);
     }
 
-    public List<InfoViewDTO> fetchRangeView(BaseQuery query) {
-        return this.selectList("fetchRangeView", query);
+    public List<InfoViewDTO> fetchRangeLatestView(BaseQuery query) {
+        return this.selectList("fetchRangeLatestView", query);
+    }
+    
+    public List<InfoViewDTO> fetchRangeCatView(BaseQuery query) {
+        return this.selectList("fetchRangeCatView", query);
     }
 
     public void adjustMoodNum(Long id, String mood, Integer num) {

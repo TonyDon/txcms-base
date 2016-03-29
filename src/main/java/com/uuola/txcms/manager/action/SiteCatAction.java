@@ -108,6 +108,7 @@ public class SiteCatAction extends BaseAction {
      */
     @RequestMapping(value = "/rebuild", method = RequestMethod.GET)
     public void rebuild() throws FileNotFoundException {
+        SiteCatUtil.loadAllCat();
         List<SiteCat> cats = SiteCatUtil.getSiteCats();
         Map<String, SiteCat> cidCat = new HashMap<String, SiteCat>();
         for (SiteCat cat : cats) {

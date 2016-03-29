@@ -8,6 +8,7 @@ package com.uuola.txcms.base.query;
 
 import javax.validation.constraints.NotNull;
 
+import com.uuola.commons.constant.CST_CHAR;
 import com.uuola.txweb.framework.query.BaseQuery;
 
 
@@ -31,15 +32,22 @@ public class InfoQuery extends BaseQuery {
     
     private Byte infoState;
     
+    private Long catId;
+    
+    private String catPath;
+    
 
     @Override
     public void filter() {
         if(this.listSize>100){
             this.listSize = 100;
         }
+        if(null != this.catPath){
+            this.catPath = this.catPath.concat(CST_CHAR.STR_PERCENT);
+        }
     }
 
-
+    
     
     public Long getId() {
         return id;
@@ -91,6 +99,34 @@ public class InfoQuery extends BaseQuery {
     
     public void setInfoState(Byte infoState) {
         this.infoState = infoState;
+    }
+
+
+
+    
+    public String getCatPath() {
+        return catPath;
+    }
+
+
+
+    
+    public void setCatPath(String catPath) {
+        this.catPath = catPath;
+    }
+
+
+
+    
+    public Long getCatId() {
+        return catId;
+    }
+
+
+
+    
+    public void setCatId(Long catId) {
+        this.catId = catId;
     }
 
 }
