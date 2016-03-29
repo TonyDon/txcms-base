@@ -8,7 +8,9 @@ package com.uuola.txcms.manager.action;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.uuola.commons.JsonUtil;
 import com.uuola.commons.constant.CST_ENCODING;
 import com.uuola.commons.file.FileUtil;
-import com.uuola.txcms.base.dict.TRUE_OR_FALSE;
 import com.uuola.txcms.base.dto.SiteCatDTO;
 import com.uuola.txcms.base.entity.SiteCat;
 import com.uuola.txcms.base.query.SiteCatQuery;
 import com.uuola.txcms.base.service.SiteCatService;
+import com.uuola.txcms.component.SiteCatUtil;
 import com.uuola.txweb.framework.action.BaseAction;
 import com.uuola.txweb.framework.action.methods.QueryCallbackHandler;
 import com.uuola.txweb.framework.action.methods.UpdateCallbackHandler;
@@ -105,12 +107,14 @@ public class SiteCatAction extends BaseAction {
      * @throws FileNotFoundException 
      */
     @RequestMapping(value = "/rebuild", method = RequestMethod.GET)
-    public void rebuild() throws FileNotFoundException{
-        SiteCatQuery query = new SiteCatQuery();
-        query.setStatus(TRUE_OR_FALSE.T.value());
-        List<SiteCat> list = siteCatService.fetch(query);
-        String json = JsonUtil.toJSONString(list);
+    public void rebuild() throws FileNotFoundException {
+        List<SiteCat> cats = SiteCatUtil.getSiteCats();
+        Map<String, SiteCat> cidCat = new HashMap<String, SiteCat>();
+        for (SiteCat cat : cats) {
+            cidCat.put("c" + cat.getId(), cat);
+        }
+        String json = JsonUtil.toJSONString(cidCat);
         File outJson = new File(ContextUtil.getRealPath("/static/js"), "cat.js");
-        FileUtil.writeStringToFile(outJson, "var SITE_CAT_LIST="+json+";", CST_ENCODING.UTF8);
+        FileUtil.writeStringToFile(outJson, "var SITE_CAT_LIST=" + json + ";", CST_ENCODING.UTF8);
     }
 }

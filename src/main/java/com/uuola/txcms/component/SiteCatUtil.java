@@ -6,11 +6,14 @@
 
 package com.uuola.txcms.component;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
@@ -50,6 +53,20 @@ public class SiteCatUtil implements ApplicationContextAware, InitializingBean{
             }
         }
         log.warn("SiteCatUtil.loadAllCat() invoked.");
+    }
+    
+    /**
+     * 得到生效类目集合
+     * @return
+     */
+    public static List<SiteCat> getSiteCats(){
+        List<SiteCat> cats = new ArrayList<SiteCat>();
+        for(Map.Entry<Long, SiteCat> e : cidCatholder.entrySet()){
+            SiteCat c = new SiteCat();
+            BeanUtils.copyProperties(e.getValue(), c);
+            cats.add(c);
+        }
+        return cats;
     }
     
     /**
