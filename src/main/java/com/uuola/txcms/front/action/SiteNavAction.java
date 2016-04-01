@@ -35,18 +35,22 @@ public class SiteNavAction extends BaseAction {
     
     @RequestMapping(value = "/qiqu", method = RequestMethod.GET)
     public ModelAndView qiqu(){
-        return this.makeModelView("qiqu");
+        ModelAndView mv = this.makeModelView("qiqu");
+        mv.addObject("topCid", ConfigUtil.getNumberVal(CST_SYSCONFIG_NAME.SITE_CONFIG_QIQU_CID));
+        return mv;
     }
     
     @RequestMapping(value = "/gaosiao", method = RequestMethod.GET)
     public ModelAndView gaosiao(){
-        return this.makeModelView("gaosiao");
+        ModelAndView mv = this.makeModelView("gaosiao");
+        mv.addObject("topCid", ConfigUtil.getNumberVal(CST_SYSCONFIG_NAME.SITE_CONFIG_GAOSIAO_CID));
+        return mv;
     }
     
     @RequestMapping(value = "/xiaoyouxi", method = RequestMethod.GET)
     public ModelAndView xiaoyouxi(){
         ModelAndView mv = this.makeModelView("xiaoyouxi");
-        mv.addObject("topCid", ConfigUtil.getNumberVal(CST_SYSCONFIG_NAME.SITE_CONFIG_H5GAME_TOP_CID));
+        mv.addObject("topCid", ConfigUtil.getNumberVal(CST_SYSCONFIG_NAME.SITE_CONFIG_H5GAME_CID));
         return mv;
     }
 }
