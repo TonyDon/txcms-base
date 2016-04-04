@@ -72,7 +72,7 @@ public class RecordPostAction extends BaseAction {
         info.setInfoState(INFO_STATE.WAIT_AUDIT.value());
         info.setLoveNum((long) NumberUtil.genRndInt(50, 100));
         info.setHateNum((long) NumberUtil.genRndInt(10, 20));
-        info.setViewNum((long) NumberUtil.genRndInt(100, 500));
+        info.setViewNum((long) NumberUtil.genRndInt(100, 300));
         
         if(StringUtil.isNotEmpty(record.getContent())){
             info.setContent(record.getContent());
