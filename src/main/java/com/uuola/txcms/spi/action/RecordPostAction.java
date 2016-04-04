@@ -70,9 +70,9 @@ public class RecordPostAction extends BaseAction {
         info.setHasVideo(TRUE_OR_FALSE.F.value());
         info.setCatId(record.getCatId());
         info.setInfoState(INFO_STATE.WAIT_AUDIT.value());
-        info.setLoveNum((long) NumberUtil.genRndInt(50, 200));
+        info.setLoveNum((long) NumberUtil.genRndInt(50, 100));
         info.setHateNum((long) NumberUtil.genRndInt(10, 20));
-        info.setViewNum((long) NumberUtil.genRndInt(500, 2000));
+        info.setViewNum((long) NumberUtil.genRndInt(200, 1000));
         
         if(StringUtil.isNotEmpty(record.getContent())){
             info.setContent(record.getContent());
