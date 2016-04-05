@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.commons.CollectionUtil;
@@ -22,8 +23,11 @@ import com.uuola.txcms.base.dict.INFO_TYPE;
 import com.uuola.txcms.base.dict.TRUE_OR_FALSE;
 import com.uuola.txcms.base.dto.InfoPostDTO;
 import com.uuola.txcms.base.service.InfoPostService;
+import com.uuola.txcms.component.ConfigUtil;
+import com.uuola.txcms.constants.CST_SYSCONFIG_NAME;
 import com.uuola.txcms.spi.dto.InfoRecord;
 import com.uuola.txweb.framework.action.BaseAction;
+import com.uuola.txweb.framework.action.IConstant;
 import com.uuola.txweb.framework.action.methods.UpdateCallbackHandler;
 import com.uuola.txweb.framework.dto.ValidateDTO;
 
@@ -44,7 +48,12 @@ public class RecordPostAction extends BaseAction {
     
     @RequestMapping(value="/post", method=RequestMethod.POST)
     @ResponseBody
-    public ModelAndView post(@RequestBody InfoRecord record) {
+    public ModelAndView post(@RequestBody InfoRecord record, WebRequest request) {
+        String accessToken = request.getHeader("AccessToken");
+        if(!ConfigUtil.getTextVal(CST_SYSCONFIG_NAME.SITE_CRAWLER_ACCESS_TOKEN).equals(accessToken)){
+            ModelAndView mv = new ModelAndView();
+            return mv.addObject(IConstant.UPDATE_RESULT_ATTR, false);
+        }
         InfoPostDTO infoDTO = makeInitInfoDTO(record);
         ModelAndView mv = updateAction(infoDTO, new UpdateCallbackHandler<Boolean>() {
             @Override
@@ -70,9 +79,9 @@ public class RecordPostAction extends BaseAction {
         info.setHasVideo(TRUE_OR_FALSE.F.value());
         info.setCatId(record.getCatId());
         info.setInfoState(INFO_STATE.WAIT_AUDIT.value());
-        info.setLoveNum((long) NumberUtil.genRndInt(50, 100));
+        info.setLoveNum((long) NumberUtil.genRndInt(20, 50));
         info.setHateNum((long) NumberUtil.genRndInt(10, 20));
-        info.setViewNum((long) NumberUtil.genRndInt(100, 300));
+        info.setViewNum((long) NumberUtil.genRndInt(80, 200));
         
         if(StringUtil.isNotEmpty(record.getContent())){
             info.setContent(record.getContent());

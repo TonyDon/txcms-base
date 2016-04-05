@@ -35,4 +35,9 @@ public abstract class CST_SYSCONFIG_NAME {
      * web资源访问token
      */
     public static final String SITE_WEB_RESOURCE_ACCESS_TOKEN ="site.web.resource.access.token";
+    
+    /**
+     * crawler token
+     */
+    public static final String SITE_CRAWLER_ACCESS_TOKEN = "site.crawler.access.token";
 }
