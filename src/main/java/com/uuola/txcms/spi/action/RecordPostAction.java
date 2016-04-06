@@ -61,6 +61,7 @@ public class RecordPostAction extends BaseAction {
                 try {
                     infoPostService.save((InfoPostDTO) infoPostDTO);
                 } catch (Exception e) {
+                    log.error("", e);
                     return false;
                 }
                 return true;
@@ -82,7 +83,6 @@ public class RecordPostAction extends BaseAction {
         info.setLoveNum((long) NumberUtil.genRndInt(10, 30));
         info.setHateNum((long) NumberUtil.genRndInt(5, 10));
         info.setViewNum((long) NumberUtil.genRndInt(80, 100));
-        
         if(StringUtil.isNotEmpty(record.getContent())){
             info.setContent(record.getContent());
         }
