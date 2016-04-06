@@ -79,9 +79,9 @@ public class RecordPostAction extends BaseAction {
         info.setHasVideo(TRUE_OR_FALSE.F.value());
         info.setCatId(record.getCatId());
         info.setInfoState(INFO_STATE.WAIT_AUDIT.value());
-        info.setLoveNum((long) NumberUtil.genRndInt(20, 50));
-        info.setHateNum((long) NumberUtil.genRndInt(10, 20));
-        info.setViewNum((long) NumberUtil.genRndInt(80, 200));
+        info.setLoveNum((long) NumberUtil.genRndInt(10, 30));
+        info.setHateNum((long) NumberUtil.genRndInt(5, 10));
+        info.setViewNum((long) NumberUtil.genRndInt(80, 100));
         
         if(StringUtil.isNotEmpty(record.getContent())){
             info.setContent(record.getContent());
@@ -96,6 +96,9 @@ public class RecordPostAction extends BaseAction {
         if(StringUtil.isNotEmpty(record.getVideoUrl())){
             info.setVideoUrl(record.getVideoUrl());
             info.setHasVideo(TRUE_OR_FALSE.T.value());
+        }
+        if(StringUtil.isNotEmpty(record.getSrcUrl())){
+            info.setSiteUrl(record.getSrcUrl());
         }
         
         return info;
