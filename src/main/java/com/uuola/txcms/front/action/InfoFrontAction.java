@@ -6,6 +6,8 @@
 
 package com.uuola.txcms.front.action;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.uuola.commons.CollectionUtil;
+import com.uuola.commons.NumberUtil;
 import com.uuola.txcms.base.dto.InfoDTO;
 import com.uuola.txcms.base.entity.InfoContent;
 import com.uuola.txcms.base.entity.SiteCat;
@@ -134,6 +138,26 @@ public class InfoFrontAction extends BaseAction {
         InfoContent content = infoQueryService.fetchEffectContent(id);
         ModelAndView mv = this.makeModelView("viewContent");
         mv.addObject("infoConent", content);
+        return mv;
+    }
+    
+    @RequestMapping(value = "/api/rand-pick", method = RequestMethod.GET)
+    public ModelAndView randPickApi(@RequestParam("cid") Long cid){
+        List<Long> ids = infoQueryService.fetchRandRelatedIds(cid);
+        Long retId = null;
+        if(CollectionUtil.isNotEmpty(ids)){
+            retId = ids.get(NumberUtil.genRndInt(0, ids.size()));
+        }
+        ModelAndView mv = this.makeModelView("randPick");
+        mv.addObject("id", retId);
+        return mv;
+    }
+    
+    @RequestMapping(value = "/api/go-pick", method = RequestMethod.GET)
+    public ModelAndView goPickApi(@RequestParam("id") Long id, @RequestParam("cid") Long cid, @RequestParam("direct") Integer direct){
+        Long retId = infoQueryService.fetchSidesId(id, cid, direct);
+        ModelAndView mv = this.makeModelView("goPick");
+        mv.addObject("id", retId);
         return mv;
     }
 }

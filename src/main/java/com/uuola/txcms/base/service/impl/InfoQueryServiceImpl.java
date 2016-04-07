@@ -7,6 +7,7 @@
 package com.uuola.txcms.base.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.uuola.commons.CollectionUtil;
+import com.uuola.commons.NumberUtil;
 import com.uuola.txcms.base.dao.InfoBaseDAO;
 import com.uuola.txcms.base.dao.InfoContentDAO;
 import com.uuola.txcms.base.dict.INFO_STATE;
@@ -108,6 +110,29 @@ public class InfoQueryServiceImpl implements InfoQueryService {
         query.setInfoState(INFO_STATE.PASS.value());
         query.setIsDelete(TRUE_OR_FALSE.F.value());
         return infoContentDAO.fetchContent(query);
+    }
+    
+    @Override
+    public List<Long> fetchRandRelatedIds(Long catId) {
+        if(null == catId){
+            return Collections.emptyList();
+        }
+        Integer max = infoBaseDAO.findCountByCatId(catId);
+        return infoBaseDAO.findIdsByRange(catId, NumberUtil.genRndInt(0, max), NumberUtil.genRndInt(3, 10));
+    }
+
+    @Override
+    public Long fetchSidesId(Long id, Long catId, Integer direct) {
+        if(null == id || null == catId || null == direct){
+            return null;
+        }
+        Long retId = null ;
+        if(direct == 1){ //靠前的一条
+            retId = infoBaseDAO.findNextId(id, catId);
+        }else{ //靠后的一条
+            retId = infoBaseDAO.findPrevId(id, catId);
+        }
+        return retId;
     }
 
 }

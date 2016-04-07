@@ -6,6 +6,8 @@
 
 package com.uuola.txcms.base.service;
 
+import java.util.List;
+
 import com.uuola.txcms.base.dto.InfoDTO;
 import com.uuola.txcms.base.entity.InfoContent;
 import com.uuola.txweb.framework.dto.PageDTO;
@@ -55,5 +57,20 @@ public interface InfoQueryService {
      * @return
      */
     InfoContent fetchEffectContent(Long id);
+    
+    /**
+     * 通过传入的catId，返回相关联的随机信息ID
+     * @param id
+     * @return
+     */
+    List<Long> fetchRandRelatedIds(Long catId);
 
+    /**
+     * 找当前信息的前一条或后一条记录ID
+     * @param id
+     * @param catId
+     * @param direct
+     * @return
+     */
+    Long fetchSidesId(Long id, Long catId, Integer direct);
 }

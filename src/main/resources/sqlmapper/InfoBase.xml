@@ -117,6 +117,32 @@
 	    	limit #{crow}, #{listSize}
     </select>
     
+    <select id="findCatId" resultType="java.lang.Long" parameterType="java.lang.Long">
+    	select cat_id from info_base where id = #{id}
+    </select>
+    
+    <select id="findCountByCatId" resultType="java.lang.Integer" parameterType="java.lang.Long">
+    	select count(*) from info_base where cat_id=#{catId} and is_delete=0 and info_state=1 
+    </select>
+    
+    <select id="findIdsByRange" resultType="java.lang.Long" parameterType="java.util.Map">
+    	select id from info_base 
+    	where cat_id=#{catId}  and is_delete=0 and info_state=1 
+    	limit #{currRow} , #{listSize}
+    </select>
+    
+    <select id="findNextId" resultType="java.lang.Long" parameterType="java.util.Map">
+    	select id from info_base 
+    	where cat_id=#{catId}  and is_delete=0 and info_state=1 and id <![CDATA[>]]>#{id}
+    	order by id asc limit 0 , 1
+    </select>
+    
+    <select id="findPrevId" resultType="java.lang.Long" parameterType="java.util.Map">
+    	select id from info_base 
+    	where cat_id=#{catId}  and is_delete=0 and info_state=1 and id <![CDATA[<]]>#{id}
+    	order by id desc limit 0 , 1
+    </select>
+    
     <update id="markDelete" parameterType="java.util.Map">
     	update info_base set
     	    is_delete=1 ,

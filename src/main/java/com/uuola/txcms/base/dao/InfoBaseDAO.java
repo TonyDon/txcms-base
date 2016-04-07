@@ -53,7 +53,37 @@ public class InfoBaseDAO extends TxWebDAO<InfoBase> {
     public InfoBase findEffective(Long id){
         return this.selectOne("findEffective", id);
     }
+    
+    public Long findCatId(Long id){
+        return this.selectOne("findCatId", id);
+    }
+    
+    public Integer findCountByCatId(Long catId){
+        return this.selectOne("findCountByCatId", catId);
+    }
+    
+    public List<Long> findIdsByRange(Long catId, Integer currRow, Integer listSize){
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("catId", catId);
+        params.put("currRow", currRow);
+        params.put("listSize", listSize);
+        return this.selectList("findIdsByRange", params);
+    }
 
+    public Long findNextId(Long id, Long catId) {
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("id", id);
+        params.put("catId", catId);
+        return this.selectOne("findNextId", params);
+    }
+    
+    public Long findPrevId(Long id, Long catId) {
+        Map<String,Object> params = new HashMap<String, Object>();
+        params.put("id", id);
+        params.put("catId", catId);
+        return this.selectOne("findPrevId", params);
+    }
+    
     public Integer updateInfoState(List<Long> ids, Byte state) {
         Map<String,Object> params = new HashMap<String, Object>();
         params.put("ids", ids);
@@ -84,4 +114,6 @@ public class InfoBaseDAO extends TxWebDAO<InfoBase> {
         params.put("num", num);
         this.updateByMapper("adjustMoodNum", params);
     }
+
+   
 }
