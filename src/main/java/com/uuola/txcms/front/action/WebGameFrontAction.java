@@ -42,14 +42,7 @@ public class WebGameFrontAction extends BaseAction {
      */
     @RequestMapping(value="/show", method=RequestMethod.GET)
     public ModelAndView show(InfoQuery query){
-        ModelAndView mv = queryAction(query, new QueryCallbackHandler<InfoDTO>() {
-
-            @Override
-            public InfoDTO doQuery(BaseQuery query) {
-                return infoService.fetchEffective(((InfoQuery)query).getId());
-            }
-            
-        });
+        ModelAndView mv = fetchEffectInfo(query);
         return assignViewName(mv, "show");
     }
     
@@ -60,6 +53,12 @@ public class WebGameFrontAction extends BaseAction {
      */
     @RequestMapping(value="/play", method=RequestMethod.GET)
     public ModelAndView play(InfoQuery query){
+        ModelAndView mv = fetchEffectInfo(query);
+        mv.addObject(WebResourceAccessUtil.URL_HASH_PARAM_NAME, WebResourceAccessUtil.makeHash());
+        return assignViewName(mv, "play");
+    }
+    
+    private ModelAndView fetchEffectInfo(InfoQuery query){
         ModelAndView mv = queryAction(query, new QueryCallbackHandler<InfoDTO>() {
 
             @Override
@@ -68,7 +67,6 @@ public class WebGameFrontAction extends BaseAction {
             }
             
         });
-        mv.addObject(WebResourceAccessUtil.URL_HASH_PARAM_NAME, WebResourceAccessUtil.makeHash());
-        return assignViewName(mv, "play");
+        return mv;
     }
 }

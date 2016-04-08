@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,18 +53,32 @@ public class InfoFrontAction extends BaseAction {
      * @param query
      * @return
      */
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ModelAndView viewPath(@PathVariable("id") Long id) {
+        if (null == id) {
+            return null;
+        }
+        return viewRequest(id);
+    }
+    
     @RequestMapping(value = "/view", method = RequestMethod.GET)
-    public ModelAndView view(InfoQuery query){
+    public ModelAndView viewRequest(@RequestParam("id") Long id) {
+        if (null == id) {
+            return null;
+        }
+        InfoQuery query = new InfoQuery();
+        query.setId(id);
         ModelAndView mv = queryAction(query, new QueryCallbackHandler<InfoDTO>() {
 
             @Override
             public InfoDTO doQuery(BaseQuery query) {
-                return infoService.fetchEffective(((InfoQuery)query).getId());
+                return infoService.fetchEffective(((InfoQuery) query).getId());
             }
-            
+
         });
         return assignViewName(mv, "view");
     }
+
     
     /**
      * 增加浏览次数
