@@ -72,7 +72,7 @@ public class RecordPostAction extends BaseAction {
 
     private InfoPostDTO makeInitInfoDTO(InfoRecord record) {
         InfoPostDTO info = new InfoPostDTO();
-        info.setAuthorId(10004L);
+        info.setAuthorId(10005L);
         info.setTitle(record.getTitle());
         info.setSummary(record.getSummary());
         info.setInfoType(INFO_TYPE.CONTENT.value());
@@ -82,7 +82,7 @@ public class RecordPostAction extends BaseAction {
         info.setInfoState(INFO_STATE.WAIT_AUDIT.value());
         info.setLoveNum((long) NumberUtil.genRndInt(10, 30));
         info.setHateNum((long) NumberUtil.genRndInt(5, 10));
-        info.setViewNum((long) NumberUtil.genRndInt(80, 100));
+        info.setViewNum((long) NumberUtil.genRndInt(50, 100));
         if(StringUtil.isNotEmpty(record.getContent())){
             info.setContent(record.getContent());
         }
