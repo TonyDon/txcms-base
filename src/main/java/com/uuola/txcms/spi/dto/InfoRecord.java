@@ -33,6 +33,8 @@ public class InfoRecord {
     private List<String> remoteImgUrls;
     
     private String videoUrl;
+    
+    private Long authorId;
 
     
     public String getSrcUrl() {
@@ -114,6 +116,18 @@ public class InfoRecord {
     
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
+    }
+
+
+    
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+
+    
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 
 

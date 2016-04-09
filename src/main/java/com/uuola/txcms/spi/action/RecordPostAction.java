@@ -72,7 +72,7 @@ public class RecordPostAction extends BaseAction {
 
     private InfoPostDTO makeInitInfoDTO(InfoRecord record) {
         InfoPostDTO info = new InfoPostDTO();
-        info.setAuthorId(10005L);
+        info.setAuthorId(null == record.getAuthorId() ? 10004L : record.getAuthorId());
         info.setTitle(record.getTitle());
         info.setSummary(record.getSummary());
         info.setInfoType(INFO_TYPE.CONTENT.value());
@@ -83,24 +83,21 @@ public class RecordPostAction extends BaseAction {
         info.setLoveNum((long) NumberUtil.genRndInt(10, 30));
         info.setHateNum((long) NumberUtil.genRndInt(5, 10));
         info.setViewNum((long) NumberUtil.genRndInt(50, 100));
-        if(StringUtil.isNotEmpty(record.getContent())){
+        if (StringUtil.isNotEmpty(record.getContent())) {
             info.setContent(record.getContent());
         }
-        if(CollectionUtil.isNotEmpty(record.getRemoteImgUrls())){
+        if (CollectionUtil.isNotEmpty(record.getRemoteImgUrls())) {
             info.setPicUrl(record.getRemoteImgUrls().get(0));
             info.setHasPic(TRUE_OR_FALSE.T.value());
-            if(record.getRemoteImgUrls().size()>1){
-                //TODO add content html
-            }
         }
-        if(StringUtil.isNotEmpty(record.getVideoUrl())){
+        if (StringUtil.isNotEmpty(record.getVideoUrl())) {
             info.setVideoUrl(record.getVideoUrl());
             info.setHasVideo(TRUE_OR_FALSE.T.value());
         }
-        if(StringUtil.isNotEmpty(record.getSrcUrl())){
+        if (StringUtil.isNotEmpty(record.getSrcUrl())) {
             info.setSiteUrl(record.getSrcUrl());
         }
-        
+
         return info;
     }
 }
