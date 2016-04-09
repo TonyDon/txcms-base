@@ -18,7 +18,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.commons.CollectionUtil;
 import com.uuola.commons.NumberUtil;
+import com.uuola.txcms.base.dict.INFO_TYPE;
 import com.uuola.txcms.base.dto.InfoDTO;
+import com.uuola.txcms.base.entity.InfoBase;
 import com.uuola.txcms.base.entity.InfoContent;
 import com.uuola.txcms.base.entity.SiteCat;
 import com.uuola.txcms.base.query.InfoQuery;
@@ -76,7 +78,13 @@ public class InfoFrontAction extends BaseAction {
             }
 
         });
-        return assignViewName(mv, "view");
+        assignViewName(mv, "view");
+        InfoDTO infoDTO = (InfoDTO)mv.getModel().get("infoDTO");
+        InfoBase ib = infoDTO.getInfoBase();
+        if(null != ib && INFO_TYPE.REDIRECT.value().equals(ib.getInfoType())){
+           mv.setViewName("redirect:"+ib.getSiteUrl());
+        }
+        return mv;
     }
 
     
