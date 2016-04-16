@@ -66,6 +66,10 @@ public class VersionUtil implements InitializingBean {
         return systemVersion;
     }
     
+    public static String getStartupTime(){
+        return startupTime;
+    }
+    
     @Override
     public void afterPropertiesSet() throws Exception {
         setStartupTime();
