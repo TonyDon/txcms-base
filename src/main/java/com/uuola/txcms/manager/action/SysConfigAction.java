@@ -19,6 +19,7 @@ import com.uuola.txcms.base.dto.SysConfigDTO;
 import com.uuola.txcms.base.entity.SysConfig;
 import com.uuola.txcms.base.query.SysConfigQuery;
 import com.uuola.txcms.base.service.SysConfigService;
+import com.uuola.txcms.component.VersionUtil;
 import com.uuola.txcms.component.WebResourceAccessUtil;
 import com.uuola.txweb.framework.action.BaseAction;
 import com.uuola.txweb.framework.action.methods.QueryCallbackHandler;
@@ -115,5 +116,15 @@ public class SysConfigAction extends BaseAction {
     public String refreshwebToken(){
         WebResourceAccessUtil.refresh();
         return WebResourceAccessUtil.makeHash();
+    }
+    
+    /**
+     * 刷新Version信息
+     */
+    @RequestMapping(value = "/version/refresh", method = RequestMethod.GET)
+    @ResponseBody
+    public String refreshVersion(){
+        VersionUtil.load();
+        return VersionUtil.getSysVer()+ " " +VersionUtil.getSrcVer();
     }
 }

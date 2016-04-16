@@ -40,4 +40,14 @@ public abstract class CST_SYSCONFIG_NAME {
      * crawler token
      */
     public static final String SITE_CRAWLER_ACCESS_TOKEN = "site.crawler.access.token";
+    
+    /**
+     * 站点资源版本设置
+     */
+    public static final String SITE_RESOURCE_VERSION = "site.resource.version";
+    
+    /**
+     * 系统版本设置
+     */
+    public static final String SITE_SYSTEM_VERSION = "site.system.version";
 }
