@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.txcms.base.entity.UserInfo;
 import com.uuola.txcms.component.SessionUtil;
+import com.uuola.txcms.component.VersionUtil;
 import com.uuola.txweb.framework.action.BaseAction;
 
 
@@ -52,5 +53,14 @@ public class ConsoleAction extends BaseAction {
             return user.getName();
         }
         return "error";
+    }
+    
+    @RequestMapping(value="/system_version", method=RequestMethod.GET)
+    @ResponseBody
+    public Object systemVersion() {
+        String sysVer = VersionUtil.getSysVer();
+        String srcVer = VersionUtil.getSrcVer();
+        String startTime = VersionUtil.getStartupTime();
+        return sysVer+"-"+srcVer+"-"+startTime;
     }
 }

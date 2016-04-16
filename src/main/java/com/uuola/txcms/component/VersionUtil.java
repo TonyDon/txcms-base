@@ -55,7 +55,7 @@ public class VersionUtil implements InitializingBean {
     }
     
     public static void setStartupTime(){
-        startupTime = DateUtil.formatDate(new Date(), CST_DATE_FORMAT.YYYY_MM_DD_HH_MM_SS);
+        startupTime = DateUtil.formatDate(new Date(), CST_DATE_FORMAT.YYYYMMDDHHMMSSSSS);
     }
     
     public static String getSrcVer(){
