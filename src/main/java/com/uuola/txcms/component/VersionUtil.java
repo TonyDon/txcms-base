@@ -6,10 +6,14 @@
 
 package com.uuola.txcms.component;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 
+import com.uuola.commons.DateUtil;
+import com.uuola.commons.constant.CST_DATE_FORMAT;
 import com.uuola.txcms.constants.CST_SYSCONFIG_NAME;
 
 
@@ -31,6 +35,8 @@ public class VersionUtil implements InitializingBean {
      */
     private static String sourceVersion ;
     
+    private static String startupTime;
+    
     /**
      * 加载所有类目信息
      */
@@ -45,7 +51,11 @@ public class VersionUtil implements InitializingBean {
         if(null != sysVer){
             systemVersion = sysVer;
         }
-        log.info("-- SystemVer:"+systemVersion+ " sourceVer:" + sourceVersion);
+        log.warn("-- SystemVer:"+systemVersion+ " sourceVer:" + sourceVersion + " time:" + startupTime);
+    }
+    
+    public static void setStartupTime(){
+        startupTime = DateUtil.formatDate(new Date(), CST_DATE_FORMAT.YYYY_MM_DD_HH_MM_SS);
     }
     
     public static String getSrcVer(){
@@ -58,6 +68,7 @@ public class VersionUtil implements InitializingBean {
     
     @Override
     public void afterPropertiesSet() throws Exception {
+        setStartupTime();
         load();
     }
 
