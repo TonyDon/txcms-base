@@ -50,4 +50,9 @@ public abstract class CST_SYSCONFIG_NAME {
      * 系统版本设置
      */
     public static final String SITE_SYSTEM_VERSION = "site.system.version";
+    
+    /**
+     * 文件存储域名
+     */
+    public static final String SITE_STORE_FILE_DOMAIN = "site.store.file.domain";
 }

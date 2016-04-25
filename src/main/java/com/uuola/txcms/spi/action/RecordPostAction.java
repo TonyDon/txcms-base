@@ -80,9 +80,9 @@ public class RecordPostAction extends BaseAction {
         info.setHasVideo(TRUE_OR_FALSE.F.value());
         info.setCatId(record.getCatId());
         info.setInfoState(INFO_STATE.WAIT_AUDIT.value());
-        info.setLoveNum((long) NumberUtil.genRndInt(10, 20));
+        info.setLoveNum((long) NumberUtil.genRndInt(5, 20));
         info.setHateNum((long) NumberUtil.genRndInt(5, 10));
-        info.setViewNum((long) NumberUtil.genRndInt(30, 80));
+        info.setViewNum((long) NumberUtil.genRndInt(20, 50));
         if (StringUtil.isNotEmpty(record.getContent())) {
             info.setContent(record.getContent());
         }
@@ -100,4 +100,5 @@ public class RecordPostAction extends BaseAction {
 
         return info;
     }
+
 }
