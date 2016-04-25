@@ -31,6 +31,7 @@ import com.uuola.commons.file.FileUtil;
 import com.uuola.commons.image.ImageUtil;
 import com.uuola.commons.listener.WebContext;
 import com.uuola.txcms.component.FileExtNameValidator;
+import com.uuola.txcms.component.StoreFileUtil;
 import com.uuola.txcms.constants.CST_ERROR_MSG;
 import com.uuola.txweb.framework.action.BaseAction;
 import com.uuola.txweb.framework.utils.ContextUtil;
@@ -106,7 +107,8 @@ public class UploaderAction extends BaseAction {
 
             url = WebContext.getServletContext().getContextPath().concat(UPLOAD_ROOT_DIR).concat(dirPath)
                     .concat(CST_CHAR.STR_SLASH).concat(distName);
-
+            
+            url = StoreFileUtil.parseUrl(url);
         } catch (Exception e) {
             log.error("save()", e);
         }
@@ -127,7 +129,8 @@ public class UploaderAction extends BaseAction {
         if (StringUtil.isEmpty(url)) {
             return false;
         }
-        url = StringUtil.replace(url.trim(), WebContext.getServletContext().getContextPath(), CST_CHAR.STR_EMPTY);
+        int domainCtxLen = StoreFileUtil.getStoreFileDomain().length() + WebContext.getServletContext().getContextPath().length();
+        url = url.trim().substring(domainCtxLen);
         String extName = FileUtil.getFileExt(url);
         if (StringUtil.startsNotWith(url, UPLOAD_ROOT_DIR) || url.contains("..")
                 || url.toLowerCase().contains("web-inf") || url.toLowerCase().contains("meta-inf")

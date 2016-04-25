@@ -19,6 +19,7 @@ import com.uuola.txcms.base.dto.SysConfigDTO;
 import com.uuola.txcms.base.entity.SysConfig;
 import com.uuola.txcms.base.query.SysConfigQuery;
 import com.uuola.txcms.base.service.SysConfigService;
+import com.uuola.txcms.component.StoreFileUtil;
 import com.uuola.txcms.component.VersionUtil;
 import com.uuola.txcms.component.WebResourceAccessUtil;
 import com.uuola.txweb.framework.action.BaseAction;
@@ -126,5 +127,15 @@ public class SysConfigAction extends BaseAction {
     public String refreshVersion(){
         VersionUtil.load();
         return VersionUtil.getSysVer()+ " " +VersionUtil.getSrcVer();
+    }
+    
+    /**
+     * 刷新文件存储域名配置信息
+     */
+    @RequestMapping(value = "/storedomain/refresh", method = RequestMethod.GET)
+    @ResponseBody
+    public String refreshStoreDomain(){
+        StoreFileUtil.load();
+        return StoreFileUtil.getStoreFileDomain();
     }
 }

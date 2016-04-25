@@ -58,6 +58,10 @@ public class StoreFileUtil implements InitializingBean{
         }
         return url;
     }
+    
+    public static String getStoreFileDomain(){
+        return storeFileDomain;
+    }
 
     @Override
     public void afterPropertiesSet() throws Exception {
