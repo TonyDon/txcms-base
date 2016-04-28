@@ -72,6 +72,9 @@
     	<if test="infoState!=null">
     		and info_state=#{infoState, jdbcType=TINYINT} 
     	</if>
+    	<if test="catId!=null">
+    		and cat_id=#{catId, jdbcType=BIGINT} 
+    	</if>
     </sql>
     
     <select id="findCount" resultType="Integer" parameterType="InfoQuery">
