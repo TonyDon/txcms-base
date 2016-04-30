@@ -22,6 +22,11 @@ public abstract class CST_SYSCONFIG_NAME {
     public static final String SITE_CONFIG_H5GAME_CID ="site.config.h5game.cid";
     
     /**
+     * 娱乐顶级类目ID
+     */
+    public static final String SITE_CONFIG_YULE_CID = "site.config.yule.cid";
+    
+    /**
      * 奇趣顶级类目ID
      */
     public static final String SITE_CONFIG_QIQU_CID = "site.config.qiqu.cid";
