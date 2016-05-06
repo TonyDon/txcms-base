@@ -86,7 +86,7 @@ public class UploaderAction extends BaseAction {
             // 保存文件路径
             Calendar cal = Calendar.getInstance();
             String dirPath = String.format("/%s/%x/%03d/%04d", storeDir, DateUtil.getYear(cal), DateUtil.getDayInYear(cal),
-                    NumberUtil.genRndInt(100, 1000));
+                    NumberUtil.genRndInt(10, 100));
 
             String distDir = ContextUtil.getRealPath(UPLOAD_ROOT_DIR).concat(dirPath);
             FileUtil.createNoExistsDirs(distDir);
