@@ -40,10 +40,10 @@ public class SiteNavAction extends BaseAction {
         return mv;
     }
     
-    @RequestMapping(value = "/jiankang", method = RequestMethod.GET)
+    @RequestMapping(value = "/yundong", method = RequestMethod.GET)
     public ModelAndView jiankang(){
-        ModelAndView mv = this.makeModelView("jiankang");
-        mv.addObject("topCid", ConfigUtil.getNumberVal(CST_SYSCONFIG_NAME.SITE_CONFIG_JIANKANG_CID));
+        ModelAndView mv = this.makeModelView("yundong");
+        mv.addObject("topCid", ConfigUtil.getNumberVal(CST_SYSCONFIG_NAME.SITE_CONFIG_YUNDONG_CID));
         return mv;
     }
     

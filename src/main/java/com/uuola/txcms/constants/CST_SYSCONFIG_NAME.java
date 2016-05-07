@@ -29,7 +29,7 @@ public abstract class CST_SYSCONFIG_NAME {
     /**
      * 健康顶级类目ID
      */
-    public static final String SITE_CONFIG_JIANKANG_CID = "site.config.jiankang.cid";
+    public static final String SITE_CONFIG_YUNDONG_CID = "site.config.yundong.cid";
     
     
     /**
