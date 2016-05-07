@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.commons.CollectionUtil;
 import com.uuola.commons.NumberUtil;
+import com.uuola.commons.StringUtil;
 import com.uuola.txcms.base.dict.INFO_TYPE;
 import com.uuola.txcms.base.dto.InfoDTO;
 import com.uuola.txcms.base.entity.InfoBase;
@@ -51,6 +52,11 @@ public class InfoFrontAction extends BaseAction {
     private InfoQueryService infoQueryService;
     
     /**
+     * 页面信息存储DTO MODEL 属性KEY
+     */
+    private final String PAGE_INFODTO_KEY = "infoDTO";
+    
+    /**
      * 展示信息
      * @param query
      * @return
@@ -70,7 +76,7 @@ public class InfoFrontAction extends BaseAction {
         }
         InfoQuery query = new InfoQuery();
         query.setId(id);
-        ModelAndView mv = queryAction(query, new QueryCallbackHandler<InfoDTO>() {
+        ModelAndView mv = queryAction(query, PAGE_INFODTO_KEY, new QueryCallbackHandler<InfoDTO>() {
 
             @Override
             public InfoDTO doQuery(BaseQuery query) {
@@ -79,10 +85,16 @@ public class InfoFrontAction extends BaseAction {
 
         });
         assignViewName(mv, "view");
-        InfoDTO infoDTO = (InfoDTO)mv.getModel().get("infoDTO");
+        
+        InfoDTO infoDTO = (InfoDTO)mv.getModel().get(PAGE_INFODTO_KEY);
         InfoBase ib = infoDTO.getInfoBase();
+        InfoContent cont = infoDTO.getInfoContent();
         if(null != ib && INFO_TYPE.REDIRECT.value().equals(ib.getInfoType())){
            mv.setViewName("redirect:"+ib.getSiteUrl());
+        }
+        if(null != cont && StringUtil.isNotEmpty(cont.getContent())){
+            mv.addObject("content", cont.getContent());
+            cont.setContent(null); // 设置为NULL 不用JSON序列化
         }
         return mv;
     }
