@@ -28,6 +28,7 @@ import com.uuola.commons.StringUtil;
 import com.uuola.commons.coder.KeyGenerator;
 import com.uuola.commons.constant.CST_CHAR;
 import com.uuola.commons.file.FileUtil;
+import com.uuola.commons.image.ImageInfo;
 import com.uuola.commons.image.ImageUtil;
 import com.uuola.commons.listener.WebContext;
 import com.uuola.txcms.component.FileExtNameValidator;
@@ -98,9 +99,27 @@ public class UploaderAction extends BaseAction {
             String distName = fileName.concat(CST_CHAR.STR_DOT).concat(extName);
             File dist = new File(distDir, distName);
             mpFile.transferTo(dist);
+            boolean isImage = fileExtNameValidator.checkImageExt(extName);
+            
+            // 控制原图最大尺寸进行缩图处理
+            if (isImage) {
+                ImageInfo imgInfo = ImageUtil.detect(dist);
+                // 修正图片扩展名
+                if (null != imgInfo && !extName.equalsIgnoreCase(imgInfo.getFormatName())) {
+                    extName = imgInfo.getFormatName();
+                    distName = fileName.concat(CST_CHAR.STR_DOT).concat(imgInfo.getFormatName());
+                    File newFile = new File(distDir, distName);
+                    dist.renameTo(newFile);
+                    dist = newFile;
+                }
+                if (null != imgInfo && imgInfo.getWidth() > 640) {
+                    // 对原图进行缩图处理
+                    ImageUtil.resize(dist, null, 640, 0, false);
+                }
+            }
 
             // 缩图
-            if (needThumb && dist.exists() && dist.canRead() && fileExtNameValidator.checkImageExt(extName)) {
+            if (needThumb && dist.exists() && dist.canRead() && isImage) {
                 File w1Image = new File(distDir, fileName.concat(".w120.").concat(extName));
                 ImageUtil.resize(dist, w1Image, 120, 0, false);
             }
