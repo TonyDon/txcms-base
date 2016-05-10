@@ -44,4 +44,9 @@ public class PassKeyManager {
         String serverHashKey = SHA.encode(orgPasskey.concat(CST_CHAR.STR_AT).concat(captcha));
         return serverHashKey.equals(hashkey);
     }
+    
+    public static void main(String... args){
+        String pass = "123";
+        System.out.println(encrypt(SHA.encode(pass)));
+    }
 }
