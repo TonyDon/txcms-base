@@ -99,6 +99,26 @@ public class InfoFrontAction extends BaseAction {
         return mv;
     }
 
+    /**
+     * 归档列表，用于SEO抓取
+     * @param query
+     * @return
+     */
+    @RequestMapping(value = "/archive", method = RequestMethod.GET)
+    public ModelAndView archive(InfoQuery query){
+        if(null == query.getPageNo()){
+            query.setPageNo(1);
+        }
+        ModelAndView mv = queryAction(query, new QueryCallbackHandler<PageDTO>() {
+
+            @Override
+            public PageDTO doQuery(BaseQuery query) {
+                return infoQueryService.fetchRangeLatestView(query);
+            }
+            
+        });
+        return assignViewName(mv, "archive");
+    }
     
     /**
      * 增加浏览次数
