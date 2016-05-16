@@ -7,6 +7,7 @@
 package com.uuola.txcms.front.action;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -65,6 +66,16 @@ public class SiteNavAction extends BaseAction {
     public ModelAndView xiaoyouxi(){
         ModelAndView mv = this.makeModelView("xiaoyouxi");
         mv.addObject("topCid", ConfigUtil.getNumberVal(CST_SYSCONFIG_NAME.SITE_CONFIG_H5GAME_CID));
+        return mv;
+    }
+    
+    @RequestMapping(value = "/catelist/{id}", method = RequestMethod.GET)
+    public ModelAndView catelist(@PathVariable("id") Long id){
+        if (null == id) {
+            return null;
+        }
+        ModelAndView mv = this.makeModelView("catelist");
+        mv.addObject("cid", id);
         return mv;
     }
 }
