@@ -37,7 +37,10 @@ public class SiteCatUtil implements ApplicationContextAware, InitializingBean{
     
     private static Logger log = LoggerFactory.getLogger(SiteCatUtil.class);
     
-    private static Map<Long, SiteCat> cidCatholder = new HashMap<Long, SiteCat>();
+    private static Map<Long, SiteCat> cidCatHolder = new HashMap<Long, SiteCat>();
+    
+    // 类目ID - 类目名称路径
+    private static Map<Long, String> cidNamepathHolder = new HashMap<Long, String>();
     
     private static ApplicationContext context;
     
@@ -48,21 +51,42 @@ public class SiteCatUtil implements ApplicationContextAware, InitializingBean{
         SiteCatService service = context.getBean(SiteCatService.class);
         List<SiteCat> list = service.fetch(new SiteCatQuery());
         if(CollectionUtil.isNotEmpty(list)){
-            cidCatholder.clear();
+            cidCatHolder.clear();
+            cidNamepathHolder.clear();
             for(SiteCat cat : list){
-                cidCatholder.put(cat.getId(), cat);
+                cidCatHolder.put(cat.getId(), cat);
+            }
+            for (SiteCat cat : list) {
+                if (cat.getRid() == 0L) {
+                    cidNamepathHolder.put(cat.getId(), cat.getName());
+                } else {
+                    cidNamepathHolder.put(cat.getId(), extractNamepath(cidCatHolder, cat));
+                }
             }
         }
         log.warn("SiteCatUtil.loadAllCat() invoked.");
     }
     
+    private static String extractNamepath(Map<Long, SiteCat> cidCatHolder, SiteCat cat) {
+        String catPath = cat.getCatPath();
+        String[] cidArray = StringUtil.split(catPath, '-');
+        List<String> buff = new ArrayList<String>(3);
+        for(String cStr : cidArray){
+            if(null!=cStr && !cStr.isEmpty() && !cStr.equals("0")){
+                Long cid = Long.valueOf(cStr);
+                buff.add(cidCatHolder.get(cid).getName());
+            }
+        }
+        return StringUtil.join(buff, '/');
+    }
+
     /**
      * 得到生效类目集合
      * @return
      */
     public static List<SiteCat> getSiteCats(){
         List<SiteCat> cats = new ArrayList<SiteCat>();
-        for(Map.Entry<Long, SiteCat> e : cidCatholder.entrySet()){
+        for(Map.Entry<Long, SiteCat> e : cidCatHolder.entrySet()){
             SiteCat c = new SiteCat();
             BeanUtils.copyProperties(e.getValue(), c);
             cats.add(c);
@@ -76,7 +100,7 @@ public class SiteCatUtil implements ApplicationContextAware, InitializingBean{
      * @return
      */
     public static SiteCat getSiteCat(Long cid){
-        return cidCatholder.get(cid);
+        return cidCatHolder.get(cid);
     }
 
     /**
@@ -102,11 +126,35 @@ public class SiteCatUtil implements ApplicationContextAware, InitializingBean{
         return idArray;
     }
     
+    /**
+     * 得到类目名称路径,使用'/'分割
+     * @param cid
+     * @return
+     */
+    public static String getCatNamepath(Long cid){
+        return cidNamepathHolder.get(cid);
+    }
+    
     public static void main(String... args){
         Long[] ca = getCatPathArray("0-1-23-45-");
         for(Long i : ca)
         System.out.println(i);
         System.out.println(ca.length);
+        Map<Long, SiteCat> cidCatHolder = new HashMap<Long, SiteCat>();
+        SiteCat c1 = new SiteCat();
+        c1.setId(1111L);
+        c1.setName("aaa");
+        c1.setCatPath("0-1111-");
+        cidCatHolder.put(1111L, c1);
+        
+        SiteCat c2 = new SiteCat();
+        c2.setId(1112L);
+        c2.setName("bbb");
+        c2.setCatPath("0-1111-1112-");
+        cidCatHolder.put(1112L, c2);
+        
+        System.out.println(extractNamepath(cidCatHolder, c1));
+        System.out.println(extractNamepath(cidCatHolder, c2));
     }
 
     @Override

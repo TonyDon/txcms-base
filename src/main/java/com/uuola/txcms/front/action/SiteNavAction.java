@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uuola.txcms.component.ConfigUtil;
+import com.uuola.txcms.component.SiteCatUtil;
 import com.uuola.txcms.constants.CST_SYSCONFIG_NAME;
 import com.uuola.txweb.framework.action.BaseAction;
 
@@ -76,6 +77,7 @@ public class SiteNavAction extends BaseAction {
         }
         ModelAndView mv = this.makeModelView("catelist");
         mv.addObject("cid", id);
+        mv.addObject("catNamepath", SiteCatUtil.getCatNamepath(id));
         return mv;
     }
 }

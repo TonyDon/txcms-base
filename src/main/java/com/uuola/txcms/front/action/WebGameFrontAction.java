@@ -17,6 +17,7 @@ import com.uuola.txcms.base.dto.InfoDTO;
 import com.uuola.txcms.base.entity.InfoBase;
 import com.uuola.txcms.base.query.InfoQuery;
 import com.uuola.txcms.base.service.InfoService;
+import com.uuola.txcms.component.SiteCatUtil;
 import com.uuola.txcms.component.WebResourceAccessUtil;
 import com.uuola.txweb.framework.action.BaseAction;
 import com.uuola.txweb.framework.action.methods.QueryCallbackHandler;
@@ -33,6 +34,11 @@ import com.uuola.txweb.framework.query.BaseQuery;
 @Controller
 @RequestMapping("/h5g")
 public class WebGameFrontAction extends BaseAction {
+    
+    /**
+     * 页面信息存储DTO MODEL 属性KEY
+     */
+    private final String PAGE_INFODTO_KEY = "infoDTO";
     
     @Autowired
     private InfoService infoService;
@@ -67,17 +73,21 @@ public class WebGameFrontAction extends BaseAction {
      * @param mv
      * @return
      */
-    private ModelAndView detectRedirect(ModelAndView mv){
-        InfoDTO infoDTO = (InfoDTO)mv.getModel().get("infoDTO");
+    private ModelAndView detectRedirect(ModelAndView mv) {
+        InfoDTO infoDTO = (InfoDTO) mv.getModel().get(PAGE_INFODTO_KEY);
         InfoBase ib = infoDTO.getInfoBase();
-        if(null != ib && INFO_TYPE.REDIRECT.value().equals(ib.getInfoType())){
-           mv.setViewName("redirect:"+ib.getSiteUrl());
+        if (null != ib) {
+            if (INFO_TYPE.REDIRECT.value().equals(ib.getInfoType())) {
+                mv.setViewName("redirect:" + ib.getSiteUrl());
+            } else {
+                mv.addObject("catNamepath", SiteCatUtil.getCatNamepath(ib.getCatId()));
+            }
         }
         return mv;
     }
     
     private ModelAndView fetchEffectInfo(InfoQuery query){
-        ModelAndView mv = queryAction(query, new QueryCallbackHandler<InfoDTO>() {
+        ModelAndView mv = queryAction(query, PAGE_INFODTO_KEY, new QueryCallbackHandler<InfoDTO>() {
 
             @Override
             public InfoDTO doQuery(BaseQuery query) {

@@ -85,14 +85,18 @@ public class InfoFrontAction extends BaseAction {
 
         });
         assignViewName(mv, "view");
-        
-        InfoDTO infoDTO = (InfoDTO)mv.getModel().get(PAGE_INFODTO_KEY);
+
+        InfoDTO infoDTO = (InfoDTO) mv.getModel().get(PAGE_INFODTO_KEY);
         InfoBase ib = infoDTO.getInfoBase();
         InfoContent cont = infoDTO.getInfoContent();
-        if(null != ib && INFO_TYPE.REDIRECT.value().equals(ib.getInfoType())){
-           mv.setViewName("redirect:"+ib.getSiteUrl());
+        if (null != ib) {
+            if (INFO_TYPE.REDIRECT.value().equals(ib.getInfoType())) {
+                mv.setViewName("redirect:" + ib.getSiteUrl());
+            } else {
+                mv.addObject("catNamepath", SiteCatUtil.getCatNamepath(ib.getCatId()));
+            }
         }
-        if(null != cont && StringUtil.isNotEmpty(cont.getContent())){
+        if (null != cont && StringUtil.isNotEmpty(cont.getContent())) {
             mv.addObject("content", cont.getContent());
             cont.setContent(null); // 设置为NULL 不用JSON序列化
         }
