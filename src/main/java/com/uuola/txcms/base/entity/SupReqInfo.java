@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.uuola.txweb.framework.dao.support.BaseEntity;
-
 
 /**
  * <pre>
@@ -23,9 +21,8 @@ import com.uuola.txweb.framework.dao.support.BaseEntity;
  */
 @Entity
 @Table(name="SUP_REQ_INFO")
-public class SupReqInfo extends BaseEntity {
+public class SupReqInfo {
 
-    private static final long serialVersionUID = 3683215231090332794L;
     
     @Id
     private Long id;

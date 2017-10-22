@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.uuola.txweb.framework.dao.support.BaseEntity;
-
 
 /**
  * <pre>
@@ -23,10 +21,8 @@ import com.uuola.txweb.framework.dao.support.BaseEntity;
  */
 @Entity
 @Table(name="INFO_BASE")
-public class InfoBase extends BaseEntity {
-
-    private static final long serialVersionUID = -817802743423678135L;
-    
+public class InfoBase{
+ 
     @Id
     private Long id;
     

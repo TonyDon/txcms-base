@@ -10,8 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.uuola.txweb.framework.dao.support.BaseEntity;
-
 
 /**
  * <pre>
@@ -22,9 +20,7 @@ import com.uuola.txweb.framework.dao.support.BaseEntity;
  */
 @Entity
 @Table(name = "INFO_TAG_RELATION")
-public class InfoTagRelation extends BaseEntity {
-
-    private static final long serialVersionUID = -3017443245378955440L;
+public class InfoTagRelation  {
     
     @Column(name = "TAG_ID")
     private Long tagId;

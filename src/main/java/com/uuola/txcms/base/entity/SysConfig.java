@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.uuola.txweb.framework.dao.support.BaseEntity;
-
 
 /**
  * <pre>
@@ -23,9 +21,8 @@ import com.uuola.txweb.framework.dao.support.BaseEntity;
  */
 @Entity
 @Table(name="SYS_CONFIG")
-public class SysConfig extends BaseEntity {
+public class SysConfig {
 
-    private static final long serialVersionUID = -4092219936498753594L;
     
     @Id
     private Integer id;

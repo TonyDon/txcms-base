@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.uuola.txweb.framework.dao.support.BaseEntity;
-
 
 /**
  * <pre>
@@ -23,9 +21,8 @@ import com.uuola.txweb.framework.dao.support.BaseEntity;
  */
 @Entity
 @Table(name="ROLE_CFG")
-public class RoleCfg extends BaseEntity {
+public class RoleCfg {
 
-    private static final long serialVersionUID = 5803370269545883232L;
     
     @Id
     private Long id;
